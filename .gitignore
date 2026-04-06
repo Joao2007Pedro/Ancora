@@ -1,0 +1,19 @@
+.env
+.env.*
+!.env.example
+
+# Firebase local config with secrets
+frontend/assets/js/firebase-config.js
+
+# Dependencies and editor files
+node_modules/
+.vscode/
+
+# OS and logs
+.DS_Store
+*.log
+firebase-debug.log
+
+# Firebase CLI cache
+.firebase/
+.firebaserc
