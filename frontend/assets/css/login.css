@@ -15,6 +15,7 @@
   --verde: #ccff00;
   --branco: #ffffff;
   --branco2: #e2e8f0;
+  --back: #eae8ff;
   --cinza: #94a3b8;
   --cinza-escuro: #454557;
 }
@@ -26,7 +27,8 @@ main {
 
 .sec1 {
   width: 30%;
-  height: auto;
+  height: 110vh;
+  position: relative;
   border: 1px solid red;
   background-color: var(--azul-escuro);
   z-index: 2;
@@ -36,7 +38,7 @@ main {
   position: absolute;
   z-index: -1;
   top: 0;
-  left: 20%;
+  left: 60%;
 }
 
 #eclipse2 {
@@ -44,16 +46,6 @@ main {
   z-index: -1;
   bottom: 0;
   left: 0;
-}
-
-/* Section 2 */
-
-.sec2 {
-  width: 70%;
-  height: 800px;
-  border: 1px solid blue;
-  background-color: var(--cinza);
-  z-index: 2;
 }
 
 .titulo {
@@ -202,4 +194,192 @@ main {
   justify-content: center;
   align-items: center;
   gap: 40px;
+}
+
+/* Section 2 */
+
+.sec2 {
+  width: 70%;
+  height: auto;
+  border: 1px solid blue;
+  background-color: var(--back);
+  z-index: 2;
+}
+
+.container_buttons {
+  width: 70%;
+  height: 100px;
+  border: 1px solid red;
+  margin: 5% auto;
+  border-radius: 20px;
+  background: var(--branco);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+/* Botões */
+
+.btn1 {
+  width: 40%;
+  height: 72px;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  border-radius: 20px;
+}
+
+.btn1 h2 {
+  color: #e2e8f0;
+  font-family: "Plus Jakarta Sans";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px; /* 111.111% */
+  letter-spacing: 1px;
+}
+
+/* Texts */
+
+.title_sec2 {
+  width: 70%;
+  height: 120px;
+  border: 1px solid red;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.title_sec2 h1 {
+  color: #000;
+  font-family: "Plus Jakarta Sans";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 83.333% */
+  letter-spacing: 1px;
+}
+
+.title_sec2 h2 {
+  color: var(--cinza-escuro);
+  font-family: "Plus Jakarta Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 166.667% */
+  letter-spacing: 1px;
+}
+
+/*  */
+
+/* Btn google */
+
+.google {
+  width: 60%;
+  height: 100px;
+  margin: 2% auto;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google button {
+  width: 100%;
+  height: 100px;
+  border-radius: 20px;
+  background-color: var(--branco);
+}
+
+.itens_google {
+  width: 65%;
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.itens_google h2 {
+  color: #161c21;
+  font-family: "Plus Jakarta Sans";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 111.111% */
+  letter-spacing: 1px;
+}
+
+/*  */
+.separar {
+  width: 60%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.separar img {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.separar h2 {
+  color: #000;
+  font-family: "Plus Jakarta Sans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 125% */
+  letter-spacing: 1px;
+}
+
+/* Botões login */
+
+.email_container {
+  width: 70%;
+  height: 300px;
+  border: 1px solid red;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.email_container h2 {
+  color: #0a0f5c;
+  font-family: "Plus Jakarta Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 166.667% */
+  letter-spacing: 1px;
+}
+
+.email {
+  width: 100%;
+  height: 60px;
+  border: 1px solid red;
+}
+
+.email input {
+  width: 100%;
+  height: 80px;
+  background-color: var(--cinza-escuro);
+  color: var(--cinza);
+  border-radius: 20px;
+  font-family: "Plus Jakarta Sans";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 133.333% */
+  letter-spacing: 1px;
+  padding: 30px;
 }
