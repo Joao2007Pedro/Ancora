@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline-variant": "#c6c4da",
+              "tertiary-container": "#4d6200",
+              "surface-variant": "#dde3e9",
+              "on-tertiary-fixed": "#161e00",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed": "#090e5b",
+              "on-primary-fixed-variant": "#1400ed",
+              "on-primary": "#ffffff",
+              "outline": "#767589",
+              "on-background": "#161c21",
+              "surface-container": "#e9eff5",
+              "on-secondary": "#ffffff",
+              "surface-container-low": "#eef4fa",
+              "on-surface-variant": "#454557",
+              "primary-fixed": "#e1e0ff",
+              "secondary": "#5258a1",
+              "background": "#f5faff",
+              "on-secondary-fixed-variant": "#393f88",
+              "on-primary-fixed": "#04006d",
+              "surface-tint": "#3a3bff",
+              "tertiary-fixed-dim": "#abd600",
+              "on-secondary-container": "#383e86",
+              "tertiary": "#394900",
+              "on-error-container": "#93000a",
+              "surface-container-high": "#e3e9ef",
+              "inverse-surface": "#2b3136",
+              "surface-container-highest": "#dde3e9",
+              "on-tertiary-fixed-variant": "#3c4d00",
+              "primary": "#1300e1",
+              "on-primary-container": "#ceceff",
+              "primary-container": "#3333ff",
+              "surface-bright": "#f5faff",
+              "secondary-container": "#a7adfd",
+              "on-error": "#ffffff",
+              "on-surface": "#161c21",
+              "on-tertiary": "#ffffff",
+              "surface": "#f5faff",
+              "tertiary-fixed": "#c3f400",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#e0e0ff",
+              "inverse-on-surface": "#ebf1f7",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed-dim": "#c0c1ff",
+              "surface-dim": "#d5dbe1",
+              "inverse-primary": "#c0c1ff",
+              "secondary-fixed-dim": "#bec2ff",
+              "on-tertiary-container": "#b5e300"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f5faff;
+        }
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px rgba(10, 15, 92, 0.06);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen text-on-surface">
+<!-- Decorative Kinetic Element -->
+<div class="fixed -top-24 -right-24 w-64 h-64 bg-tertiary-fixed rounded-full opacity-20 blur-3xl pointer-events-none"></div>
+<div class="fixed top-12 right-12 w-6 h-6 bg-tertiary-fixed rounded-full pointer-events-none"></div>
+<!-- SideNavBar (Authority: JSON components[1]) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#E8EEF4] dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col h-full py-6 z-50">
+<div class="px-6 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Abstract geometric logo for Proa Scholar tutoring portal with deep navy and neon lime accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB2mv58KIHdWAI_Scn4ZWW9LlM-SUfBx_jOurM0uC4klQvCkDPVTfMKq4C7p9cSTTMLNCp9kXZtDhDT68mtH21Pqv7zdlFOzMZosxLrOtK7DfIIPapGXwMXi3kuNjnP_ArU6hq0n4tTaTDVA4zDxAjuCG5K8xLeAQgEydCPV8TAdMR6ohDwFayRtkzdJtDAhiY_gDuOwB006A38JDl7k5cS5Lw5juxjsbbpD4IdD1U1hp_TaYUUUbTe3K1AhlnlLhcvqkET0cGHWzK"/>
+</div>
+<div>
+<h2 class="text-xl font-black text-[#0A0F5C] dark:text-white leading-tight">Proa Scholar</h2>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Tutoring Portal</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard Tab -->
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 py-3 px-6 hover:bg-[#CCFF00]/10 hover:text-[#3333FF] rounded-r-full transition-all group" href="#">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+<span class="font-['Space_Grotesk'] font-semibold">Dashboard</span>
+</a>
+<!-- Agenda Tab -->
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 py-3 px-6 hover:bg-[#CCFF00]/10 hover:text-[#3333FF] rounded-r-full transition-all group" href="#">
+<span class="material-symbols-outlined text-2xl">calendar_today</span>
+<span class="font-['Space_Grotesk'] font-semibold">Agenda</span>
+</a>
+<!-- My Sessions Tab (ACTIVE) -->
+<a class="flex items-center gap-3 text-[#3333FF] font-bold py-3 px-6 bg-[#CCFF00]/10 rounded-r-full translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-['Space_Grotesk'] font-semibold">My Sessions</span>
+</a>
+</nav>
+<div class="px-6 mb-6">
+<button class="w-full py-4 bg-primary text-on-primary rounded-full font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add</span>
+                New Session
+            </button>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800 pt-4 mt-auto">
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 py-3 px-6 hover:bg-[#CCFF00]/10 hover:text-[#3333FF] rounded-r-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="font-['Space_Grotesk'] font-semibold">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 dark:text-slate-400 py-3 px-6 hover:bg-[#CCFF00]/10 hover:text-[#3333FF] rounded-r-full transition-all" href="#">
+<span class="material-symbols-outlined text-2xl">logout</span>
+<span class="font-['Space_Grotesk'] font-semibold">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 p-12 max-w-7xl mx-auto">
+<!-- Top Nav Bar (Identity Anchor) -->
+<header class="flex justify-between items-center mb-16">
+<div>
+<h1 class="text-5xl font-bold text-on-surface tracking-tighter leading-none mb-2">Minhas Monitorias</h1>
+<p class="text-slate-500 font-medium">Acompanhe e gerencie seu progresso educacional.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full border-none">
+<span class="material-symbols-outlined text-slate-400 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-medium" placeholder="Buscar monitoria..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-highest hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+</button>
+<div class="h-12 w-12 rounded-full overflow-hidden border-2 border-primary p-0.5">
+<img class="w-full h-full object-cover rounded-full" data-alt="Close up portrait of a young college student smiling, natural lighting, soft focus library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDrdBSmtG3U9IpGaFv7huTDckAzZl3co1_q4MxIV2kS81_3i34lMTiVR4D-uSC4Kv70duBlFSek1_fLR0aiYL9t54JNj9tjumvRD3VtCIATzFAabHRqJ1VwVd-jX7YLDDWDchtvZuX20nFMCKub57hHscEU2Urwu4cWJ5mDFoWOfGrAqYZF08aTDVXGd6_DHT0wYop9PbVqv-3SmUeGlcskPFFTzLW0bw1vbiFhmpyWBUC_Ke3IHxQcAqY1I_OUY-S1YRdxmcSJV36"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Tab Bar: rounded pills -->
+<section class="flex gap-4 mb-10 overflow-x-auto pb-2">
+<button class="px-8 py-3 bg-primary text-on-primary rounded-full font-bold shadow-md">Próximas</button>
+<button class="px-8 py-3 bg-surface-container-highest text-on-surface-variant rounded-full font-bold hover:bg-surface-variant transition-colors">Passadas</button>
+<button class="px-8 py-3 bg-surface-container-highest text-on-surface-variant rounded-full font-bold hover:bg-surface-variant transition-colors">Canceladas</button>
+</section>
+<!-- Session Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- UPCOMING Card -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden flex relative editorial-shadow group border-l-8 border-primary transition-transform hover:-translate-y-1">
+<div class="p-8 flex flex-1 flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional profile of a male math tutor with glasses, wearing a casual polo shirt, friendly office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFfABGNLMoZ-8X_jfXvc6GdUUdwVVWKJkY0cxC-TfTDAmGiVt2bjp4zOH_Yf6fYuQyfwPuueo8QCq1zIU7Zf_Udb4QkclkQV8ukX81urZkcAiGZcWiMravBNuPdX56dxUH5q4esZRql_nj3ysolX7OK7nulJbDFRJ_PJOK1WqgvR4N-cvWTqadwAKUQjypwgpBl-Sc5Qa9qDjQ6nxv7J4OcfFgASj2sV9grBF0NxfQgGjlJd3Q6jHorgFOTlRqDSbL6CD0zgiaCMWh"/>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Matemática Avançada</h3>
+<p class="text-slate-500 font-medium">Monitor: Ricardo Santos</p>
+</div>
+</div>
+<span class="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full text-xs font-black uppercase tracking-widest">Online</span>
+</div>
+<div class="flex items-center gap-8 mb-8">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Data</span>
+<span class="text-lg font-bold">24 de Outubro</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Horário</span>
+<span class="text-lg font-bold">14:30 - 15:30</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4 mt-4">
+<button class="flex-1 py-3 px-6 bg-primary text-on-primary rounded-full font-bold text-sm">Entrar na Sala</button>
+<button class="py-3 px-6 text-error font-bold text-sm hover:bg-error/5 rounded-full transition-colors">Cancelar</button>
+</div>
+</div>
+<!-- Status Dot -->
+<div class="absolute top-4 right-4 w-3 h-3 bg-tertiary-fixed rounded-full"></div>
+</div>
+<!-- UPCOMING Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden flex relative editorial-shadow group border-l-8 border-primary transition-transform hover:-translate-y-1">
+<div class="p-8 flex flex-1 flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a female programming tutor, vibrant lighting, modern tech workspace background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEtpw4gqHLmf7RbnvaN0D8WFoNkssAjtnyQVaMT4rS1-UlLmr0UtxlHD172PIvAZDkaxmwG4f9nu2_WjDQXVjpSqIC6XzpflnPPg36PCk6uw27K_tltMdNaaUOv7dzEDeS0Y_tHWh00t5l3T5GpTvL7Olyg-CaBJh0ga-VNnfsLZPE8KtBnppzzQn-dIVr2rKZybsyWtHJibXTNT6wvjDZmQRzOQ8D_pxViAJbFFv1SmsnAVTfuNlKpqO5vFB95X2BwK_2L3X4MOAv"/>
+</div>
+<div>
+<h3 class="text-xl font-bold text-on-surface">Lógica de Programação</h3>
+<p class="text-slate-500 font-medium">Monitora: Ana Paula</p>
+</div>
+</div>
+<span class="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full text-xs font-black uppercase tracking-widest">Presencial</span>
+</div>
+<div class="flex items-center gap-8 mb-8">
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Data</span>
+<span class="text-lg font-bold">26 de Outubro</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Horário</span>
+<span class="text-lg font-bold">10:00 - 11:30</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-4 mt-4">
+<button class="flex-1 py-3 px-6 bg-primary text-on-primary rounded-full font-bold text-sm">Ver Endereço</button>
+<button class="py-3 px-6 text-error font-bold text-sm hover:bg-error/5 rounded-full transition-colors">Cancelar</button>
+</div>
+</div>
+<div class="absolute top-4 right-4 w-3 h-3 bg-tertiary-fixed rounded-full"></div>
+</div>
+<!-- PAST Card (Visual Reference) -->
+<div class="bg-surface-container-low opacity-80 rounded-lg overflow-hidden flex relative border-l-8 border-outline-variant transition-opacity hover:opacity-100">
+<div class="p-8 flex flex-1 flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden grayscale">
+<img class="w-full h-full object-cover" data-alt="Profile photo of a female literature tutor, warm window light, bookshelves background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2sP_jgh4p6ZKHCQ6nJGcpeeEMeQDypwsSSQfle5BIdsTVme4ZnNk545ryTiJMLr2iZnXbzlk6gHHnWhtBi8IF-kqLKLBYgkxfR2DeXd0IJmZdQRFMnTNxv5IHVuEUx6QkXCLOUY_k42tpF0-Wc_5giTXDpP6MskYLemT-B-xImQMehwRT_hhi9mGJZwNuJPZX1Whiss0XbaUZLiPUAMOjYOy4hcvJAMhXSlcAlckgJdYG-Beb4h_3Pn89smUi44mhnuKxXJ1sPhFR"/>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-400">Literatura Brasileira</h3>
+<p class="text-slate-400 font-medium italic">Sessão finalizada em 12/10</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-4">
+<a class="text-primary font-bold flex items-center gap-2 group" href="#">
+                            Ver detalhes 
+                            <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+<span class="text-slate-400 font-bold text-xs">Avaliada ★ 5.0</span>
+</div>
+</div>
+</div>
+<!-- CANCELLED Card (Visual Reference) -->
+<div class="bg-surface-container-low opacity-80 rounded-lg overflow-hidden flex relative border-l-8 border-error/40">
+<div class="p-8 flex flex-1 flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden grayscale contrast-75">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young male tutor with a neutral expression, minimalist gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAAxpX117io-8BwEFAZXF59vAS2YOXaVqB8gwflo0KdC9IoIq0V4Omm8C8nthONyLVDJwaaXvxfLknyXeJ7wOiVpVBCCzi_5AS9UAXNEnsxaIGwnkWO6HutTGu8ggqvVgBelpXzpFsb5szIbFCdIiQC4q0bWupCDMg2pM9Y9MQGmbRExlA9yJjBBRaYpITRy_3RkDDHc9NX-J0-JWx6Hfp-avNOs07xivWuRM7jjv7meJLNsiivIRDuQi-1tRx1nqU3EECyTmz-LXH"/>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-400">Física I</h3>
+<p class="text-slate-400 font-medium">Cancelado pelo aluno</p>
+</div>
+</div>
+<span class="px-4 py-1.5 bg-error-container text-on-error-container rounded-full text-xs font-black uppercase tracking-widest">Cancelada</span>
+</div>
+<div class="flex items-center justify-end">
+<button class="py-2 px-6 bg-surface-container-highest text-on-surface-variant rounded-full font-bold text-sm">Remarcar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination or Load More (Editorial Style) -->
+<div class="mt-16 flex flex-col items-center">
+<p class="text-sm font-medium text-slate-400 mb-6">Exibindo 4 de 12 monitorias</p>
+<button class="group flex flex-col items-center gap-3">
+<div class="w-12 h-12 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">expand_more</span>
+</div>
+<span class="text-xs font-black uppercase tracking-widest text-slate-400 group-hover:text-primary transition-colors">Carregar mais</span>
+</button>
+</div>
+</main>
+<!-- FAB for New Session on Mobile/Tablet (Suppressed per logic, but kept as premium interaction if needed for context) -->
+<!-- Suppression Logic: Suppressed on Details/Profile. Since this is "My Sessions" and side nav has it, we don't duplicate. -->
+</body></html> 
