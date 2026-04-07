@@ -1,0 +1,204 @@
+:root {
+  --primary: #1300e1;
+  --primary-container: #3333ff;
+  --on-primary: #ffffff;
+  --surface: #f5faff;
+  --on-surface: #161c21;
+  --surface-container-low: #eef4fa;
+  --surface-container-highest: #dde3e9;
+  --surface-container-lowest: #ffffff;
+  --accent-neon: #CCFF00;
+  --accent-orange: #FF5C00;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  --font-headline: "Space Grotesk", sans-serif;
+}
+
+/* Reutilizando estilos globais do seu código anterior */
+body {
+  font-family: var(--font-body);
+  background-color: var(--surface);
+  margin: 0;
+  display: flex;
+}
+
+.main-content {
+  margin-left: 256px;
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+}
+
+.container-small {
+  width: 100%;
+  max-width: 600px;
+  z-index: 10;
+}
+
+/* Header */
+.page-header { margin-bottom: 2.5rem; }
+.label-tiny {
+  color: var(--primary);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+.title-xl {
+  font-family: var(--font-headline);
+  font-size: 3rem;
+  font-weight: 800;
+  color: #090e5b;
+  letter-spacing: -0.05em;
+  margin-top: 0.5rem;
+}
+
+/* Summary Card */
+.summary-card {
+  background: var(--surface-container-lowest);
+  padding: 2.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px rgba(10, 15, 92, 0.06);
+  position: relative;
+}
+
+.card-accent-dot {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  background: var(--accent-orange);
+  border: 4px solid var(--surface);
+  border-radius: 50%;
+}
+
+/* Monitor Info */
+.monitor-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--surface-container-low);
+}
+
+.verified-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--accent-neon);
+  font-size: 14px !important;
+  padding: 4px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.badge-tag {
+  display: inline-block;
+  background: #090e5b;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Details */
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-row.highlight {
+  background: rgba(204, 255, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-box-white, .icon-box-gray {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box-white { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.icon-box-gray { background: var(--surface-container-low); }
+
+.text-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.text-group p {
+  font-weight: 700;
+  color: #090e5b;
+}
+
+/* Footer & Buttons */
+.card-footer {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn {
+  font-family: var(--font-body);
+  border-radius: 99px;
+  padding: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary { background: var(--primary-container); color: white; }
+.btn-secondary { background: transparent; border: 2px solid var(--primary-container); color: var(--primary-container); }
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.step-indicator span { width: 4px; height: 4px; background: #cbd5e1; border-radius: 50%; }
+.step-indicator span.long { width: 32px; height: 4px; border-radius: 99px; background: var(--accent-neon); }
+
+.context-help {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-top: 2rem;
+  padding: 0 2.5rem;
+}

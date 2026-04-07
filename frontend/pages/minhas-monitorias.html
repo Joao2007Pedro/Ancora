@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proa Scholar - Minhas Monitorias</title>
+  <title>Minhas Monitorias</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/pages/minhas-monitorias.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <script src="../assets/js/components/sidebar-component.js"></script>
 </head>
 <body>
   <!-- Elementos Decorativos -->
@@ -16,50 +18,7 @@
   <div class="decorative-dot"></div>
 
   <!-- Barra Lateral -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-box">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB2mv58KIHdWAI_Scn4ZWW9LlM-SUfBx_jOurM0uC4klQvCkDPVTfMKq4C7p9cSTTMLNCp9kXZtDhDT68mtH21Pqv7zdlFOzMZosxLrOtK7DfIIPapGXwMXi3kuNjnP_ArU6hq0n4tTaTDVA4zDxAjuCG5K8xLeAQgEydCPV8TAdMR6ohDwFayRtkzdJtDAhiY_gDuOwB006A38JDl7k5cS5Lw5juxjsbbpD4IdD1U1hp_TaYUUUbTe3K1AhlnlLhcvqkET0cGHWzK" alt="Logo">
-      </div>
-      <div class="logo-text">
-        <h2>Proa Scholar</h2>
-        <p>Tutoring Portal</p>
-      </div>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a href="#" class="nav-item">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span>Dashboard</span>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="material-symbols-outlined">calendar_today</span>
-        <span>Agenda</span>
-      </a>
-      <a href="#" class="nav-item active">
-        <span class="material-symbols-outlined icon-filled">history_edu</span>
-        <span>My Sessions</span>
-      </a>
-    </nav>
-
-    <div class="sidebar-action">
-      <button class="btn btn-primary btn-full shadow-hover">
-        <span class="material-symbols-outlined">add</span>
-        New Session
-      </button>
-    </div>
-
-    <div class="sidebar-footer">
-      <a href="#" class="nav-item">
-        <span class="material-symbols-outlined">settings</span>
-        <span>Settings</span>
-      </a>
-      <a href="#" class="nav-item">
-        <span class="material-symbols-outlined">logout</span>
-        <span>Logout</span>
-      </a>
-    </div>
-  </aside>
+  <sidebar-menu></sidebar-menu>
 
   <!-- Conteúdo Principal -->
   <main class="main-content">
@@ -158,7 +117,7 @@
             <div class="tutor-info grayscale">
               <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2sP_jgh4p6ZKHCQ6nJGcpeeEMeQDypwsSSQfle5BIdsTVme4ZnNk545ryTiJMLr2iZnXbzlk6gHHnWhtBi8IF-kqLKLBYgkxfR2DeXd0IJmZdQRFMnTNxv5IHVuEUx6QkXCLOUY_k42tpF0-Wc_5giTXDpP6MskYLemT-B-xImQMehwRT_hhi9mGJZwNuJPZX1Whiss0XbaUZLiPUAMOjYOy4hcvJAMhXSlcAlckgJdYG-Beb4h_3Pn89smUi44mhnuKxXJ1sPhFR" alt="Tutor Literatura">
               <div>
-                <h3 class="text-muted">Literatura Brasileira</h3>
+                <h3 class="text-muted">Estrutura Condicionais</h3>
                 <p class="text-muted italic">Sessão finalizada em 12/10</p>
               </div>
             </div>
@@ -179,7 +138,7 @@
             <div class="tutor-info grayscale-contrast">
               <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAAxpX117io-8BwEFAZXF59vAS2YOXaVqB8gwflo0KdC9IoIq0V4Omm8C8nthONyLVDJwaaXvxfLknyXeJ7wOiVpVBCCzi_5AS9UAXNEnsxaIGwnkWO6HutTGu8ggqvVgBelpXzpFsb5szIbFCdIiQC4q0bWupCDMg2pM9Y9MQGmbRExlA9yJjBBRaYpITRy_3RkDDHc9NX-J0-JWx6Hfp-avNOs07xivWuRM7jjv7meJLNsiivIRDuQi-1tRx1nqU3EECyTmz-LXH" alt="Tutor Física">
               <div>
-                <h3 class="text-muted">Física I</h3>
+                <h3 class="text-muted">HTML e CSS</h3>
                 <p class="text-muted">Cancelado pelo aluno</p>
               </div>
             </div>
