@@ -10,7 +10,7 @@
 - Kauê → https://github.com/KaueSiqueira54
 - Iasmin → https://github.com/IasminMoreira
 - João → https://github.com/Joao2007Pedro
-- Ryan → 
+- Ryan → https://github.com/ryann-08
 - Amanda → https://github.com/Amandach-sat
 
 ## Stack
