@@ -29,7 +29,6 @@ main {
   width: 30%;
   height: 110vh;
   position: relative;
-  border: 1px solid red;
   background-color: var(--azul-escuro);
   z-index: 2;
 }
@@ -53,7 +52,6 @@ main {
   height: 40px;
   display: flex;
   margin: 10% auto;
-  border: 1px solid red;
 }
 
 .itens_titulo {
@@ -62,7 +60,6 @@ main {
   display: flex;
   margin: 0 auto;
   gap: 10px;
-  border: 1px solid #000;
 }
 
 .itens_titulo img {
@@ -113,7 +110,6 @@ main {
 .text_sec1 {
   width: 70%;
   height: auto;
-  border: 1px solid red;
   margin: 5% auto;
 }
 
@@ -134,7 +130,6 @@ main {
 .text2_sec2 {
   width: 70%;
   height: auto;
-  border: 1px solid red;
   margin: 0 auto;
 }
 
@@ -153,7 +148,6 @@ main {
 .items_container {
   width: 70%;
   height: 200px;
-  border: 1px solid red;
   margin: 4% auto;
   display: flex;
   flex-direction: column;
@@ -163,7 +157,6 @@ main {
 .item {
   width: 100%;
   height: 60px;
-  border: 1px solid red;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
@@ -173,7 +166,7 @@ main {
 
 .star {
   width: 15%;
-  height: auto;
+  height: 50px;
   justify-content: center;
   display: flex;
   background-color: var(--cinza-escuro);
@@ -183,7 +176,7 @@ main {
 .item h2 {
   color: var(--branco2);
   font-family: "Plus Jakarta Sans";
-  font-size: 20px;
+  font-size: 22px;
   font-style: normal;
   font-weight: 300;
   line-height: 40px;
@@ -193,7 +186,7 @@ main {
 #item1 {
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 10%;
 }
 
 /* Section 2 */
@@ -209,7 +202,6 @@ main {
 .container_buttons {
   width: 70%;
   height: 100px;
-  border: 1px solid red;
   margin: 5% auto;
   border-radius: 20px;
   background: var(--branco);
@@ -224,7 +216,6 @@ main {
 .btn1 {
   width: 40%;
   height: 72px;
-  border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,7 +224,7 @@ main {
   border-radius: 20px;
 }
 
-.btn1 h2 {
+.btn1 button {
   color: #e2e8f0;
   font-family: "Plus Jakarta Sans";
   font-size: 36px;
@@ -241,6 +232,18 @@ main {
   font-weight: 600;
   line-height: 40px; /* 111.111% */
   letter-spacing: 1px;
+  background-color: var(--azul-escuro);
+  width: 100%;
+  height: 72px;
+  border-radius: 20px;
+}
+
+.btn1 button:hover {
+  background-color: var(--verde);
+  color: var(--azul-escuro);
+  border: 1px solid var(--azul-escuro);
+  transition: 0.1s;
+  cursor: pointer;
 }
 
 /* Texts */
@@ -248,7 +251,6 @@ main {
 .title_sec2 {
   width: 70%;
   height: 120px;
-  border: 1px solid red;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
@@ -294,25 +296,36 @@ main {
   height: 100px;
   border-radius: 20px;
   background-color: var(--branco);
-}
-
-.itens_google {
-  width: 65%;
-  border: 1px solid red;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
+  color: #161c21;
+  gap: 2%;
 }
 
-.itens_google h2 {
-  color: #161c21;
+.google button h2 {
   font-family: "Plus Jakarta Sans";
   font-size: 36px;
   font-style: normal;
   font-weight: 500;
   line-height: 40px; /* 111.111% */
   letter-spacing: 1px;
+}
+
+.google button:hover {
+  background-color: var(--azul-claro);
+  border: 2px solid var(--azul-escuro);
+  color: var(--branco);
+  cursor: pointer;
+}
+
+.itens_google h2:hover {
+  color: var(--branco);
+}
+
+.itens_google {
+  width: 65%;
 }
 
 /*  */
@@ -346,7 +359,6 @@ main {
 .email_container {
   width: 70%;
   height: 300px;
-  border: 1px solid red;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -366,7 +378,6 @@ main {
 .email {
   width: 100%;
   height: 60px;
-  border: 1px solid red;
 }
 
 .email input {
@@ -382,4 +393,47 @@ main {
   line-height: 40px; /* 133.333% */
   letter-spacing: 1px;
   padding: 30px;
+}
+
+#senha {
+  display: flex;
+  justify-content: right;
+  margin: 1%;
+}
+
+#senha a {
+  text-decoration: none;
+  color: var(--azul-claro);
+}
+
+/* Botão confirmar */
+
+.confirmar {
+  width: 70%;
+  height: 80px;
+  margin: 2% auto;
+}
+
+.confirmar button {
+  width: 100%;
+  height: 80px;
+  background-color: var(--azul-claro);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: #fff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px; /* 111.111% */
+  letter-spacing: 1px;
+}
+
+.confirmar button:hover {
+  background-color: var(--verde);
+  color: var(--azul-escuro);
+  transition: 0.2s;
+  cursor: pointer;
 }
