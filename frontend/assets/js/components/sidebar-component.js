@@ -42,7 +42,7 @@ class SidebarMenu extends HTMLElement {
 
         <!-- Navegação Principal -->
         <nav class="sidebar-nav">
-          <a href="../home.html" class="nav-item" data-page="home">
+          <a href="home.html" class="nav-item" data-page="home">
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
           </a>
@@ -50,7 +50,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">calendar_today</span>
             <span>Agenda</span>
           </a>
-          <a href="../pages/minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
+          <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
             <span>Minhas Monitorias</span>
           </a>
@@ -58,7 +58,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">library_books</span>
             <span>Recursos</span>
           </a>
-          <a href="#roadmap" class="nav-item" data-page="roadmap">
+          <a href="roadmap.html" class="nav-item" data-page="roadmap">
             <span class="material-symbols-outlined">map</span>
             <span>RoadMap</span>
           </a>
@@ -114,7 +114,7 @@ class SidebarMenu extends HTMLElement {
 
         <!-- Navegação Principal -->
         <nav class="sidebar-nav">
-          <a href="../home.html" class="nav-item" data-page="home">
+          <a href="home.html" class="nav-item" data-page="home">
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
           </a>
@@ -122,7 +122,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">calendar_today</span>
             <span>Agenda</span>
           </a>
-          <a href="../pages/minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
+          <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
             <span>Minhas Monitorias</span>
           </a>
@@ -188,11 +188,13 @@ class SidebarMenu extends HTMLElement {
   attachEventListeners() {
     // Delegação de eventos para links com hash
     this.addEventListener('click', (e) => {
-      if (e.target.closest('.nav-item[href^="#"]')) {
+      const clickedItem = e.target.closest('.nav-item[href^="#"]');
+      if (clickedItem) {
+        e.preventDefault();
         this.querySelectorAll('.nav-item').forEach(item => {
           item.classList.remove('active');
         });
-        e.currentTarget.classList.add('active');
+        clickedItem.classList.add('active');
       }
     });
   }
@@ -241,6 +243,6 @@ function fazerLogout(event) {
     localStorage.removeItem('userToken');
     
     // Redirecionar para login
-    window.location.href = '../pages/login.html';
+    window.location.href = 'login.html';
   }
 }
