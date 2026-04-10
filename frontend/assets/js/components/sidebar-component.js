@@ -46,7 +46,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
           </a>
-          <a href="#agenda" class="nav-item" data-page="agenda">
+          <a href="calendario.html" class="nav-item" data-page="agenda">
             <span class="material-symbols-outlined">calendar_today</span>
             <span>Agenda</span>
           </a>
@@ -118,9 +118,9 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
           </a>
-          <a href="#agenda" class="nav-item" data-page="agenda">
+          <a href="calendario.html" class="nav-item" data-page="agenda">
             <span class="material-symbols-outlined">calendar_today</span>
-            <span>Agenda</span>
+            <span>Calendário</span>
           </a>
           <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
@@ -130,7 +130,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">library_books</span>
             <span>Recursos</span>
           </a>
-          <a href="#roadmap" class="nav-item" data-page="roadmap">
+          <a href="roadmap.html" class="nav-item" data-page="roadmap">
             <span class="material-symbols-outlined">map</span>
             <span>Roadmap</span>
           </a>

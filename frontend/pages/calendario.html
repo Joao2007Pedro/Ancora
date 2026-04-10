@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<link rel="stylesheet" href="../assets/css/components.css"/>
+<link rel="stylesheet" href="../assets/css/pages/calendario.css"/>
+<script defer src="../assets/js/components/sidebar-component.js"></script>
+<script defer src="../assets/js/components/header-actions-component.js"></script>
+<script defer src="../assets/js/pages/calendario.js"></script>
+<title>Agenda</title>
+</head>
+
+<body>
+
+<sidebar-menu></sidebar-menu>
+
+<!-- Main -->
+<main class="main">
+
+<header class="header">
+  <section class="title">
+    <p>Calendário do Monitor</p>
+    <h1>Escolha um <br>horário</h1>
+  </section>
+
+  <app-header-actions
+    search-placeholder="Buscar horário..."
+    avatar-src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHg40P3uJMWJmNFTKGX549MhF5555LxYNMpJ0Pf8nfH5kJtH3Yc6YOWNxBETEjnl_Ecy7iF_LSUNCiA8U4dqeg1zDhYI9FZ-RsIQYFBI9Zn8rxc9ITqC_jOOLItZ-NWjwviv-asHIXQCk_M8llDqmQpszGc8W-jZQv0AoDTzMUE6At9v9HgTvdRDdc-gtDhoHRZIjeHYRV1rirm1CTWrHFsff61NrhWVPQaXc9shxW46guZq43ReZKd7gQ8Oi6VPTGmbpeZea0eg7Q"
+    avatar-alt="Marcus Oliveira">
+  </app-header-actions>
+</header>
+
+<!-- Calendar -->
+<section class="calendar">
+
+<!-- headers -->
+<div class="day" data-day-label="Segunda-feira" data-day-short="Seg" data-day-number="24"><p>Seg</p><h3>24</h3></div>
+<div class="day" data-day-label="Terça-feira" data-day-short="Ter" data-day-number="25"><p>Ter</p><h3>25</h3></div>
+<div class="day" data-day-label="Quarta-feira" data-day-short="Qua" data-day-number="26"><p>Qua</p><h3>26</h3></div>
+<div class="day" data-day-label="Quinta-feira" data-day-short="Qui" data-day-number="27"><p>Qui</p><h3>27</h3></div>
+<div class="day" data-day-label="Sexta-feira" data-day-short="Sex" data-day-number="28"><p>Sex</p><h3>28</h3></div>
+<div class="day disabled" data-day-label="Sábado" data-day-short="Sáb" data-day-number="29"><p>Sáb</p><h3>29</h3></div>
+<div class="day disabled" data-day-label="Domingo" data-day-short="Dom" data-day-number="30"><p>Dom</p><h3>30</h3></div>
+
+<!-- colunas -->
+<div class="col">
+<button type="button">09:00</button>
+<button type="button">10:30</button>
+<button type="button" disabled>14:00</button>
+<button type="button">16:30</button>
+</div>
+
+<div class="col">
+<button type="button" disabled>09:00</button>
+<button type="button">10:30</button>
+<button type="button">14:00</button>
+<button type="button">16:30</button>
+</div>
+
+<div class="col">
+<button type="button">09:00</button>
+<button type="button" class="selected">10:30</button>
+<button type="button">14:00</button>
+<button type="button">16:30</button>
+</div>
+
+<div class="col">
+<button type="button">09:00</button>
+<button type="button" disabled>10:30</button>
+<button type="button" disabled>14:00</button>
+<button type="button">16:30</button>
+</div>
+
+<div class="col">
+<button type="button">09:00</button>
+<button type="button">10:30</button>
+<button type="button">14:00</button>
+<button type="button" disabled>16:30</button>
+</div>
+
+<div class="col">
+<button type="button" disabled>10:00</button>
+<button type="button" disabled>11:30</button>
+</div>
+
+<div class="col unavailable">
+<span>Indisponível</span>
+</div>
+
+</section>
+
+<footer class="footer">
+  <div class="selected-info">
+    <div class="date">
+      <span id="selectedDayShort">Qua</span>
+      <strong id="selectedDayNumber">26</strong>
+    </div>
+    <div>
+      <p>Horário Selecionado</p>
+      <h2 id="selectedDateTime">Quarta-feira às 10:30</h2>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="cancel">Cancelar</button>
+    <button type="button" class="confirm">Confirmar Sessão</button>
+  </div>
+</footer>
+
+</main>
+
+
+</body>
+</html>
