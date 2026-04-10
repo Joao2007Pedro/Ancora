@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Monitoria</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/pages/cadastrar-monitoria.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <script defer src="../assets/js/components/sidebar-component.js"></script>
+  <script defer src="../assets/js/pages/cadastrar-monitoria.js"></script>
+</head>
+
+<body>
+  <sidebar-menu></sidebar-menu>
+
+<main class="main">
+  <header class="header">
+    <div>
+      <h2>Nova Monitoria</h2>
+      <p>Preencha os dados abaixo para disponibilizar seu horário.</p>
+    </div>
+
+    <div class="progress">
+      <span>PASSO 01 DE 03</span>
+      <div class="bar">
+        <div class="fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="card">
+
+    <!-- TEMA -->
+    <div class="grid">
+      <div>
+        <h3>Qual o tema?</h3>
+        <p>Escolha a matéria principal e dê um título.</p>
+      </div>
+
+      <div>
+        <div class="chips">
+          <button type="button" class="chip active">JavaScript</button>
+          <button type="button" class="chip">Python</button>
+          <button type="button" class="chip">UI Design</button>
+          <button type="button" class="chip">Soft Skills</button>
+        </div>
+
+        <input type="text" placeholder="Título da monitoria">
+        <textarea rows="5" placeholder="Descrição"></textarea>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div class="grid border">
+      <div>
+        <h3>Formato e Nível</h3>
+        <p>Defina como será entregue.</p>
+      </div>
+
+      <div>
+        <div class="toggle-group">
+          <button type="button" class="active">Iniciante</button>
+          <button type="button">Avançado</button>
+        </div>
+
+        <div class="toggle-group">
+          <button type="button" class="active">Online</button>
+          <button type="button">Presencial</button>
+        </div>
+
+        <div class="counter">
+          <button type="button" id="minus">-</button>
+          <span id="count">8</span>
+          <button type="button" id="plus">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENDAMENTO -->
+    <div class="grid border">
+      <div>
+        <h3>Agendamento</h3>
+      </div>
+
+      <div>
+        <div class="days">
+          <button type="button" class="day active">14</button>
+          <button type="button" class="day">15</button>
+          <button type="button" class="day">16</button>
+          <button type="button" class="day">17</button>
+        </div>
+
+        <div class="time">
+          <input type="time" value="14:30">
+          <input type="time" value="16:00">
+        </div>
+
+        <button type="button" id="addSlot" class="btn-outline">Adicionar horário</button>
+
+        <div id="slots"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-outline">Cancelar</button>
+      <button type="button" class="btn-primary">Próximo</button>
+    </div>
+
+  </section>
+</main>
+
+
+</body>
+</html>
