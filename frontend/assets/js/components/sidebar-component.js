@@ -219,8 +219,7 @@ customElements.define('sidebar-menu', SidebarMenu);
  * Abre formulário para nova monitoria
  */
 function abrirNovaMonitoria() {
-  console.log('Abrindo formulário de nova monitoria...');
-  // Implementar navegação ou modal
+  window.location.href = 'cadastrar-monitoria.html';
 }
 
 /**
