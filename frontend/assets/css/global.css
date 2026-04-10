@@ -1,0 +1,53 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap');
+
+:root {
+  /* Cores Proa */
+  --azul:       #3333FF;
+  --navy:       #0A0F5C;
+  --lime:       #CCFF00;
+  --laranja:    #FF6600;
+  --ciano:      #44BBFF;
+  --bg:         #E8EEF4;
+
+  /* Neutros */
+  --branco:     #FFFFFF;
+  --cinza-100:  #F5F5F5;
+  --cinza-300:  #D1D5DB;
+  --cinza-500:  #6B7280;
+  --cinza-700:  #374151;
+  --preto:      #0A0A0A;
+
+  /* Semânticas */
+  --sucesso:    #22C55E;
+  --erro:       #EF4444;
+  --aviso:      #F59E0B;
+
+  /* Tipografia */
+  --fonte:      'Clash Grotesk', sans-serif;
+
+  /* Bordas */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-pill:50px;
+
+  /* Sombra */
+  --sombra:     0 2px 12px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte);
+  background-color: var(--bg);
+  color: var(--navy);
+  line-height: 1.5;
+}
+
+img { max-width: 100%; display: block; }
+a   { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--fonte); }
