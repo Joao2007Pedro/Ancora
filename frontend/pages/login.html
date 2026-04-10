@@ -105,25 +105,26 @@
           </div>
         </div>
 
-        <div class="email_container">
+        <form id="form-login" class="email_container">
           <div class="container">
             <h2>E-mail Institucional</h2>
             <div class="email">
-              <input type="email" name="" id="email" value="aluno@senacsp.edu.br" />
+              <input type="email" id="email" value="aluno@senacsp.edu.br" required />
             </div>
           </div>
 
           <div class="container">
             <h2>Senha</h2>
             <div class="email">
-              <input type="password" name="" id="senha" value="******" />
+              <input type="password" id="senha" value="******" required />
             </div>
           </div>
-          <h2 id="senha"><a href="">Esqueceu a senha?</a></h2>
-        </div>
+          <h2><a href="">Esqueceu a senha?</a></h2>
+          <p id="msg-erro" style="color: #EF4444; margin-top: 12px; text-align: center; min-height: 20px;"></p>
+        </form>
 
         <div class="confirmar">
-          <button>
+          <button type="submit" form="form-login">
             Acessar plataforma
             <!-- <img src="../assets/images/login/Right.png" alt="" /> -->
           </button>
