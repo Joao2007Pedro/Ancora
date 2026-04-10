@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Âncora | Evolua com sua turma</title>
+  <script src="./assets/js/pages/index.js"></script>
+  <link rel="stylesheet" href="./assets/css/pages/index.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <span class="navbar__logo">Âncora</span>
+
+      <button class="navbar__burger" id="burgerBtn" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="navbar__links" id="navLinks">
+        <a href="#how" class="navbar__link navbar__link--active">Como funciona</a>
+        <a href="#features" class="navbar__link">Funcionalidades</a>
+        <a href="#testimonials" class="navbar__link">Depoimentos</a>
+      </div>
+
+      <div class="navbar__actions">
+        <button class="btn btn--ghost" onclick="window.location.href='./pages/login.html'">Login</button>
+        <button class="btn btn--pill" onclick="window.location.href='./pages/cadastro.html'">Criar conta</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">
+          Tire suas dúvidas.<br/>
+          Evolua com sua <span class="text-primary">turma.</span>
+        </h1>
+        <p class="hero__subtitle">
+          Conecte-se com monitores ProProfissão e transforme sua jornada de aprendizado
+          em uma experiência coletiva e dinâmica.
+        </p>
+        <div class="hero__actions">
+          <button class="btn btn--primary btn--large" onclick="window.location.href='./pages/cadastro.html'">
+            Começar agora
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+          <button class="btn btn--outline btn--large" onclick="window.location.href='./pages/login.html'">Ver monitorias</button>
+        </div>
+        <div class="social-proof">
+          <div class="avatar-stack">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHQnYUGL1aKDQ2TLVR_9Emyjy1euo-nDsCgs_G87rQQn9ximyU5qJeN7ksme2xAfd3RUKt1yGxzRgcHUB1fnkWOb4P_LjOdCKleApsczjsZKUpGtRslYzeVmvyzKKXIOSlymJk5zhipEyaLEdlzFSlBU1_TUNkgexb58kL-Mfs4WrEIR8mT-eTAjv9YH2wWcq7_CR2sH39zdbuTEtTWvpG-nMtFWmpxE9mGB2TfMyfsu7unogFuj4TScUcmX-c_ksDOEoelK127A8-" alt="Aluna 1"/>
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHhCBqPxZIk73zCjpL6nHB8LVD2jDRybNOa328F8q38FmeO9wi32nvEsiFX0XuVeeyXTJOwFfqUf4ZgxCXPOgRycaz0LPQulM_WS3Da81CjX2eiYNMgyk3pkS__91AOIpf9B8stJKwBASGH3VWPTVOSknPLYqtKrj-wmwYCiME8XVbNeJ_KDqd88Hpg7WYDWn2JZEJ8dlC5f3MKFK5ntGm0kkVIjHu88Khfli3se2uqg9bnStuB9r7LPN4oaiQW3hHe4nhZUKTta3U" alt="Aluno 2"/>
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtqJ8Jszb82m3SxU0_J4F4rsTpsL_NbnKkitATk67vmgDpnalMBLW4dAzgE-oxusaDndXYn0qQ84V9HmS-3y3s2eh59KfaryxRX8-apGG6ZQyAqUfUAD7UXK5UXsof9vl0YlbzHqp7mBW-EbFna5TrPhzndXYEO9wU1Ox5uTlwrqw7bvd-HXQ-N04rBjWyjuXLSeOY8kCQ44pTC4juXBH4CguH1cStkCSSTE6TtzNm3dWHDtQ6MSVT57gtaHyH1GleaTdk6xecra1z" alt="Aluno 3"/>
+          </div>
+          <p class="social-proof__text">
+            <strong>+2.500 alunos</strong> já estão evoluindo
+          </p>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__glow"></div>
+        <div class="dot dot--lime" style="top:2.5rem;right:2.5rem;"></div>
+        <div class="dot dot--orange" style="bottom:5rem;left:0;"></div>
+
+        <div class="monitor-card">
+          <div class="monitor-card__avatar-wrap">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgqFwUrMQqUJYavYG3wdosTnRTQFau7OWtXFeQ4oAdz5-3NSHXjuL0CrkFbei75175sBiXwnrW5K58WlilXtc4vYzywSqCCQcyEF_prcipDvcQ0E_TpTP1OV9raEAVrRuKyGq4ba1ivEArIkas5ggjgYDi_t1NwHqIDIntUDIiwUDXS9NESmUleUDYw-HxTfs9pOMWZg-KHjPASl3YXH_-Y29U9dTyQcZ0o8UwzoSJlSUbxSeXkPGrb6f7rPEyj3eM1nb6VrWA5c_G" alt="Monitor Ricardo Santos" class="monitor-card__avatar"/>
+            <div class="monitor-card__badge">
+              <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;font-size:18px;">verified</span>
+            </div>
+          </div>
+          <h3 class="monitor-card__name">Ricardo Santos</h3>
+          <p class="monitor-card__role">Monitor Front-end</p>
+          <div class="monitor-card__tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">React</span>
+          </div>
+          <div class="monitor-card__rating">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">star</span>
+            <strong>4.9</strong>
+            <span class="rating__count">(120 mentorias)</span>
+          </div>
+          <button class="btn btn--dark btn--full">Agendar Monitoria</button>
+        </div>
+
+        <div class="session-badge">
+          <div class="session-badge__dot"></div>
+          <p>Próxima sessão em 15min</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats">
+      <div class="stats__inner">
+        <div class="stat">
+          <h2 class="stat__value">150+</h2>
+          <p class="stat__label">Alunos ativos</p>
+        </div>
+        <div class="stat">
+          <h2 class="stat__value">5</h2>
+          <p class="stat__label">Equipes conectadas</p>
+        </div>
+        <div class="stat">
+          <h2 class="stat__value">48h</h2>
+          <p class="stat__label">Tempo médio de resposta</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how" id="how">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Como funciona</span>
+        <h2 class="section-title">Do agendamento à sessão em 3 passos</h2>
+      </div>
+      <div class="steps">
+        <div class="step-card">
+          <span class="step-card__number">01</span>
+          <div class="step-card__icon step-card__icon--orange">
+            <span class="material-symbols-outlined">search</span>
+          </div>
+          <h3 class="step-card__title">Encontre um monitor</h3>
+          <p class="step-card__desc">Navegue pelos perfis e escolha o monitor que melhor domina a tecnologia que você quer aprender.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-card__number">02</span>
+          <div class="step-card__icon step-card__icon--cyan">
+            <span class="material-symbols-outlined">calendar_month</span>
+          </div>
+          <h3 class="step-card__title">Agende sua sessão</h3>
+          <p class="step-card__desc">Escolha um horário disponível na agenda global que se encaixe perfeitamente na sua rotina de estudos.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-card__number">03</span>
+          <div class="step-card__icon step-card__icon--lime">
+            <span class="material-symbols-outlined">school</span>
+          </div>
+          <h3 class="step-card__title">Aprenda e evolua</h3>
+          <p class="step-card__desc">Participe da monitoria ao vivo, tire suas dúvidas e avance no seu roadmap de aprendizado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features" id="features">
+      <div class="features__inner">
+        <div class="section-header">
+          <span class="section-eyebrow">Funcionalidades</span>
+          <h2 class="section-title">Tudo que você precisa para evoluir</h2>
+        </div>
+
+        <!-- Feature 1 -->
+        <div class="feature-row">
+          <div class="feature-row__text">
+            <h3 class="feature-row__title">Agenda global de monitorias</h3>
+            <p class="feature-row__desc">Um feed unificado onde você vê todas as monitorias disponíveis para sua turma e curso. Filtre por tecnologia, monitor ou horário.</p>
+          </div>
+          <div class="feature-row__card">
+            <div class="window-bar">
+              <div class="window-bar__dot dot-red"></div>
+              <div class="window-bar__dot dot-lime"></div>
+              <div class="window-bar__dot dot-cyan"></div>
+            </div>
+            <div class="agenda-item">
+              <div class="agenda-item__icon agenda-item__icon--primary">
+                <span class="material-symbols-outlined">code</span>
+              </div>
+              <div>
+                <p class="agenda-item__name">HTML Avançado</p>
+                <p class="agenda-item__sub">com Maria S.</p>
+              </div>
+              <span class="agenda-item__time">Hoje 14:00</span>
+            </div>
+            <div class="agenda-item agenda-item--muted">
+              <div class="agenda-item__icon agenda-item__icon--orange">
+                <span class="material-symbols-outlined">palette</span>
+              </div>
+              <div>
+                <p class="agenda-item__name">UI/UX Basics</p>
+                <p class="agenda-item__sub">com João P.</p>
+              </div>
+              <span class="agenda-item__time agenda-item__time--muted">Amanhã 10:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-row feature-row--reverse">
+          <div class="feature-row__text">
+            <h3 class="feature-row__title">Escolha o horário ideal</h3>
+            <p class="feature-row__desc">Grade horária flexível que respeita o seu tempo. Marque sessões individuais ou em grupo com apenas dois cliques.</p>
+          </div>
+          <div class="feature-row__card">
+            <div class="calendar">
+              <div class="calendar__header">
+                <span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span><span>D</span>
+              </div>
+              <div class="calendar__grid">
+                <div class="cal-day">12</div>
+                <div class="cal-day cal-day--active">13</div>
+                <div class="cal-day">14</div>
+                <div class="cal-day cal-day--highlight">15</div>
+                <div class="cal-day">16</div>
+                <div class="cal-day">17</div>
+                <div class="cal-day">18</div>
+              </div>
+              <div class="calendar__slot">
+                <span>14:00 - 15:00</span>
+                <button class="btn btn--primary btn--xs">Selecionar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-row">
+          <div class="feature-row__text">
+            <h3 class="feature-row__title">Roadmap do seu curso</h3>
+            <p class="feature-row__desc">Acompanhe sua evolução de forma visual. Saiba exatamente onde você está e quais são os próximos desafios para completar sua jornada.</p>
+          </div>
+          <div class="feature-row__card">
+            <div class="roadmap">
+              <div class="roadmap__header">
+                <p class="roadmap__label">Progresso de Front-end</p>
+                <span class="roadmap__pct">65%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill" style="width:65%"></div>
+              </div>
+              <div class="roadmap__steps">
+                <div class="rs rs--done">
+                  <div class="rs__dot rs__dot--done"><span class="material-symbols-outlined">check</span></div>
+                  <p>Fundamentos de lógica</p>
+                </div>
+                <div class="rs rs--done">
+                  <div class="rs__dot rs__dot--done"><span class="material-symbols-outlined">check</span></div>
+                  <p>HTML Semântico</p>
+                </div>
+                <div class="rs rs--current">
+                  <div class="rs__dot rs__dot--current"><div class="rs__dot-inner"></div></div>
+                  <p class="rs__label--current">CSS Flexbox &amp; Grid</p>
+                </div>
+                <div class="rs rs--locked">
+                  <div class="rs__dot rs__dot--locked"></div>
+                  <p>Javascript Moderno</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Depoimentos</span>
+        <h2 class="section-title">O que os alunos estão dizendo</h2>
+      </div>
+      <div class="testimonials__grid">
+        <div class="testimonial-card testimonial-card--primary">
+          <p class="testimonial-card__quote">"As monitorias da Âncora foram o diferencial no meu aprendizado. O contato direto com quem já passou pelo processo ajuda muito a destravar nos códigos."</p>
+          <div class="testimonial-card__author">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUcBXAd4wVqvnohoLJM4LHmOlaY0WlP4GmU-qsU4hkg6f69ByMTGLH-S3qgWZpJurlz_Jj6sll_hKX7i_hIi-GJxHHmt_vSvDePd9XHlEhNOtbwfKepZVNI2t45epQK463htuvPf-hqzv7_Df31QJsUR57U8ZVCY-z4rQSlyWk3LLPjNqmk5d4XXro7TSV3XsquOOX6_IcC8HFyA8AyrU4u0u4hDMySkQepZgatt9MrtVMhzL_rIL9dONeN1WcSxfY8a1Q3KeLnZiw" alt="Ana Lima"/>
+            <div>
+              <p class="author__name">Ana Lima</p>
+              <p class="author__role">Aluna de Web Design</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card testimonial-card--orange">
+          <p class="testimonial-card__quote">"Agendar sessões é muito intuitivo. A plataforma me deu a segurança que eu precisava para não desistir nas partes mais difíceis do roadmap."</p>
+          <div class="testimonial-card__author">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuASvJeYha9-YTdcckVo3q93XbXwGpCNZFQlA1_3yU-PWECSx2f4C4tBEntCJD76YzkfcgQbqyttHe3-8yiPdKsimjrToA4KBRsLugBu0oiQUyyoHXzqlLFSPMlehpjK2btftSbdmTfxTEngSfyMBNUcs05zGma0idKud7ejM1Xh5S48FPsURagEX1egN6w1LFKVaELtcvHQJV8ctc7D29xNwlyRN3UAJxQpysa_6dkL1n1KxmCYrUR_N7_HZSii_mXYD7GFS8b9aFHX" alt="Carlos M."/>
+            <div>
+              <p class="author__name">Carlos M.</p>
+              <p class="author__role">Aluno de Backend</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card testimonial-card--lime">
+          <p class="testimonial-card__quote">"O monitor que me atendeu foi super paciente. Explicou conceitos complexos de um jeito que eu finalmente consegui aplicar no meu projeto final."</p>
+          <div class="testimonial-card__author">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBushfb21WnaZ40ZV97gul_2k6F7T1sEe3z2llSoAi6_NQvIjUPvO7fmrWcLTMiOA7sjH2jSj4vMxU6oz3cBMwDwveuLHomrYMnRCpingY7H9BHnnzqwUpbs6uh9KVj0z9PNFimvY6FFzkNeNWV1pAfSnbW57DCYFI5iMMiUoGsiqIVHkUWInihW6q85qPW3M2pKMAC49z02zlRw8E5JqgmhLwarvcQ7iqPcrcNrkdEiPq_9rLKoxbLd7CMp0-2NtrbHdMRy9gQsYLA" alt="Rafael S."/>
+            <div>
+              <p class="author__name">Rafael S.</p>
+              <p class="author__role">Aluno Fullstack</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section">
+      <div class="cta-card">
+        <div class="cta-card__glow cta-card__glow--top"></div>
+        <div class="cta-card__glow cta-card__glow--bottom"></div>
+        <div class="cta-card__content">
+          <h2 class="cta-card__title">Pronto para evoluir com sua turma?</h2>
+          <div class="cta-card__actions">
+            <button class="btn btn--lime btn--large">
+              Criar conta grátis
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <button class="btn btn--outline-white btn--large">Já tenho conta</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">Âncora</span>
+        <p class="footer__copy">© 2024 Âncora by Instituto Proa. Kinetic Scholar Editorial.</p>
+      </div>
+      <nav class="footer__links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Support</a>
+      </nav>
+      <div class="footer__social">
+        <a href="#" class="social-icon" aria-label="Site">
+          <span class="material-symbols-outlined">language</span>
+        </a>
+        <a href="#" class="social-icon" aria-label="Comunidade">
+          <span class="material-symbols-outlined">group</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
