@@ -206,10 +206,9 @@ main {
   height: 80px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   justify-items: center;
   align-items: center;
-  gap: 20px;
 }
 
 .star {
@@ -229,10 +228,6 @@ main {
   font-weight: 300;
   line-height: 40px;
   letter-spacing: 1px;
-}
-
-#item1 {
-  justify-content: space-evenly;
 }
 
 /* Section 2 */
@@ -1011,12 +1006,12 @@ main {
 
   .plataform {
     width: 70%;
-    height: 46px;
+    height: 50px;
   }
 
   .plataform h2 {
-    font-size: 18px;
-    line-height: 46px;
+    font-size: 14px;
+    line-height: 48px;
   }
 
   .text_sec1 {
@@ -1192,5 +1187,125 @@ main {
     height: 72px;
     font-size: 30px;
     border-radius: 18px;
+  }
+}
+
+/* Responsivity 1600 */
+
+@media (min-width: 1500px) {
+  .itens_titulo {
+    width: 90%;
+  }
+
+  .itens_titulo h1 {
+    font-size: 40px;
+  }
+
+  .plataform {
+    width: 80%;
+    height: 70px;
+  }
+
+  .plataform h2 {
+    font-size: 20px;
+    line-height: 66px;
+  }
+
+  .text_sec1 {
+    width: 80%;
+  }
+
+  .text_sec1 h1 {
+    font-size: 52px;
+    line-height: 58px;
+  }
+
+  .text2_sec2 {
+    width: 80%;
+  }
+
+  .text2_sec2 h2 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .items_container {
+    width: 80%;
+    height: auto;
+    gap: 20px;
+  }
+
+  .item {
+    height: 70px;
+    gap: 18px;
+  }
+
+  .item h2 {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .star {
+    width: 20%;
+    height: 50px;
+  }
+
+  /* Seção 2 */
+
+  .container_buttons {
+    width: 70%;
+  }
+
+  .title_sec2 {
+    width: 70%;
+  }
+
+  .title_sec2 h1 {
+    font-size: 48px;
+  }
+
+  .title_sec2 h2 {
+    font-size: 22px;
+  }
+
+  .email_container {
+    width: 70%;
+  }
+
+  .email_container h2 {
+    font-size: 22px;
+  }
+
+  .email input {
+    height: 70px;
+    font-size: 22px;
+  }
+
+  #perfil {
+    font-size: 26px;
+    margin: 3%;
+  }
+
+  .container_acess {
+    width: 50%;
+  }
+
+  .itens_acess h2 {
+    font-size: 24px;
+  }
+
+  .itens_acess h3 {
+    font-size: 18px;
+  }
+
+  #aluno {
+    width: 30%;
+    height: 60px;
+  }
+
+  .confirmar {
+    width: 60%;
+    height: 72px;
+    margin: 3% auto;
   }
 }
