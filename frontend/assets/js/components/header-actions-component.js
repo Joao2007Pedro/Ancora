@@ -25,6 +25,7 @@ class AppHeaderActions extends HTMLElement {
           <div class="header-actions-component__avatar">
             <img src="${avatarSrc}" alt="${avatarAlt}" />
           </div>
+          <span class="header-actions-component__status-dot" aria-hidden="true"></span>
           ${hasName ? `<span class="header-actions-component__name">${profileName}</span>` : ""}
         </div>
       </div>

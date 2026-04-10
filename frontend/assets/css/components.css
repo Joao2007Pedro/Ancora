@@ -313,24 +313,23 @@
 .header-actions-component {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .header-actions-component__search {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  min-width: 220px;
-  padding: 0.65rem 1rem;
+  min-width: 300px;
+  padding: 0.7rem 1.15rem;
   border-radius: 9999px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  background-color: #e3e8ef;
+  border: 1px solid transparent;
 }
 
 .header-actions-component__search-icon {
-  color: #94a3b8;
-  font-size: 1.2rem;
+  color: #0a0f5c;
+  font-size: 1.45rem;
 }
 
 .header-actions-component__search-input {
@@ -339,20 +338,20 @@
   outline: none;
   background: transparent;
   color: #0f172a;
-  font-size: 0.875rem;
+  font-size: 1.05rem;
   font-weight: 500;
 }
 
 .header-actions-component__search-input::placeholder {
-  color: #94a3b8;
+  color: #5f6673;
 }
 
 .header-actions-component__notify {
   width: 3rem;
   height: 3rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid transparent;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #d7dfcc;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -362,12 +361,13 @@
 }
 
 .header-actions-component__notify:hover {
-  background-color: #f1f5f9;
+  background-color: #ccd6bf;
 }
 
 .header-actions-component__profile {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .header-actions-component__profile--chip {
@@ -385,8 +385,8 @@
 }
 
 .header-actions-component__avatar {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -404,6 +404,17 @@
   font-weight: 700;
 }
 
+.header-actions-component__status-dot {
+  position: absolute;
+  right: -0.35rem;
+  top: -0.35rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background-color: #ccff00;
+  border: 2px solid #e8eef4;
+}
+
 @media (max-width: 768px) {
   .header-actions-component {
     width: 100%;
@@ -413,5 +424,19 @@
   .header-actions-component__search {
     flex: 1;
     min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions-component {
+    gap: 0.75rem;
+  }
+
+  .header-actions-component__search {
+    min-width: 100%;
+  }
+
+  .header-actions-component__search-input {
+    font-size: 0.95rem;
   }
 }
