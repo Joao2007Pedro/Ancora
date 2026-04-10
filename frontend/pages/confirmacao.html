@@ -3,101 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmação de Agendamento - Proa Scholar</title>
-    
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+    <title>Confirmação</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-    
+
     <!-- Estilos -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
     <link rel="stylesheet" href="../assets/css/pages/confirmacao.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
-  <script src="../assets/js/components/sidebar-component.js"></script>
+
+    <!-- Components -->
+    <script src="../assets/js/components/sidebar-component.js"></script>
+    <script src="../assets/js/utils/user-manager.js"></script>
 </head>
 <body>
-
-    <!-- Componente Reutilizável da Sidebar -->
+    <!-- Sidebar -->
     <sidebar-menu></sidebar-menu>
 
-    <main class="main-content confirmation-page">
-        <!-- Elementos Decorativos -->
-        <div class="decorative-blob"></div>
-        <div class="decorative-dot"></div>
-
-        <div class="container-small">
-            <header class="page-header">
-                <span class="label-tiny">Resumo do Pedido</span>
-                <h1 class="title-xl">Confirmar agendamento</h1>
+    <main class="confirmation-page">
+        <div class="confirmation-container">
+            <!-- Header -->
+            <header class="confirmation-header">
+                <span class="section-label">Resumo do Pedido</span>
+                <h1 class="page-title">Confirmar agendamento</h1>
             </header>
 
-            <!-- Card de Resumo -->
-            <section class="summary-card">
-                <div class="card-accent-dot"></div>
-                
-                <div class="monitor-profile">
-                    <div class="avatar-wrapper">
+            <!-- Card Resumo -->
+            <section class="confirmation-card">
+                <!-- Monitor Profile -->
+                <div class="monitor-info">
+                    <div class="monitor-avatar">
                         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0rHmpgUmUDqMEE2icWB1QWtAf447FVXALCYfE9ihfNpBDAhqNaMUOT1ubG7jazLBnofvz7nOipYI6db8euVYalVFYI-TLhkeXueUIDGj17khXQRS3IqE6gISjtbb8YoAFyzkxfhEJCwdl67Vlagv7TzImHn69BRpSzr4dvaYmhjfmt2BUAZjeXKJR0lTlXjsd9sYCt8mSHHYAmHiM_YSnRDaOGru3s2zN5waIGTaD09LStJATBQonvCrigMAWLAzAFLdMeCb5EcFi" alt="Lucas Mendonça">
-                        <span class="material-symbols-outlined verified-badge">verified</span>
+                        <span class="verified-icon">✓</span>
                     </div>
-                    <div class="monitor-text">
-                        <h3>Lucas Mendonça</h3>
-                        <span class="badge-tag">Monitor Senior</span>
+                    <div class="monitor-details">
+                        <h2 class="monitor-name">Lucas Mendonça</h2>
+                        <span class="monitor-badge">Monitor Senior</span>
                     </div>
                 </div>
 
-                <div class="details-list">
-                    <div class="detail-row highlight">
-                        <div class="icon-box-white">
+                <!-- Detalhes de Agendamento -->
+                <div class="booking-details">
+                    <div class="detail-item highlight">
+                        <div class="detail-icon calendar-icon">
                             <span class="material-symbols-outlined">calendar_today</span>
                         </div>
-                        <div class="text-group">
+                        <div class="detail-content">
                             <label>Data e Horário</label>
                             <p>24 de Outubro, 2023 • 14:30 - 15:30</p>
                         </div>
                     </div>
 
-                    <div class="detail-row">
-                        <div class="icon-box-gray">
+                    <div class="detail-item">
+                        <div class="detail-icon video-icon">
                             <span class="material-symbols-outlined">videocam</span>
                         </div>
-                        <div class="text-group">
+                        <div class="detail-content">
                             <label>Formato da Sessão</label>
                             <p>Online via Discord</p>
                         </div>
                     </div>
 
-                    <div class="detail-row">
-                        <div class="icon-box-gray">
+                    <div class="detail-item">
+                        <div class="detail-icon subject-icon">
                             <span class="material-symbols-outlined">history_edu</span>
                         </div>
-                        <div class="text-group">
+                        <div class="detail-content">
                             <label>Matéria</label>
                             <p>Lógica de Programação I</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-full shadow-hover">
+                <!-- Botões de Ação -->
+                <div class="action-buttons">
+                    <button class="btn-confirm" onclick="confirmarAgendamento()">
                         Confirmar agendamento
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </button>
-                    <button class="btn btn-secondary btn-full">Cancelar</button>
+                    <button class="btn-cancel" onclick="cancelarAgendamento()">
+                        Cancelar
+                    </button>
                 </div>
 
-                <!-- Indicador Visual Inferior -->
-                <div class="step-indicator">
-                    <span></span><span></span><span class="long"></span><span></span><span></span>
+                <!-- Indicador de Progresso -->
+                <div class="progress-indicator">
+                    <span></span>
+                    <span></span>
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </section>
 
-            <p class="context-help">
+            <!-- Mensagem Informativa -->
+            <p class="info-text">
                 Ao confirmar, você receberá o link de acesso e materiais de apoio diretamente no seu e-mail cadastrado.
             </p>
         </div>
     </main>
 
-    <!-- Scripts -->
-    <script src="sidebar-component.js"></script>
+    <script src="../assets/js/pages/confirmacao.js"></script>
 </body>
 </html>
