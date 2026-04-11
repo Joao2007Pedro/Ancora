@@ -118,7 +118,7 @@ main {
 .itens_titulo h1 {
   font-family: "Space Grotesk";
   color: var(--verde);
-  font-size: 40px;
+  font-size: 38px;
   font-style: normal;
   font-weight: 400;
   line-height: 48px;
@@ -146,7 +146,7 @@ main {
 .plataform h2 {
   color: var(--verde);
   font-family: "Plus Jakarta Sans";
-  font-size: 25px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 48px;
@@ -163,7 +163,7 @@ main {
 .text_sec1 h1 {
   color: #fff;
   font-family: "Space Grotesk";
-  font-size: 60px;
+  font-size: 48px;
   font-style: normal;
   font-weight: 700;
   line-height: 70px;
@@ -183,7 +183,7 @@ main {
 .text2_sec2 h2 {
   color: var(--cinza);
   font-family: "Plus Jakarta Sans";
-  font-size: 25px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: 40px;
@@ -193,7 +193,7 @@ main {
 /* Items */
 
 .items_container {
-  width: 90%;
+  width: 80%;
   height: 300px;
   margin: 4% auto;
   display: flex;
@@ -574,7 +574,7 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   .itens_titulo img {
@@ -584,14 +584,14 @@ main {
   }
 
   .plataform {
-    width: 75%;
+    width: 60%;
     height: auto;
     margin: 0 5%;
     gap: 10px;
   }
 
   .plataform h2 {
-    font-size: 15px;
+    font-size: 10px;
     line-height: 38px;
   }
 
@@ -601,7 +601,7 @@ main {
   }
 
   .text_sec1 h1 {
-    font-size: 34px;
+    font-size: 25px;
     line-height: 44px;
   }
 
@@ -611,7 +611,7 @@ main {
   }
 
   .text2_sec2 h2 {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 24px;
   }
 
@@ -649,13 +649,13 @@ main {
 
   .btn1 {
     width: 48%;
-    height: 48px;
+    height: 45px;
     border-radius: 12px;
   }
 
   .btn1 button {
-    font-size: 18px;
-    height: 48px;
+    font-size: 15px;
+    height: 40px;
     border-radius: 12px;
   }
 
@@ -666,19 +666,19 @@ main {
   }
 
   .title_sec2 h1 {
-    font-size: 28px;
+    font-size: 20px;
     line-height: 34px;
   }
 
   .title_sec2 h2 {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 22px;
   }
 
   /* Cards de perfil */
   .container_acess {
     order: 1;
-    width: 90%;
+    width: 70%;
     height: auto;
     flex-direction: column;
     gap: 12px;
@@ -699,18 +699,18 @@ main {
   }
 
   .itens_acess h2 {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 26px;
   }
 
   .itens_acess h3 {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 20px;
   }
 
   #aluno {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 40px;
     border-radius: 10px;
   }
 
@@ -724,7 +724,7 @@ main {
   }
 
   .email_container h2 {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 26px;
   }
 
@@ -734,7 +734,7 @@ main {
 
   .email input {
     height: 50px;
-    font-size: 15px;
+    font-size: 12px;
     border-radius: 12px;
     padding: 14px;
   }
@@ -755,13 +755,13 @@ main {
   .confirmar {
     order: 3;
     width: 90%;
-    height: 56px;
+    height: 50px;
     margin: 12px auto;
   }
 
   .confirmar button {
-    height: 56px;
-    font-size: 20px;
+    height: 50px;
+    font-size: 15px;
     border-radius: 14px;
   }
 }
@@ -785,39 +785,39 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 30px;
+    font-size: 22px;
   }
 
   .plataform {
-    width: 90%;
+    width: 80%;
     height: 42px;
   }
 
   .plataform h2 {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 42px;
   }
 
   .text_sec1 {
-    width: 85%;
+    width: 80%;
   }
 
   .text_sec1 h1 {
-    font-size: 42px;
+    font-size: 32px;
     line-height: 54px;
   }
 
   .text2_sec2 {
-    width: 85%;
+    width: 80%;
   }
 
   .text2_sec2 h2 {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 30px;
   }
 
   .items_container {
-    width: 85%;
+    width: 80%;
     height: auto;
     gap: 12px;
   }
@@ -828,12 +828,12 @@ main {
   }
 
   .item h2 {
-    font-size: 16px;
+    font-size: 12px;
     line-height: 24px;
   }
 
   .star {
-    width: 25%;
+    width: 20%;
     height: 40px;
   }
 
@@ -845,20 +845,20 @@ main {
 
   .container_buttons {
     width: 80%;
-    height: 80px;
+    height: 60px;
     gap: 20px;
     margin: 4% auto;
   }
 
   .btn1 {
     width: 42%;
-    height: 60px;
+    height: 40px;
     border-radius: 16px;
   }
 
   .btn1 button {
-    font-size: 26px;
-    height: 60px;
+    font-size: 15px;
+    height: 40px;
     border-radius: 16px;
   }
 
@@ -870,39 +870,40 @@ main {
   }
 
   .title_sec2 h1 {
-    font-size: 36px;
+    font-size: 25px;
     line-height: 42px;
   }
 
   .title_sec2 h2 {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 28px;
   }
 
   .google {
     width: 75%;
-    height: 80px;
+    height: 50px;
   }
 
   .google button {
-    height: 80px;
+    height: 50px;
     border-radius: 16px;
   }
 
   .google button img {
-    width: 40px;
+    width: 30px;
   }
 
   .google button h2 {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   .separar {
     width: 75%;
+    gap: 10px;
   }
 
   .separar h2 {
-    font-size: 22px;
+    font-size: 15px;
   }
 
   .email_container {
@@ -913,31 +914,31 @@ main {
   }
 
   .email_container h2 {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 28px;
   }
 
   .email input {
-    height: 64px;
-    font-size: 18px;
+    height: 50px;
+    font-size: 14px;
     border-radius: 16px;
     padding: 20px;
   }
 
   #perfil {
-    font-size: 22px;
+    font-size: 15px;
     margin: 3%;
   }
 
   .container_acess {
-    width: 80%;
+    width: 70%;
     height: auto;
     gap: 16px;
     margin: 0 auto 16px;
   }
 
   .aluno_access {
-    width: 46%;
+    width: 56%;
     height: auto;
     padding: 20px 0;
     border-radius: 16px;
@@ -950,30 +951,30 @@ main {
   }
 
   .itens_acess h2 {
-    font-size: 20px;
+    font-size: 15px;
     line-height: 28px;
   }
 
   .itens_acess h3 {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 22px;
   }
 
   #aluno {
-    width: 30%;
-    height: 50px;
+    width: 28%;
+    height: 35px;
     border-radius: 10px;
   }
 
   .confirmar {
-    width: 80%;
-    height: 68px;
+    width: 70%;
+    height: 60px;
     margin: 3% auto;
   }
 
   .confirmar button {
-    height: 68px;
-    font-size: 26px;
+    height: 50px;
+    font-size: 18px;
     border-radius: 16px;
   }
 }
@@ -1001,7 +1002,7 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 34px;
+    font-size: 25px;
   }
 
   .plataform {
@@ -1010,7 +1011,7 @@ main {
   }
 
   .plataform h2 {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 48px;
   }
 
@@ -1019,7 +1020,7 @@ main {
   }
 
   .text_sec1 h1 {
-    font-size: 48px;
+    font-size: 40px;
     line-height: 58px;
   }
 
@@ -1028,12 +1029,12 @@ main {
   }
 
   .text2_sec2 h2 {
-    font-size: 25px;
+    font-size: 20px;
     line-height: 32px;
   }
 
   .items_container {
-    width: 80%;
+    width: 70%;
     height: auto;
     gap: 10px;
   }
@@ -1044,13 +1045,13 @@ main {
   }
 
   .item h2 {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 28px;
   }
 
   .star {
-    width: 18%;
-    height: 40px;
+    width: 20%;
+    height: 35px;
   }
 
   /* Seção 2 */
@@ -1060,89 +1061,94 @@ main {
   }
 
   .container_buttons {
-    width: 75%;
-    height: 88px;
+    width: 70%;
+    height: 70px;
     gap: 30px;
     margin: 4% auto;
   }
 
   .btn1 {
     width: 42%;
-    height: 66px;
+    height: 50px;
     border-radius: 18px;
   }
 
   .btn1 button {
-    font-size: 30px;
-    height: 66px;
+    font-size: 25px;
+    height: 50px;
     border-radius: 18px;
   }
 
   .title_sec2 {
-    width: 75%;
+    width: 70%;
     height: auto;
     gap: 8px;
     margin-bottom: 14px;
   }
 
   .title_sec2 h1 {
-    font-size: 40px;
+    font-size: 30px;
     line-height: 46px;
   }
 
   .title_sec2 h2 {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 30px;
   }
 
   .google {
-    width: 65%;
-    height: 88px;
+    width: 60%;
+    height: 70px;
+  }
+
+  .google img {
+    width: 50px;
   }
 
   .google button {
-    height: 88px;
+    height: 70px;
     border-radius: 18px;
   }
 
   .google button h2 {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   .separar {
-    width: 65%;
+    width: 60%;
+    gap: 10px;
   }
 
   .separar h2 {
-    font-size: 26px;
+    font-size: 20px;
   }
 
   .email_container {
-    width: 75%;
+    width: 70%;
     height: auto;
     gap: 20px;
     margin: 0 auto 16px;
   }
 
   .email_container h2 {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 32px;
   }
 
   .email input {
-    height: 70px;
-    font-size: 20px;
+    height: 60px;
+    font-size: 18px;
     border-radius: 18px;
     padding: 24px;
   }
 
   #perfil {
-    font-size: 24px;
+    font-size: 20px;
     margin: 3%;
   }
 
   .container_acess {
-    width: 75%;
+    width: 70%;
     height: auto;
     gap: 20px;
     margin: 0 auto 16px;
@@ -1162,30 +1168,30 @@ main {
   }
 
   .itens_acess h2 {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 30px;
   }
 
   .itens_acess h3 {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 26px;
   }
 
   #aluno {
-    width: 28%;
-    height: 58px;
+    width: 25%;
+    height: 45px;
     border-radius: 12px;
   }
 
   .confirmar {
-    width: 75%;
+    width: 70;
     height: 72px;
     margin: 3% auto;
   }
 
   .confirmar button {
-    height: 72px;
-    font-size: 30px;
+    height: 60px;
+    font-size: 20px;
     border-radius: 18px;
   }
 }
@@ -1198,7 +1204,7 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 40px;
+    font-size: 30px;
   }
 
   .plataform {
@@ -1207,7 +1213,7 @@ main {
   }
 
   .plataform h2 {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 66px;
   }
 
@@ -1216,7 +1222,7 @@ main {
   }
 
   .text_sec1 h1 {
-    font-size: 52px;
+    font-size: 48px;
     line-height: 58px;
   }
 
@@ -1225,7 +1231,7 @@ main {
   }
 
   .text2_sec2 h2 {
-    font-size: 28px;
+    font-size: 22px;
     line-height: 32px;
   }
 
@@ -1241,7 +1247,7 @@ main {
   }
 
   .item h2 {
-    font-size: 22px;
+    font-size: 20px;
     line-height: 28px;
   }
 
@@ -1254,6 +1260,11 @@ main {
 
   .container_buttons {
     width: 70%;
+    height: 80px;
+  }
+
+  .btn1 {
+    height: 60px;
   }
 
   .title_sec2 {
@@ -1261,11 +1272,19 @@ main {
   }
 
   .title_sec2 h1 {
-    font-size: 48px;
+    font-size: 40px;
   }
 
   .title_sec2 h2 {
     font-size: 22px;
+  }
+
+  .google img {
+    width: 50px;
+  }
+
+  .google button h2 {
+    font-size: 25px;
   }
 
   .email_container {
@@ -1273,12 +1292,12 @@ main {
   }
 
   .email_container h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .email input {
     height: 70px;
-    font-size: 22px;
+    font-size: 20px;
   }
 
   #perfil {
