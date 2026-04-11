@@ -2,8 +2,7 @@
 .env.*
 !.env.example
 
-# Firebase local config with secrets
-frontend/assets/js/firebase-config.js
+# Firebase web config is public by design; keep tracked for static deployments
 
 # Dependencies and editor files
 node_modules/
