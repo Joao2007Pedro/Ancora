@@ -20,7 +20,7 @@ export async function criarUsuario(uid, dados) {
     uid,
     ...dados,
     foto_url: fotoUrl,
-    aprovado: false,
+    aprovado: dados.aprovado ?? false,   // usa o valor passado, padrão false
     criado_em: serverTimestamp()
   });
 }
