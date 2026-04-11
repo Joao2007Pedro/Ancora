@@ -29,7 +29,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header__text-wrapper">
-                <h1 class="header__title">Roadmap</h1>
+                <h1 class="header__title">Roadmap — <span id="turma-nome">carregando...</span></h1>
                 <p class="header__subtitle">Seu caminho de aprendizado personalizado</p>
                 <div class="header__deco"></div>
             </div>
@@ -42,142 +42,21 @@
         </header>
 
         <div class="content-area">
-            <!-- Filter Bar -->
-            <div class="filter-bar" id="filterBar">
-                <button type="button" class="filter-btn filter-btn--active" data-filter="geral">Geral</button>
-                <button type="button" class="filter-btn" data-filter="javascript">JavaScript</button>
-                <button type="button" class="filter-btn" data-filter="python">Python</button>
-                <button type="button" class="filter-btn" data-filter="react">React</button>
-                <button type="button" class="filter-btn" data-filter="nodejs">Node.js</button>
-                <button type="button" class="filter-btn" data-filter="sql">SQL</button>
-            </div>
-
             <!-- Progress Summary Card -->
             <div class="progress-card">
                 <div class="progress-card__deco"></div>
                 <div class="progress-card__info">
                     <span class="progress-card__label">Seu progresso total</span>
-                    <span class="progress-card__title">6 de 18 módulos concluídos</span>
+                    <span class="progress-card__title" id="progresso-texto">0/0 concluídos</span>
                 </div>
                 <div class="progress-bar">
-                    <div class="progress-bar__fill" id="progressFill"></div>
-                </div>
-                <div class="progress-stats">
-                    <div class="stat stat--done">
-                        <div class="stat__dot"></div>
-                        <span>6 concluídos</span>
-                    </div>
-                    <div class="stat stat--progress">
-                        <div class="stat__dot"></div>
-                        <span>4 em andamento</span>
-                    </div>
-                    <div class="stat stat--pending">
-                        <div class="stat__dot"></div>
-                        <span>8 a aprender</span>
-                    </div>
+                    <div class="progress-bar__fill" id="barra-progresso" style="width: 0%"></div>
                 </div>
             </div>
 
             <!-- Roadmap Items List -->
-            <div class="roadmap-list">
-
-                <!-- Item 1: Concluído -->
-                <div class="roadmap-item roadmap-item--done">
-                    <div class="roadmap-item__icon">
-                        <div class="icon-circle icon-circle--done">
-                            <span class="material-symbols-outlined">check</span>
-                        </div>
-                    </div>
-                    <div class="roadmap-item__card roadmap-item__card--done">
-                        <div class="roadmap-item__header">
-                            <h3 class="roadmap-item__title roadmap-item__title--done">Introdução ao JavaScript</h3>
-                            <span class="badge badge--done">Concluído</span>
-                        </div>
-                        <div class="roadmap-item__meta">
-                            <span class="material-symbols-outlined roadmap-item__meta-icon">calendar_today</span>
-                            <span>Finalizado em 12 de Outubro de 2023</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 2: Em Andamento -->
-                <div class="roadmap-item roadmap-item--active">
-                    <div class="roadmap-item__icon">
-                        <div class="icon-circle icon-circle--active">
-                            <span class="material-symbols-outlined">play_arrow</span>
-                        </div>
-                    </div>
-                    <div class="roadmap-item__card roadmap-item__card--active">
-                        <div class="roadmap-item__header">
-                            <div>
-                                <h3 class="roadmap-item__title">Funções e Escopo</h3>
-                                <p class="roadmap-item__desc">Entenda como organizar seu código e gerenciar o fluxo de dados.</p>
-                            </div>
-                            <span class="badge badge--active">Em andamento</span>
-                        </div>
-                        <div class="roadmap-item__footer">
-                            <div class="roadmap-item__details">
-                                <div class="detail">
-                                    <span class="material-symbols-outlined detail__icon">menu_book</span>
-                                    <span>3 de 5 aulas concluídas</span>
-                                </div>
-                                <div class="detail">
-                                    <span class="material-symbols-outlined detail__icon">timer</span>
-                                    <span>15 min restantes</span>
-                                </div>
-                            </div>
-                            <button type="button" class="btn-continue" id="btnContinue">
-                                Continuar Estudo
-                                <span class="material-symbols-outlined btn-continue__arrow">arrow_forward</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 3: Bloqueado -->
-                <div class="roadmap-item roadmap-item--locked">
-                    <div class="roadmap-item__icon">
-                        <div class="icon-circle icon-circle--locked">
-                            <span class="material-symbols-outlined">lock</span>
-                        </div>
-                    </div>
-                    <div class="roadmap-item__card roadmap-item__card--locked">
-                        <div class="roadmap-item__header">
-                            <div>
-                                <h3 class="roadmap-item__title">Promises e Async/Await</h3>
-                                <p class="roadmap-item__desc">Dominando operações assíncronas e integração com APIs.</p>
-                            </div>
-                            <span class="badge badge--locked">Bloqueado</span>
-                        </div>
-                        <div class="roadmap-item__notice">
-                            <span class="material-symbols-outlined roadmap-item__notice-icon">schedule</span>
-                            <span>Disponível após concluir módulo anterior</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 4: A Aprender -->
-                <div class="roadmap-item roadmap-item--pending">
-                    <div class="roadmap-item__icon">
-                        <div class="icon-circle icon-circle--locked">
-                            <span class="material-symbols-outlined">lock</span>
-                        </div>
-                    </div>
-                    <div class="roadmap-item__card roadmap-item__card--pending">
-                        <div class="roadmap-item__header">
-                            <h3 class="roadmap-item__title">Manipulação de DOM</h3>
-                            <span class="badge badge--pending">A aprender</span>
-                        </div>
-                        <div class="subtopic-bars">
-                            <div class="subtopic-bar"></div>
-                            <div class="subtopic-bar"></div>
-                            <div class="subtopic-bar"></div>
-                            <div class="subtopic-bar"></div>
-                        </div>
-                        <p class="subtopic-label">4 Sub-tópicos planejados</p>
-                    </div>
-                </div>
-
+            <div class="roadmap-list" id="roadmap-container">
+                <p>Carregando roadmap...</p>
             </div>
         </div>
     </main>

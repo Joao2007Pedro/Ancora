@@ -54,6 +54,7 @@
 /* Dark mode */
 .dark {
     --color-bg: #020617;
+    filter: blur(80px);
     --color-surface: #0f172a;
     --color-surface-white: #0f172a;
     --color-on-surface: #f8fafc;
@@ -809,6 +810,112 @@ a {
 
 .dark .glow-bg {
     opacity: 0.06;
+}
+
+/* ============================================
+   DYNAMIC ROADMAP
+   ============================================ */
+
+.modulo-card {
+    background-color: var(--color-surface-white);
+    border: 1px solid var(--color-border-light);
+    border-left: 6px solid var(--color-outline);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+}
+
+.modulo-card.status-concluido {
+    border-left-color: var(--color-lime);
+}
+
+.modulo-card.status-em_andamento {
+    border-left-color: var(--color-blue);
+}
+
+.modulo-card.status-a_aprender {
+    border-left-color: var(--color-outline);
+}
+
+.modulo-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+}
+
+.modulo-numero {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #0A0F5C;
+    flex-shrink: 0;
+}
+
+.modulo-info h3 {
+    font-size: 1.1rem;
+    color: var(--color-navy);
+}
+
+.modulo-info p {
+    color: var(--color-on-surface-secondary);
+    font-size: 0.92rem;
+}
+
+.modulo-badge {
+    margin-left: auto;
+    border-radius: var(--radius-full);
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.modulo-badge.status-concluido {
+    background: var(--color-done-bg);
+}
+
+.modulo-badge.status-em_andamento {
+    background: var(--color-active-bg);
+}
+
+.modulo-badge.status-a_aprender {
+    background: var(--color-locked-bg);
+    color: var(--color-on-surface-secondary);
+}
+
+.topicos-lista {
+    margin: 0.85rem 0 0.5rem 2.75rem;
+}
+
+.topicos-lista li {
+    margin-bottom: 0.25rem;
+    color: var(--color-on-surface-secondary);
+}
+
+.modulo-acoes {
+    display: flex;
+    gap: 0.6rem;
+    margin-left: 2.75rem;
+    flex-wrap: wrap;
+}
+
+.btn-status {
+    border: 1px solid var(--color-outline);
+    border-radius: var(--radius-full);
+    padding: 0.45rem 0.8rem;
+    background: var(--color-surface-white);
+    color: var(--color-navy);
+    font-weight: 600;
+}
+
+.btn-status.ativo {
+    border-color: var(--color-blue);
+    background: var(--color-active-bg);
 }
 
 /* ============================================

@@ -1,72 +1,127 @@
 import { protegerPagina } from "../utils/auth-guard.js";
+import { buscarRoadmap, buscarProgressoAluno, salvarProgressoModulo } from "../utils/firebase-db.js";
+import { observarSessao } from "../auth.js";
+import { buscarUsuarioPorUid } from "../utils/firebase-db.js";
 
 protegerPagina();
 
-/* ============================================
-   DOM READY
-   ============================================ */
+const STATUS = {
+  concluido:     { label: "Concluído",    cor: "var(--color-lime)",   icone: "✓" },
+  em_andamento:  { label: "Em andamento", cor: "var(--color-blue)",   icone: "▶" },
+  a_aprender:    { label: "A aprender",   cor: "var(--color-outline)", icone: "○" }
+};
 
-document.addEventListener("DOMContentLoaded", function () {
+function normalizarTurmaId(turma) {
+  return (turma || "java")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace("#", "sharp");
+}
 
-    /* --- Animate progress bar on load --- */
-    var progressFill = document.getElementById("progressFill");
-    if (progressFill) {
-        setTimeout(function () {
-            progressFill.style.width = "33.33%";
-        }, 300);
-    }
+observarSessao(async (usuario) => {
+  if (!usuario) return;
 
-    /* --- Filter bar toggle --- */
-    var filterBar = document.getElementById("filterBar");
-    if (filterBar) {
-        var filterButtons = filterBar.querySelectorAll(".filter-btn");
+  const dadosUsuario = await buscarUsuarioPorUid(usuario.uid);
+  const turma        = dadosUsuario?.equipe || "java";
+  const turmaId      = normalizarTurmaId(turma);
+  const roadmap      = await buscarRoadmap(turmaId);
+  const progresso    = await buscarProgressoAluno(usuario.uid);
+  const container = document.querySelector("#roadmap-container");
 
-        filterButtons.forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                filterButtons.forEach(function (b) {
-                    b.classList.remove("filter-btn--active");
-                });
-                btn.classList.add("filter-btn--active");
-            });
-        });
-    }
+  if (!container) return;
 
-    /* --- "Continuar Estudo" button feedback --- */
-    var btnContinue = document.getElementById("btnContinue");
-    if (btnContinue) {
-        var originalContinueHtml = btnContinue.innerHTML;
-        var resetContinueTimer = null;
+  if (!roadmap) {
+    container.innerHTML =
+      "<p>Roadmap não encontrado para sua turma. Em breve!</p>";
+    return;
+  }
 
-        btnContinue.addEventListener("click", function () {
-            if (btnContinue.disabled) {
-                return;
-            }
+  // Calcula progresso geral
+  const total     = roadmap.modulos.length;
+  const concluidos = roadmap.modulos.filter(m => {
+    const chave = `${turmaId}_modulo_${m.ordem}`;
+    return progresso[chave] === "concluido";
+  }).length;
 
-            btnContinue.textContent = "Carregando...";
-            btnContinue.disabled = true;
-            btnContinue.style.opacity = "0.6";
+  // Atualiza barra de progresso
+  const pct = Math.round((concluidos / total) * 100);
+  document.querySelector("#progresso-texto") &&
+    (document.querySelector("#progresso-texto").textContent = `${concluidos}/${total} concluídos`);
+  document.querySelector("#barra-progresso") &&
+    (document.querySelector("#barra-progresso").style.width = `${pct}%`);
+  document.querySelector("#turma-nome") &&
+    (document.querySelector("#turma-nome").textContent = roadmap.turma);
 
-            if (resetContinueTimer) {
-                clearTimeout(resetContinueTimer);
-            }
+  // Renderiza módulos
+  container.innerHTML = roadmap.modulos.map(modulo => {
+    const chave  = `${turmaId}_modulo_${modulo.ordem}`;
+    const status = progresso[chave] || "a_aprender";
+    const s      = STATUS[status];
 
-            resetContinueTimer = setTimeout(function () {
-                btnContinue.innerHTML = originalContinueHtml;
-                btnContinue.disabled = false;
-                btnContinue.style.opacity = "1";
-            }, 1500);
-        });
-    }
+    return `
+      <div class="modulo-card status-${status}" data-ordem="${modulo.ordem}">
+        <div class="modulo-header">
+          <div class="modulo-numero" style="background: ${s.cor}">${s.icone}</div>
+          <div class="modulo-info">
+            <h3>${modulo.titulo}</h3>
+            <p>${modulo.descricao}</p>
+          </div>
+          <span class="modulo-badge status-${status}">${s.label}</span>
+        </div>
 
-    /* --- "Novo Estudo" button bounce --- */
-    var btnNewStudy = document.getElementById("btnNewStudy");
-    if (btnNewStudy) {
-        btnNewStudy.addEventListener("click", function () {
-            btnNewStudy.style.transform = "scale(0.95)";
-            setTimeout(function () {
-                btnNewStudy.style.transform = "scale(1)";
-            }, 150);
-        });
-    }
+        <ul class="topicos-lista">
+          ${modulo.topicos.map(t => `<li>${t}</li>`).join("")}
+        </ul>
 
+        <div class="modulo-acoes">
+          <button class="btn-status ${status === 'concluido' ? 'ativo' : ''}"
+            data-ordem="${modulo.ordem}"
+            data-status="concluido">
+            ✓ Marcar como concluído
+          </button>
+          <button class="btn-status ${status === 'em_andamento' ? 'ativo' : ''}"
+            data-ordem="${modulo.ordem}"
+            data-status="em_andamento">
+            ▶ Em andamento
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Interação dos botões de status
+  if (container.dataset.bound === "true") return;
+  container.dataset.bound = "true";
+
+  container.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".btn-status");
+    if (!btn) return;
+
+    const ordem  = parseInt(btn.dataset.ordem);
+    const status = btn.dataset.status;
+
+    await salvarProgressoModulo(usuario.uid, turmaId, ordem, status);
+
+    // Atualiza visual sem recarregar a página
+    const card = container.querySelector(`.modulo-card[data-ordem="${ordem}"]`);
+    card.className = `modulo-card status-${status}`;
+    card.querySelector(".modulo-badge").textContent = STATUS[status].label;
+    card.querySelector(".modulo-badge").className = `modulo-badge status-${status}`;
+    card.querySelectorAll(".btn-status").forEach(b => {
+      b.classList.toggle("ativo", b.dataset.status === status);
+    });
+
+    // Recalcula barra
+    const novoProgresso = await buscarProgressoAluno(usuario.uid);
+    const novoConcluidos = roadmap.modulos.filter(m => {
+      const c = `${turmaId}_modulo_${m.ordem}`;
+      return novoProgresso[c] === "concluido";
+    }).length;
+    const novoPct = Math.round((novoConcluidos / total) * 100);
+    document.querySelector("#progresso-texto") &&
+      (document.querySelector("#progresso-texto").textContent = `${novoConcluidos}/${total} concluídos`);
+    document.querySelector("#barra-progresso") &&
+      (document.querySelector("#barra-progresso").style.width = `${novoPct}%`);
+  });
 });
