@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="../assets/css/pages/cadastrar-monitoria.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <script defer src="../assets/js/components/sidebar-component.js"></script>
-  <script defer src="../assets/js/pages/cadastrar-monitoria.js"></script>
+  <script type="module" src="../assets/js/pages/cadastrar-monitoria.js"></script>
 </head>
 
 <body>
@@ -45,14 +45,14 @@
 
       <div>
         <div class="chips">
-          <button type="button" class="chip active">JavaScript</button>
-          <button type="button" class="chip">Python</button>
-          <button type="button" class="chip">UI Design</button>
-          <button type="button" class="chip">Soft Skills</button>
+          <button type="button" class="chip active materia-btn">JavaScript</button>
+          <button type="button" class="chip materia-btn">Python</button>
+          <button type="button" class="chip materia-btn">UI Design</button>
+          <button type="button" class="chip materia-btn">Soft Skills</button>
         </div>
 
-        <input type="text" placeholder="Título da monitoria">
-        <textarea rows="5" placeholder="Descrição"></textarea>
+        <input id="titulo-monitoria" type="text" placeholder="Título da monitoria">
+        <textarea id="descricao-monitoria" rows="5" placeholder="Descrição"></textarea>
       </div>
     </div>
 
@@ -65,13 +65,13 @@
 
       <div>
         <div class="toggle-group">
-          <button type="button" class="active">Iniciante</button>
-          <button type="button">Avançado</button>
+          <button type="button" class="active nivel-btn" data-nivel="iniciante">Iniciante</button>
+          <button type="button" class="nivel-btn" data-nivel="avancado">Avançado</button>
         </div>
 
         <div class="toggle-group">
-          <button type="button" class="active">Online</button>
-          <button type="button">Presencial</button>
+          <button type="button" class="active formato-btn" data-formato="online">Online</button>
+          <button type="button" class="formato-btn" data-formato="presencial">Presencial</button>
         </div>
 
         <div class="counter">
@@ -90,16 +90,18 @@
 
       <div>
         <div class="days">
-          <button type="button" class="day active">14</button>
-          <button type="button" class="day">15</button>
-          <button type="button" class="day">16</button>
-          <button type="button" class="day">17</button>
+          <button type="button" class="day active" data-data="2026-04-14">14</button>
+          <button type="button" class="day" data-data="2026-04-15">15</button>
+          <button type="button" class="day" data-data="2026-04-16">16</button>
+          <button type="button" class="day" data-data="2026-04-17">17</button>
         </div>
 
         <div class="time">
-          <input type="time" value="14:30">
-          <input type="time" value="16:00">
+          <input id="horario-inicio" type="time" value="14:30">
+          <input id="horario-fim" type="time" value="16:00">
         </div>
+
+        <input id="link-discord" type="url" placeholder="Link do Discord (opcional)">
 
         <button type="button" id="addSlot" class="btn-outline">Adicionar horário</button>
 
@@ -109,7 +111,7 @@
 
     <div class="actions">
       <button type="button" class="btn-outline">Cancelar</button>
-      <button type="button" class="btn-primary">Próximo</button>
+      <button type="button" class="btn-primary" id="btn-criar-monitoria">Próximo</button>
     </div>
 
   </section>

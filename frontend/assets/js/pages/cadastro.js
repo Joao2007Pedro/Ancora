@@ -1,4 +1,7 @@
 import { cadastrarEmail } from "../auth.js";
+import { redirecionarSeLogado } from "../utils/auth-guard.js";
+
+redirecionarSeLogado();
 
 const form    = document.querySelector("#form-cadastro");
 const msgErro = document.querySelector("#msg-erro");

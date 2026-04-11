@@ -1,57 +1,49 @@
-/**
- * Página de Confirmação de Agendamento
- * Gerencia as ações de confirmação e cancelamento de agendamento
- */
+import { protegerPagina } from "../utils/auth-guard.js";
+import { inscreverAluno, buscarMonitoriaPorId } from "../utils/firebase-db.js";
+import { observarSessao } from "../auth.js";
 
-/**
- * Confirma o agendamento
- */
-function confirmarAgendamento() {
-  // Verificar permissão
-  if (!hasPermission('canCreateMonitoring') && isMonitor()) {
-    alert('Monitores não podem criar monitorias adicionais.');
-    return;
+protegerPagina();
+
+let usuarioAtual = null;
+observarSessao((u) => {
+  usuarioAtual = u;
+});
+
+const params = new URLSearchParams(window.location.search);
+const monitoriaId = params.get("id");
+
+async function carregarResumo() {
+  if (!monitoriaId) return;
+  const monitoria = await buscarMonitoriaPorId(monitoriaId);
+  if (!monitoria) return;
+
+const nomeEl = document.querySelector("#monitor-nome");
+const dataEl = document.querySelector("#sessao-data");
+const formatoEl = document.querySelector("#sessao-formato");
+const assuntoEl = document.querySelector("#sessao-assunto");
+
+  if (nomeEl) nomeEl.textContent = monitoria.monitor_nome || "Monitor";
+  if (dataEl) dataEl.textContent = `${monitoria.data || "Data a combinar"} · ${monitoria.horario_inicio || "--:--"}–${monitoria.horario_fim || "--:--"}`;
+  if (formatoEl) {
+    formatoEl.textContent = monitoria.formato === "online" ? "Online via Discord" : "Presencial";
   }
-
-  console.log('Agendamento confirmado');
-  
-  const userData = getUserData();
-  console.log('Usuário:', userData);
-  
-  // Aqui você pode adicionar:
-  // - Validação de dados
-  // - Chamada para API backend
-  // - Salvar dados no Firebase
-  // - Redirecionar para página de sucesso
-  
-  // Exemplo de chamada para API
-  // fetch('/api/agendamentos', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ ...dados })
-  // })
-  
-  // Mostrar mensagem de sucesso
-  alert('Agendamento confirmado com sucesso! Um e-mail foi enviado para você.');
-  
-  // Exemplo de redirecionamento
-  // window.location.href = '../home.html';
+  if (assuntoEl) assuntoEl.textContent = monitoria.assunto || "Monitoria";
 }
 
-/**
- * Cancela o agendamento
- */
-function cancelarAgendamento() {
-  const confirmar = confirm('Deseja realmente cancelar este agendamento?');
-  
-  if (confirmar) {
-    console.log('Agendamento cancelado');
-    
-    // Aqui você pode adicionar:
-    // - Voltar para página anterior
-    // - Redirecionar para home
-    // - Limpar dados locais
-    
-    window.history.back();
+carregarResumo();
+
+document.querySelector("#btn-confirmar")?.addEventListener("click", async () => {
+  if (!usuarioAtual || !monitoriaId) return;
+  try {
+    await inscreverAluno(monitoriaId, usuarioAtual.uid, usuarioAtual.displayName || "Aluno");
+    alert("Presença confirmada!");
+    window.location.href = "./minhas-monitorias.html";
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao confirmar: " + err.message);
   }
-}
+});
+
+document.querySelector("#btn-cancelar")?.addEventListener("click", () => {
+  history.back();
+});

@@ -1,11 +1,11 @@
 import { buscarMonitorias } from "../utils/firebase-db.js";
 import { observarSessao } from "../auth.js";
+import { protegerPagina } from "../utils/auth-guard.js";
+
+protegerPagina();
 
 observarSessao((usuario) => {
-  if (!usuario) {
-    window.location.href = "./login.html";
-    return;
-  }
+  if (!usuario) return;
   carregarMonitorias();
 });
 

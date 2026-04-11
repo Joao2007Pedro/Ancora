@@ -1,3 +1,14 @@
+import { protegerPagina } from "../utils/auth-guard.js";
+import { criarMonitoria } from "../utils/firebase-db.js";
+import { observarSessao } from "../auth.js";
+
+protegerPagina();
+
+let usuarioAtual = null;
+observarSessao((u) => {
+  usuarioAtual = u;
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   var count = 8;
   var countEl = document.getElementById("count");
@@ -5,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var minusButton = document.getElementById("minus");
   var addSlotButton = document.getElementById("addSlot");
   var slotsContainer = document.getElementById("slots");
+  var criarButton = document.getElementById("btn-criar-monitoria");
 
   function renderCount() {
     if (countEl) {
@@ -61,9 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (addSlotButton && slotsContainer) {
     addSlotButton.addEventListener("click", function () {
-      var times = document.querySelectorAll('input[type="time"]');
-      var start = times[0] ? times[0].value : "";
-      var end = times[1] ? times[1].value : "";
+      var start = document.querySelector("#horario-inicio")?.value || "";
+      var end = document.querySelector("#horario-fim")?.value || "";
       var activeDay = document.querySelector(".day.active");
       var day = activeDay ? activeDay.textContent.trim() : "--";
 
@@ -78,6 +89,49 @@ document.addEventListener("DOMContentLoaded", function () {
       slotsContainer.appendChild(slot);
     });
   }
+
+  criarButton?.addEventListener("click", async function () {
+    if (!usuarioAtual) return;
+
+    var assunto = document.querySelector(".chip.active")?.textContent.trim();
+    var titulo = document.querySelector("#titulo-monitoria")?.value.trim();
+    var descricao = document.querySelector("#descricao-monitoria")?.value.trim();
+    var nivel = document.querySelector(".nivel-btn.active")?.dataset.nivel;
+    var formato = document.querySelector(".formato-btn.active")?.dataset.formato;
+    var vagas = parseInt(document.querySelector("#count")?.textContent, 10) || 10;
+    var data = document.querySelector(".day.active")?.dataset.data || "";
+    var horarioInicio = document.querySelector("#horario-inicio")?.value || "";
+    var horarioFim = document.querySelector("#horario-fim")?.value || "";
+    var linkDiscord = document.querySelector("#link-discord")?.value || "";
+
+    if (!assunto || !titulo) {
+      alert("Preencha pelo menos o assunto e o título.");
+      return;
+    }
+
+    try {
+      await criarMonitoria({
+        titulo,
+        descricao,
+        assunto,
+        nivel,
+        formato,
+        vagas,
+        monitor_id: usuarioAtual.uid,
+        monitor_nome: usuarioAtual.displayName || "Monitor",
+        monitor_foto: usuarioAtual.photoURL || "",
+        data,
+        horario_inicio: horarioInicio,
+        horario_fim: horarioFim,
+        link_discord: linkDiscord
+      });
+      alert("Monitoria criada com sucesso!");
+      window.location.href = "./home.html";
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao criar monitoria: " + err.message);
+    }
+  });
 
   renderCount();
 });

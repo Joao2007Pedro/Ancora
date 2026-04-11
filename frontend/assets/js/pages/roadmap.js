@@ -1,3 +1,7 @@
+import { protegerPagina } from "../utils/auth-guard.js";
+
+protegerPagina();
+
 /* ============================================
    DOM READY
    ============================================ */

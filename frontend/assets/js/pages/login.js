@@ -1,4 +1,7 @@
 import { loginEmail, loginGoogle } from "../auth.js";
+import { redirecionarSeLogado } from "../utils/auth-guard.js";
+
+redirecionarSeLogado();
 
 const formLogin = document.querySelector("#form-login");
 const btnGoogle = document.querySelector("#btn-google");

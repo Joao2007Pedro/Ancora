@@ -36,12 +36,12 @@
     </header>
 
     <section class="tabs" id="sessionTabs">
-      <button class="tab active">Próximas</button>
-      <button class="tab">Passadas</button>
-      <button class="tab">Canceladas</button>
+      <button class="tab aba-btn active ativo" data-aba="proximas">Próximas</button>
+      <button class="tab aba-btn" data-aba="passadas">Passadas</button>
+      <button class="tab aba-btn" data-aba="canceladas">Canceladas</button>
     </section>
 
-    <div class="cards-grid">
+    <div class="cards-grid" id="lista-minhas-monitorias">
       <!-- Card Próxima 1 -->
       <div class="card border-primary">
         <div class="card-body">
@@ -155,6 +155,8 @@
       </button>
     </div>
   </main>
+
+  <script type="module" src="../assets/js/pages/minhas-monitorias.js"></script>
 
 </body>
 </html>

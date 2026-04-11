@@ -1,3 +1,7 @@
+import { protegerPagina } from "../utils/auth-guard.js";
+
+protegerPagina();
+
 document.addEventListener("DOMContentLoaded", function () {
   var calendar = document.querySelector(".calendar");
   if (!calendar) {

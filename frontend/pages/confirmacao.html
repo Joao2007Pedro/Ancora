@@ -41,7 +41,7 @@
                         <span class="verified-icon">✓</span>
                     </div>
                     <div class="monitor-details">
-                        <h2 class="monitor-name">Lucas Mendonça</h2>
+                        <h2 class="monitor-name" id="monitor-nome">Lucas Mendonça</h2>
                         <span class="monitor-badge">Monitor Senior</span>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="detail-content">
                             <label>Data e Horário</label>
-                            <p>24 de Outubro, 2023 • 14:30 - 15:30</p>
+                            <p id="sessao-data">24 de Outubro, 2023 • 14:30 - 15:30</p>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                         </div>
                         <div class="detail-content">
                             <label>Formato da Sessão</label>
-                            <p>Online via Discord</p>
+                            <p id="sessao-formato">Online via Discord</p>
                         </div>
                     </div>
 
@@ -74,18 +74,18 @@
                         </div>
                         <div class="detail-content">
                             <label>Matéria</label>
-                            <p>Lógica de Programação I</p>
+                            <p id="sessao-assunto">Lógica de Programação I</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Botões de Ação -->
                 <div class="action-buttons">
-                    <button class="btn-confirm" onclick="confirmarAgendamento()">
+                    <button class="btn-confirm" id="btn-confirmar" type="button">
                         Confirmar agendamento
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </button>
-                    <button class="btn-cancel" onclick="cancelarAgendamento()">
+                    <button class="btn-cancel" id="btn-cancelar" type="button">
                         Cancelar
                     </button>
                 </div>
@@ -107,6 +107,6 @@
         </div>
     </main>
 
-    <script src="../assets/js/pages/confirmacao.js"></script>
+    <script type="module" src="../assets/js/pages/confirmacao.js"></script>
 </body>
 </html>
