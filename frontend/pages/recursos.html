@@ -1,47 +1,27 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recursos</title>
-
-    <link rel="stylesheet" href="../assets/css/pages/recursos.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../assets/css/components.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Âncora — Recursos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages/recursos.css">
   </head>
   <body>
     <sidebar-menu></sidebar-menu>
 
-    <header class="nav">
-      <button class="nav-hamburger" onclick="toggleSidebar()">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-
-      <div class="nav-right">
-        <div class="notification">
-          <img src="../assets/images/recursos/Icon.svg" alt="" />
-        </div>
-        <div class="nav-avatar">
-          <img src="../assets/images/recursos/image.png" alt="Avatar" />
-        </div>
-      </div>
-    </header>
     <main class="main-content">
-      <section class="principal">
-        <div class="titles">
+      <header class="page-header">
+        <div class="titles-header">
           <h1>Recursos</h1>
-          <h2>Documentação, livros e vídeos para impulsionar sua carreira.</h2>
+          <p>Documentação, livros e vídeos para impulsionar sua carreira.</p>
         </div>
+        <app-header-actions search-placeholder="Buscar recursos..." avatar-alt="Perfil"></app-header-actions>
+      </header>
 
+      <section class="principal">
         <div class="nav_princ">
           <div class="container_btns">
             <div class="container_buttons">
@@ -223,15 +203,9 @@
         </div>
       </section>
     </main>
-    <footer></footer>
-    <script src="../assets/js/components/sidebar-component.js"></script>
-    <script>
-      function toggleSidebar() {
-        // Busca o <aside> dentro do web component
-        const sidebarMenu = document.querySelector("sidebar-menu");
-        const sidebar = sidebarMenu.querySelector(".sidebar");
-        sidebar.classList.toggle("open");
-      }
-    </script>
+
+    <script defer src="../assets/js/components/sidebar-component.js"></script>
+    <script defer src="../assets/js/components/header-actions-component.js"></script>
+    <script type="module" src="../assets/js/pages/recursos.js"></script>
   </body>
 </html>

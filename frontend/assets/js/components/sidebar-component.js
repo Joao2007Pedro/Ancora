@@ -54,7 +54,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">history_edu</span>
             <span>Minhas Monitorias</span>
           </a>
-          <a href="#recursos" class="nav-item" data-page="recursos">
+          <a href="recursos.html" class="nav-item" data-page="recursos">
             <span class="material-symbols-outlined">library_books</span>
             <span>Recursos</span>
           </a>
@@ -126,7 +126,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">history_edu</span>
             <span>Minhas Monitorias</span>
           </a>
-          <a href="#recursos" class="nav-item" data-page="recursos">
+          <a href="recursos.html" class="nav-item" data-page="recursos">
             <span class="material-symbols-outlined">library_books</span>
             <span>Recursos</span>
           </a>
