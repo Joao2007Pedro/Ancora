@@ -6,6 +6,7 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="../assets/css/pages/login.css" />
+    <script type="module" src="../assets/js/pages/login.js"></script>
 
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -88,7 +89,7 @@
         </div>
 
         <div class="google">
-          <button>
+          <button id="btn-google">
             <img src="../assets/images/login/google.png" alt="" />
             <h2>Entrar com o Google</h2>
           </button>
@@ -104,25 +105,26 @@
           </div>
         </div>
 
-        <div class="email_container">
+        <form id="form-login" class="email_container">
           <div class="container">
             <h2>E-mail Institucional</h2>
             <div class="email">
-              <input type="email" name="" id="" value="aluno@senacsp.edu.br" />
+              <input type="email" id="email" value="aluno@senacsp.edu.br" required />
             </div>
           </div>
 
           <div class="container">
             <h2>Senha</h2>
             <div class="email">
-              <input type="password" name="" id="" value="******" />
+              <input type="password" id="senha" value="******" required />
             </div>
           </div>
-          <h2 id="senha"><a href="">Esqueceu a senha?</a></h2>
-        </div>
+          <h2><a href="">Esqueceu a senha?</a></h2>
+          <p id="msg-erro" style="color: #EF4444; margin-top: 12px; text-align: center; min-height: 20px;"></p>
+        </form>
 
         <div class="confirmar">
-          <button>
+          <button type="submit" form="form-login">
             Acessar plataforma
             <!-- <img src="../assets/images/login/Right.png" alt="" /> -->
           </button>

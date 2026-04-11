@@ -308,3 +308,135 @@
     padding: 0.75rem 0.5rem;
   }
 }
+
+/* Header Actions Component */
+.header-actions-component {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header-actions-component__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 300px;
+  padding: 0.7rem 1.15rem;
+  border-radius: 9999px;
+  background-color: #e3e8ef;
+  border: 1px solid transparent;
+}
+
+.header-actions-component__search-icon {
+  color: #0a0f5c;
+  font-size: 1.45rem;
+}
+
+.header-actions-component__search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.header-actions-component__search-input::placeholder {
+  color: #5f6673;
+}
+
+.header-actions-component__notify {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background-color: #d7dfcc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0f5c;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.header-actions-component__notify:hover {
+  background-color: #ccd6bf;
+}
+
+.header-actions-component__profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header-actions-component__profile--chip {
+  gap: 0.75rem;
+  padding: 0.25rem 1rem 0.25rem 0.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background-color: #ffffff;
+}
+
+.header-actions-component__profile--avatar-only {
+  border: 2px solid #3333ff;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.header-actions-component__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.header-actions-component__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-actions-component__name {
+  color: #0a0f5c;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.header-actions-component__status-dot {
+  position: absolute;
+  right: -0.35rem;
+  top: -0.35rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  background-color: #ccff00;
+  border: 2px solid #e8eef4;
+}
+
+@media (max-width: 768px) {
+  .header-actions-component {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .header-actions-component__search {
+    flex: 1;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions-component {
+    gap: 0.75rem;
+  }
+
+  .header-actions-component__search {
+    min-width: 100%;
+  }
+
+  .header-actions-component__search-input {
+    font-size: 0.95rem;
+  }
+}

@@ -6,6 +6,7 @@
     <title>Cadastro</title>
 
     <link rel="stylesheet" href="../assets/css/pages/cadastro.css" />
+    <script type="module" src="../assets/js/pages/cadastro.js"></script>
 
     <!-- Fontes -->
     <!-- Fontes -->
@@ -104,34 +105,48 @@
           </div>
         </div>
 
-        <div class="email_container">
+        <form id="form-cadastro" class="email_container">
           <div class="container">
             <h2>Nome completo</h2>
             <div class="email">
-              <input type="text" name="" id="" value="Seu nome completo" />
+              <input type="text" id="nome" value="Seu nome completo" required />
             </div>
           </div>
 
           <div class="container">
             <h2>E-mail Institucional</h2>
             <div class="email">
-              <input type="email" name="" id="" value="aluno@senacsp.edu.br" />
+              <input type="email" id="email" value="aluno@senacsp.edu.br" required />
             </div>
           </div>
 
           <div class="container">
             <h2>Senha</h2>
             <div class="email">
-              <input type="password" name="" id="" value="******" />
+              <input type="password" id="senha" value="******" required />
             </div>
           </div>
-          <h2 id="perfil">Perfil de acesso</h2>
-        </div>
 
-        <div class="container_acess">
-          <div class="aluno_access">
+          <div class="container">
+            <h2>Turma</h2>
+            <div class="email">
+              <select id="equipe" required>
+                <option value="java">Java (Manhã)</option>
+                <option value="java">Java (Tarde)</option>
+                <option value="python">Python (Tarde)</option>
+                <option value="csharp">C# (Manhã)</option>
+                <option value="kotlin">Kotlin (Manhã)</option>
+              </select>
+            </div>
+          </div>
+
+          <h2>Perfil de acesso</h2>
+        </form>
+
+        <div class="container_acess" id="perfis-selection">
+          <div class="aluno_access perfil-card ativo" data-perfil="aluno">
             <div class="itens_acess">
-              <div class="star" id="aluno">
+              <div class="star">
                 <img src="../assets/images/login/Users.png" alt="" />
               </div>
               <h2>Aluno</h2>
@@ -143,14 +158,14 @@
                 viewBox="0 0 25 25"
                 fill="none"
               >
-                <rect width="25" height="25" rx="12.5" fill="#94A3B8" />
+                <rect width="25" height="25" rx="12.5" fill="#1300E1" />
               </svg>
             </div>
           </div>
 
-          <div class="aluno_access">
+          <div class="aluno_access perfil-card" data-perfil="monitor">
             <div class="itens_acess">
-              <div class="star" id="aluno">
+              <div class="star">
                 <img src="../assets/images/login/Star.png" alt="" />
               </div>
               <h2>Monitor</h2>
@@ -168,8 +183,10 @@
           </div>
         </div>
 
+        <p id="msg-erro" style="color: #EF4444; margin: 12px 0; text-align: center; min-height: 20px;"></p>
+
         <div class="confirmar">
-          <button>
+          <button type="submit" form="form-cadastro">
             Acessar plataforma
             <!-- <img src="../assets/images/login/Right.png" alt="" /> -->
           </button>
@@ -177,17 +194,24 @@
       </section>
     </main>
 
+    <!-- Perfil selection handled by cadastro.js -->
     <script>
-      const cards = document.querySelectorAll(".aluno_access");
-
-      cards.forEach((card) => {
-        card.addEventListener("click", () => {
-          cards.forEach((c) => {
-            c.querySelector("rect").setAttribute("fill", "#94A3B8");
-          });
-
-          card.querySelector("rect").setAttribute("fill", "#1300E1");
-        });
+      // Fallback styling for perfil selection cards
+      const perfisSelection = document.querySelector("#perfis-selection");
+      perfisSelection?.addEventListener("click", (e) => {
+        const card = e.currentTarget.querySelector(".perfil-card.ativo");
+        if (card) {
+          card.classList.remove("ativo");
+          const rect = card.querySelector("rect");
+          if (rect) rect.setAttribute("fill", "#94A3B8");
+        }
+        
+        const clicked = e.target.closest(".perfil-card");
+        if (clicked) {
+          clicked.classList.add("ativo");
+          const rect = clicked.querySelector("rect");
+          if (rect) rect.setAttribute("fill", "#1300E1");
+        }
       });
     </script>
 

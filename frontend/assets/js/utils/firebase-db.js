@@ -119,3 +119,31 @@ export async function buscarMensagens(uid1, uid2) {
     .map(d => ({ id: d.id, ...d.data() }))
     .sort((a, b) => a.criado_em?.seconds - b.criado_em?.seconds);
 }
+
+// ── ROADMAP ──────────────────────────────────────────
+
+export async function buscarRoadmap(turma) {
+  const id = turma.toLowerCase().replace(/\s+/g, '').replace('#', 'sharp');
+  const snap = await getDoc(doc(db, "roadmaps", id));
+  return snap.exists() ? snap.data() : null;
+}
+
+export async function salvarProgressoModulo(uid, turma, ordemModulo, status) {
+  const q = query(collection(db, "usuarios"), where("uid", "==", uid));
+  const snap = await getDocs(q);
+  if (snap.empty) return;
+
+  const dados = snap.docs[0].data();
+  const progresso = dados.progresso || {};
+  const chave = `${turma}_modulo_${ordemModulo}`;
+  progresso[chave] = status; // "concluido" | "em_andamento" | "a_aprender"
+
+  await updateDoc(snap.docs[0].ref, { progresso });
+}
+
+export async function buscarProgressoAluno(uid) {
+  const q = query(collection(db, "usuarios"), where("uid", "==", uid));
+  const snap = await getDocs(q);
+  if (snap.empty) return {};
+  return snap.docs[0].data().progresso || {};
+}
