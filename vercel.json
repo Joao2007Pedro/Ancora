@@ -11,6 +11,8 @@
     { "source": "/confirmacao.html", "destination": "/frontend/pages/confirmacao.html" },
     { "source": "/minhas-monitorias", "destination": "/frontend/pages/minhas-monitorias.html" },
     { "source": "/cadastrar-monitoria", "destination": "/frontend/pages/cadastrar-monitoria.html" },
-    { "source": "/roadmap", "destination": "/frontend/pages/roadmap.html" }
+    { "source": "/roadmap", "destination": "/frontend/pages/roadmap.html" },
+    { "source": "/perfil", "destination": "/frontend/pages/perfil.html" },
+    { "source": "/recursos", "destination": "/frontend/pages/recursos.html" }
   ]
 }
