@@ -2,15 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyC7zN3Z0UsJDFDVy7eQ7la2RfNf0CvrSXw",
-  authDomain: "ancora-proa.firebaseapp.com",
-  projectId: "ancora-proa",
-  storageBucket: "ancora-proa.firebasestorage.app",
-  messagingSenderId: "633489684642",
-  appId: "1:633489684642:web:c99df95720148b9418bffb"
-};
+const response = await fetch("/api/firebase-web-config");
+
+if (!response.ok) {
+  throw new Error("Falha ao carregar configuracao do Firebase.");
+}
+
+const firebaseConfig = await response.json();
 
 const app = initializeApp(firebaseConfig);
 
