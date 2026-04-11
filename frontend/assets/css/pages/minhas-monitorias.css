@@ -126,59 +126,6 @@ h1, h2, h3, .font-headline {
 
 .header-titles p { color: #64748b; font-weight: 500; }
 
-.header-actions { display: flex; align-items: center; gap: 1.5rem; }
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background-color: var(--surface-container-low);
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-}
-
-.search-bar input {
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 0.875rem;
-  width: 12rem;
-  font-weight: 500;
-  color: var(--on-surface);
-  margin-left: 0.5rem;
-}
-
-.btn-icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background-color: var(--surface-container-highest);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--on-surface);
-  transition: background-color 0.2s;
-}
-
-.btn-icon:hover { background-color: var(--surface-variant); }
-
-.profile-avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 2px solid var(--primary);
-  padding: 2px;
-  overflow: hidden;
-}
-
-.profile-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
 /* Abas */
 .tabs {
   display: flex;
