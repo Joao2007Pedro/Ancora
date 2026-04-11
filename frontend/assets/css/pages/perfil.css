@@ -1,0 +1,522 @@
+.main-content {
+  margin-left: 256px;
+  padding: 32px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--cinza-100) 0%, var(--branco) 100%);
+  position: relative;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.page-header p {
+  color: var(--cinza-500);
+  font-size: 15px;
+}
+
+.decorative-blob {
+  position: fixed;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(204, 255, 0, 0.38) 0%, rgba(204, 255, 0, 0) 70%);
+  pointer-events: none;
+}
+
+.decorative-dot {
+  position: fixed;
+  top: 56px;
+  right: 60px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--lime);
+  pointer-events: none;
+}
+
+.icon-filled {
+  font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+}
+
+.back-row {
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--azul);
+  color: var(--branco);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(51, 51, 255, 0.25);
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.btn-back:hover {
+  transform: translateX(-2px);
+  opacity: 0.92;
+}
+
+.profile-card {
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sombra);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card-inner {
+  display: flex;
+}
+
+.profile-left {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.monitor-identity {
+  display: flex;
+  gap: 16px;
+}
+
+.avatar-monitor {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar-monitor img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--cinza-300);
+}
+
+.online-badge {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--branco);
+  background: var(--sucesso);
+}
+
+.status-dot-card {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sucesso);
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.2);
+}
+
+.monitor-meta h2 {
+  font-size: 28px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.monitor-meta p {
+  color: var(--cinza-500);
+  margin-bottom: 8px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.stars .star {
+  color: var(--aviso);
+  font-size: 18px;
+}
+
+.rating-value {
+  font-weight: 700;
+}
+
+.rating-count {
+  color: var(--cinza-500);
+  font-size: 13px;
+}
+
+.tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: 5px 10px;
+  background: #eef0ff;
+  color: var(--azul);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sobre-mim h3,
+.profile-right h3 {
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.sobre-mim p {
+  color: var(--cinza-700);
+  line-height: 1.65;
+}
+
+.profile-divider {
+  width: 1px;
+  background: var(--cinza-300);
+}
+
+.profile-right {
+  width: 340px;
+  padding: 32px;
+  flex-shrink: 0;
+}
+
+.horarios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.horario-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: var(--cinza-100);
+  border: 1px solid var(--cinza-300);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.horario-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dia {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.hora {
+  font-size: 13px;
+  color: var(--cinza-500);
+}
+
+.btn-disponivel {
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--azul);
+  color: var(--branco);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.btn-disponivel:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.feitas-section h2 {
+  font-size: 30px;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+.feitas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.feita-card {
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.feita-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+}
+
+.hidden-card {
+  display: none;
+}
+
+.feita-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #10163b;
+  overflow: hidden;
+}
+
+.feita-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.78);
+}
+
+.thumb-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 52px;
+  background: linear-gradient(135deg, #151b44 0%, #20296c 100%);
+}
+
+.thumb-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.tag-curso,
+.tag-aula {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--branco);
+  text-transform: uppercase;
+}
+
+.tag-curso {
+  background: #151b44;
+}
+
+.tag-aula {
+  background: var(--laranja);
+}
+
+.btn-bookmark,
+.btn-play-overlay {
+  position: absolute;
+  border: none;
+}
+
+.btn-bookmark {
+  right: 10px;
+  top: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--branco);
+  z-index: 3;
+}
+
+.btn-bookmark.saved .material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24;
+  color: var(--lime);
+}
+
+.btn-play-overlay {
+  inset: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.feita-card:hover .btn-play-overlay {
+  opacity: 1;
+}
+
+.feita-info {
+  padding: 18px;
+}
+
+.feita-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.gtag {
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.gtag-dark {
+  background: #151b44;
+  color: var(--branco);
+}
+
+.gtag-accent {
+  background: var(--lime);
+  color: var(--navy);
+}
+
+.feita-info h4 {
+  color: var(--navy);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.feita-info p {
+  color: var(--cinza-700);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.load-more {
+  margin: 28px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.load-more p {
+  color: var(--cinza-500);
+  margin-bottom: 14px;
+}
+
+.btn-load {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+}
+
+.icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--cinza-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-load:hover .icon-circle {
+  border-color: var(--azul);
+}
+
+.btn-load > span:last-child {
+  color: var(--cinza-500);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.load-more.all-loaded .btn-load {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .main-content {
+    margin-left: 0;
+    padding: 24px;
+  }
+
+  .profile-card-inner {
+    flex-direction: column;
+  }
+
+  .profile-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .profile-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .feitas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .profile-left,
+  .profile-right {
+    padding: 20px;
+  }
+
+  .monitor-identity {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-back {
+    width: 100%;
+    justify-content: center;
+  }
+}

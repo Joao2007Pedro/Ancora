@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Âncora — Perfil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/perfil.css">
+</head>
+<body>
+  <sidebar-menu></sidebar-menu>
+
+  <!-- Decorative elements -->
+  <div class="decorative-blob"></div>
+  <div class="decorative-dot"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header class="page-header">
+      <div>
+        <h1>Perfil do Monitor</h1>
+        <p>Conheça mais sobre o monitor e horários disponíveis</p>
+      </div>
+      <app-header-actions search-placeholder="Buscar monitoria..." avatar-alt="Perfil"></app-header-actions>
+    </header>
+
+    <!-- Back button -->
+    <div class="back-row">
+      <button class="btn-back" id="btnVoltar">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Voltar para Monitorias
+      </button>
+    </div>
+
+    <!-- Monitor Profile Card -->
+    <section class="profile-card" id="profileCard">
+      <div class="profile-card-inner">
+
+        <!-- Left: Monitor Info -->
+        <div class="profile-left">
+          <div class="monitor-identity">
+            <div class="avatar-monitor">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFfABGNLMoZ-8X_jfXvc6GdUUdwVVWKJkY0cxC-TfTDAmGiVt2bjp4zOH_Yf6fYuQyfwPuueo8QCq1zIU7Zf_Udb4QkclkQV8ukX81urZkcAiGZcWiMravBNuPdX56dxUH5q4esZRql_nj3ysolX7OK7nulJbDFRJ_PJOK1WqgvR4N-cvWTqadwAKUQjypwgpBl-Sc5Qa9qDjQ6nxv7J4OcfFgASj2sV9grBF0NxfQgGjlJd3Q6jHorgFOTlRqDSbL6CD0zgiaCMWh"
+                alt="Ricardo Santos"
+                id="monitorAvatar"
+              />
+              <span class="online-badge" id="onlineBadge"></span>
+            </div>
+            <div class="monitor-meta">
+              <h2 id="monitorNome">Ricardo Santos</h2>
+              <p id="monitorRole">Monitor • Equipe 1</p>
+              <div class="rating-row" id="ratingRow">
+                <div class="stars">
+                  <span class="material-symbols-outlined icon-filled star">star</span>
+                  <span class="material-symbols-outlined icon-filled star">star</span>
+                  <span class="material-symbols-outlined icon-filled star">star</span>
+                  <span class="material-symbols-outlined icon-filled star">star</span>
+                  <span class="material-symbols-outlined icon-filled star">star</span>
+                </div>
+                <span class="rating-value" id="ratingValue">4,9</span>
+                <span class="rating-count" id="ratingCount">(32 Avaliações)</span>
+              </div>
+              <div class="tags-row" id="tagsRow">
+                <span class="tag">HTML &amp; CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Git</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sobre-mim">
+            <h3>Sobre mim</h3>
+            <p id="sobreTexto">
+              Apaixonado por desenvolvimento web desde os 14 anos. Tenho experiência sólida em HTML, CSS e JavaScript e gosto de ensinar com exemplos práticos do dia a dia.
+            </p>
+          </div>
+        </div>
+
+        <div class="profile-divider"></div>
+
+        <!-- Right: Schedule -->
+        <div class="profile-right">
+          <h3>Horários disponíveis</h3>
+          <div class="horarios-list" id="horariosList">
+            <div class="horario-item">
+              <div class="horario-info">
+                <span class="dia">Terça-Feira</span>
+                <span class="hora">14:00 - 15:00</span>
+              </div>
+              <button class="btn-disponivel">Disponível</button>
+            </div>
+            <div class="horario-item">
+              <div class="horario-info">
+                <span class="dia">Sexta-Feira</span>
+                <span class="hora">14:00 - 15:00</span>
+              </div>
+              <button class="btn-disponivel">Disponível</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Online indicator dot top-right -->
+      <div class="status-dot-card"></div>
+    </section>
+
+    <!-- Monitorias Feitas -->
+    <section class="feitas-section">
+      <h2>Monitorias Feitas</h2>
+
+      <div class="feitas-grid" id="feitasGrid">
+
+        <!-- Card 1 -->
+        <div class="feita-card">
+          <div class="feita-thumb">
+            <img src="https://miro.medium.com/1*5WxLCnuAebfk11AyktuOew.png" alt="Introdução ao HTML e CSS" onerror="this.style.display='none'; this.parentElement.querySelector('.thumb-fallback').style.display='flex'" />
+            <div class="thumb-fallback" style="display:none">
+              <span class="material-symbols-outlined">play_circle</span>
+            </div>
+            <div class="thumb-overlay">
+              <div class="tag-curso">CURSO BÁSICO DE HTML E CSS</div>
+              <div class="tag-aula">AULA 1</div>
+            </div>
+            <button class="btn-bookmark" aria-label="Salvar">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+            <button class="btn-play-overlay" aria-label="Play">
+              <span class="material-symbols-outlined icon-filled">play_circle</span>
+            </button>
+          </div>
+          <div class="feita-info">
+            <div class="feita-tags">
+              <span class="gtag gtag-dark">HTML &amp; CSS</span>
+              <span class="gtag gtag-accent">INICIANTE</span>
+            </div>
+            <h4>Práticas de Flexbox</h4>
+            <p>Nesta aula, você vai aprender como o Flexbox revolucionou o layout no CSS. Esqueça o uso de float ou cálculos complexos de margens: aprenda a alinhar elementos de forma inteligente e responsiva com...</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feita-card">
+          <div class="feita-thumb">
+            <img src="https://miro.medium.com/1*5WxLCnuAebfk11AyktuOew.png" alt="Introdução ao HTML e CSS" onerror="this.style.display='none'; this.parentElement.querySelector('.thumb-fallback').style.display='flex'" />
+            <div class="thumb-fallback" style="display:none">
+              <span class="material-symbols-outlined">play_circle</span>
+            </div>
+            <div class="thumb-overlay">
+              <div class="tag-curso">CURSO BÁSICO DE HTML E CSS</div>
+              <div class="tag-aula">AULA 1</div>
+            </div>
+            <button class="btn-bookmark" aria-label="Salvar">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+            <button class="btn-play-overlay" aria-label="Play">
+              <span class="material-symbols-outlined icon-filled">play_circle</span>
+            </button>
+          </div>
+          <div class="feita-info">
+            <div class="feita-tags">
+              <span class="gtag gtag-dark">HTML &amp; CSS</span>
+              <span class="gtag gtag-accent">INICIANTE</span>
+            </div>
+            <h4>Práticas de Flexbox</h4>
+            <p>Nesta aula, você vai aprender como o Flexbox revolucionou o layout no CSS. Esqueça o uso de float ou cálculos complexos de margens: aprenda a alinhar elementos de forma inteligente e responsiva com...</p>
+          </div>
+        </div>
+
+        <!-- Card 3 (hidden, loaded via "Carregar mais") -->
+        <div class="feita-card hidden-card">
+          <div class="feita-thumb">
+            <div class="thumb-fallback">
+              <span class="material-symbols-outlined">play_circle</span>
+            </div>
+            <div class="thumb-overlay">
+              <div class="tag-curso">CURSO BÁSICO DE HTML E CSS</div>
+              <div class="tag-aula">AULA 2</div>
+            </div>
+            <button class="btn-bookmark" aria-label="Salvar">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+            <button class="btn-play-overlay" aria-label="Play">
+              <span class="material-symbols-outlined icon-filled">play_circle</span>
+            </button>
+          </div>
+          <div class="feita-info">
+            <div class="feita-tags">
+              <span class="gtag gtag-dark">HTML &amp; CSS</span>
+              <span class="gtag gtag-accent">INICIANTE</span>
+            </div>
+            <h4>Grid Layout na Prática</h4>
+            <p>Aprenda a usar CSS Grid para criar layouts complexos de forma simples e eficiente. Veja exemplos reais e como combinar Grid com Flexbox...</p>
+          </div>
+        </div>
+
+        <div class="feita-card hidden-card">
+          <div class="feita-thumb">
+            <div class="thumb-fallback">
+              <span class="material-symbols-outlined">play_circle</span>
+            </div>
+            <div class="thumb-overlay">
+              <div class="tag-curso">CURSO BÁSICO DE HTML E CSS</div>
+              <div class="tag-aula">AULA 3</div>
+            </div>
+            <button class="btn-bookmark" aria-label="Salvar">
+              <span class="material-symbols-outlined">bookmark</span>
+            </button>
+            <button class="btn-play-overlay" aria-label="Play">
+              <span class="material-symbols-outlined icon-filled">play_circle</span>
+            </button>
+          </div>
+          <div class="feita-info">
+            <div class="feita-tags">
+              <span class="gtag gtag-dark">HTML &amp; CSS</span>
+              <span class="gtag gtag-accent">INTERMEDIÁRIO</span>
+            </div>
+            <h4>Animações com CSS</h4>
+            <p>Descubra como usar keyframes, transitions e transform para criar animações fluidas e profissionais diretamente no CSS, sem JavaScript...</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Load More -->
+      <div class="load-more" id="loadMoreSection">
+        <p id="loadMoreLabel">Exibindo 2 de 4 monitorias feitas</p>
+        <button class="btn-load" id="btnCarregarMais">
+          <div class="icon-circle">
+            <span class="material-symbols-outlined">expand_more</span>
+          </div>
+          <span>Carregar mais</span>
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script defer src="../assets/js/components/sidebar-component.js"></script>
+  <script defer src="../assets/js/components/header-actions-component.js"></script>
+  <script type="module" src="../assets/js/pages/perfil.js"></script>
+</body>
+</html>
