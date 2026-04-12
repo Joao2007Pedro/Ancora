@@ -30,6 +30,28 @@
   flex-wrap: wrap;
 }
 
+.pending-monitor-banner {
+  background: linear-gradient(135deg, rgba(19, 0, 225, 0.12), rgba(204, 255, 0, 0.18));
+  border: 1px solid rgba(19, 0, 225, 0.16);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  box-shadow: var(--sombra);
+}
+
+.pending-monitor-banner strong {
+  display: block;
+  color: var(--navy);
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.pending-monitor-banner p {
+  color: var(--cinza-700);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .filtro-btn {
   padding: 10px 16px;
   border: 2px solid var(--cinza-300);

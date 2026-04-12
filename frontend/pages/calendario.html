@@ -24,8 +24,15 @@
 
 <header class="header">
   <section class="title">
+    <div class="page-header__brand">
+      <span class="page-header__brand-mark" aria-hidden="true"><span>Â</span></span>
+      <div class="page-header__brand-text">
+        <span class="page-header__brand-kicker">Âncora</span>
+        <span class="page-header__brand-name">Plataforma de Monitorias</span>
+      </div>
+    </div>
     <p>Agenda de monitorias</p>
-    <h1>Escolha um <br>horário</h1>
+    <h1>Veja o que vai <br>acontecer</h1>
   </section>
 
   <app-header-actions
@@ -35,87 +42,60 @@
   </app-header-actions>
 </header>
 
-<!-- Calendar -->
-<section class="calendar">
+<section class="agenda-layout">
+  <article class="calendar-card">
+    <div class="calendar-toolbar">
+      <button type="button" class="month-nav" id="btnPrevMonth" aria-label="Mês anterior">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <h2 id="monthLabel">Carregando...</h2>
+      <button type="button" class="month-nav" id="btnNextMonth" aria-label="Próximo mês">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
 
-<!-- headers -->
-<div class="day" data-day-label="Segunda-feira" data-day-short="Seg" data-day-number="24"><p>Seg</p><h3>24</h3></div>
-<div class="day" data-day-label="Terça-feira" data-day-short="Ter" data-day-number="25"><p>Ter</p><h3>25</h3></div>
-<div class="day" data-day-label="Quarta-feira" data-day-short="Qua" data-day-number="26"><p>Qua</p><h3>26</h3></div>
-<div class="day" data-day-label="Quinta-feira" data-day-short="Qui" data-day-number="27"><p>Qui</p><h3>27</h3></div>
-<div class="day" data-day-label="Sexta-feira" data-day-short="Sex" data-day-number="28"><p>Sex</p><h3>28</h3></div>
-<div class="day disabled" data-day-label="Sábado" data-day-short="Sáb" data-day-number="29"><p>Sáb</p><h3>29</h3></div>
-<div class="day disabled" data-day-label="Domingo" data-day-short="Dom" data-day-number="30"><p>Dom</p><h3>30</h3></div>
+    <div class="weekdays">
+      <span>Dom</span>
+      <span>Seg</span>
+      <span>Ter</span>
+      <span>Qua</span>
+      <span>Qui</span>
+      <span>Sex</span>
+      <span>Sáb</span>
+    </div>
 
-<!-- colunas -->
-<div class="col">
-<button type="button">09:00</button>
-<button type="button">10:30</button>
-<button type="button" disabled>14:00</button>
-<button type="button">16:30</button>
-</div>
+    <div class="calendar-grid" id="calendarGrid">
+      <p class="calendar-loading">Carregando calendário...</p>
+    </div>
+  </article>
 
-<div class="col">
-<button type="button" disabled>09:00</button>
-<button type="button">10:30</button>
-<button type="button">14:00</button>
-<button type="button">16:30</button>
-</div>
+  <aside class="events-card">
+    <div class="events-header">
+      <p>Monitorias do dia</p>
+      <h2 id="selectedDateTitle">Selecione uma data</h2>
+    </div>
 
-<div class="col">
-<button type="button">09:00</button>
-<button type="button" class="selected">10:30</button>
-<button type="button">14:00</button>
-<button type="button">16:30</button>
-</div>
-
-<div class="col">
-<button type="button">09:00</button>
-<button type="button" disabled>10:30</button>
-<button type="button" disabled>14:00</button>
-<button type="button">16:30</button>
-</div>
-
-<div class="col">
-<button type="button">09:00</button>
-<button type="button">10:30</button>
-<button type="button">14:00</button>
-<button type="button" disabled>16:30</button>
-</div>
-
-<div class="col">
-<button type="button" disabled>10:00</button>
-<button type="button" disabled>11:30</button>
-</div>
-
-<div class="col unavailable">
-<span>Indisponível</span>
-</div>
-
+    <div class="events-list" id="eventsList">
+      <p class="empty">Selecione um dia para ver as monitorias.</p>
+    </div>
+  </aside>
 </section>
 
 <footer class="footer">
   <div class="selected-info">
     <div class="date">
-      <span id="selectedDayShort">Qua</span>
-      <strong id="selectedDayNumber">26</strong>
+      <span id="selectedDayShort">---</span>
+      <strong id="selectedDayNumber">--</strong>
     </div>
     <div>
-      <p>Horário Selecionado</p>
-      <h2 id="selectedDateTime">Quarta-feira às 10:30</h2>
+      <p>Data selecionada</p>
+      <h2 id="selectedDateTime">Nenhuma data selecionada</h2>
     </div>
   </div>
 
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-        <div class="vw-plugin-top-wrapper"></div>
-    </div>
-</div>
-
   <div class="actions">
-    <button type="button" class="cancel">Cancelar</button>
-    <button type="button" class="confirm">Confirmar Sessão</button>
+    <button type="button" class="cancel" id="btnGoHome">Voltar para Home</button>
+    <button type="button" class="confirm" id="btnGoMonitorias">Ver Minhas Monitorias</button>
   </div>
 </footer>
 

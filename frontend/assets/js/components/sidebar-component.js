@@ -33,7 +33,8 @@ class SidebarMenu extends HTMLElement {
    */
   getUserType() {
     const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
-    if (userData.userType === 'monitor' || userData.perfil === 'monitor') {
+    const aprovado = userData.aprovado !== false;
+    if ((userData.userType === 'monitor' || userData.perfil === 'monitor') && aprovado) {
       return 'monitor';
     }
 

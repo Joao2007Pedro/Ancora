@@ -6,23 +6,30 @@ import {
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { criarUsuario, buscarUsuarioPorUid, gerarAvatar } from "./utils/firebase-db.js";
+import { criarUsuario, buscarUsuarioPorUid, gerarAvatar, registrarCandidaturaMonitor } from "./utils/firebase-db.js";
 
-function mapPerfilToUserType(perfil) {
-  return perfil === "monitor" ? "monitor" : "student";
+function mapPerfilToUserType(perfil, aprovado) {
+  if (perfil === "monitor" && aprovado !== false) {
+    return "monitor";
+  }
+
+  return "student";
 }
 
 function salvarSessaoLocal(user, dadosPerfil = {}) {
   const perfil = dadosPerfil.perfil || user.perfil || "aluno";
+  const aprovado = dadosPerfil.aprovado ?? (perfil !== "monitor");
   const userData = {
     uid: user.uid,
     nome: dadosPerfil.nome || user.displayName || "",
     email: dadosPerfil.email || user.email || "",
     foto_url: dadosPerfil.foto_url || user.photoURL || gerarAvatar(user.displayName || user.email || "Usuario"),
     perfil,
-    userType: mapPerfilToUserType(perfil),
+    userType: mapPerfilToUserType(perfil, aprovado),
     equipe: dadosPerfil.equipe || "",
-    aprovado: dadosPerfil.aprovado ?? (perfil !== "monitor")
+    aprovado,
+    perfil_solicitado: dadosPerfil.perfil_solicitado || null,
+    candidatura_status: dadosPerfil.candidatura_status || null
   };
 
   localStorage.setItem("userData", JSON.stringify(userData));
@@ -68,15 +75,41 @@ export async function loginEmail(email, senha) {
 
 export async function cadastrarEmail(nome, email, senha, perfil, equipe) {
   const result = await createUserWithEmailAndPassword(auth, email, senha);
+
+  const candidatoMonitor = perfil === "monitor";
+  const perfilFinal = candidatoMonitor ? "aluno" : perfil;
+
   await criarUsuario(result.user.uid, {
     nome,
     email,
     foto_url: gerarAvatar(nome),
-    perfil,
+    perfil: perfilFinal,
     equipe,
-    aprovado: perfil === "monitor" ? false : true
+    aprovado: !candidatoMonitor,
+    perfil_solicitado: candidatoMonitor ? "monitor" : null,
+    candidatura_status: candidatoMonitor ? "pendente" : null
   });
-  salvarSessaoLocal(result.user, { nome, email, perfil, equipe, foto_url: gerarAvatar(nome), aprovado: perfil === "monitor" ? false : true });
+
+  if (candidatoMonitor) {
+    await registrarCandidaturaMonitor({
+      uid: result.user.uid,
+      nome,
+      email,
+      equipe,
+      perfil_solicitado: "monitor"
+    });
+  }
+
+  salvarSessaoLocal(result.user, {
+    nome,
+    email,
+    perfil: perfilFinal,
+    equipe,
+    foto_url: gerarAvatar(nome),
+    aprovado: !candidatoMonitor,
+    perfil_solicitado: candidatoMonitor ? "monitor" : null,
+    candidatura_status: candidatoMonitor ? "pendente" : null
+  });
   return result.user;
 }
 

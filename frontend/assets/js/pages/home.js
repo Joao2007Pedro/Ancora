@@ -4,8 +4,30 @@ import { protegerPagina } from "../utils/auth-guard.js";
 
 protegerPagina();
 
+function renderPendingBanner() {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  const isPendingMonitor = userData.perfil_solicitado === "monitor" && userData.aprovado === false;
+  const main = document.querySelector(".main-content");
+  if (!main || !isPendingMonitor || document.querySelector(".pending-monitor-banner")) return;
+
+  const banner = document.createElement("section");
+  banner.className = "pending-monitor-banner";
+  banner.innerHTML = `
+    <strong>Sua candidatura a monitor está em análise</strong>
+    <p>Você já pode usar a plataforma como aluno enquanto a Amanda revisa sua solicitação.</p>
+  `;
+
+  const header = main.querySelector(".page-header");
+  if (header && header.parentNode) {
+    header.insertAdjacentElement("afterend", banner);
+  } else {
+    main.prepend(banner);
+  }
+}
+
 observarSessao((usuario) => {
   if (!usuario) return;
+  renderPendingBanner();
   carregarMonitorias();
 });
 

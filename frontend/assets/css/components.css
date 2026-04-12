@@ -203,6 +203,54 @@
   color: #FF5C00;
 }
 
+/* Branding dos cabeçalhos das páginas */
+.page-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.page-header__brand-mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1300e1, #3333ff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(19, 0, 225, 0.18);
+  flex-shrink: 0;
+}
+
+.page-header__brand-mark span {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.page-header__brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.page-header__brand-kicker {
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-header__brand-name {
+  color: #0A0F5C;
+  font-family: var(--font-sidebar);
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
 /* Scrollbar da Sidebar */
 .sidebar::-webkit-scrollbar {
   width: 6px;

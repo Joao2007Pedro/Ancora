@@ -37,6 +37,61 @@ export async function atualizarPerfil(uid, dados) {
   if (!snap.empty) await updateDoc(snap.docs[0].ref, dados);
 }
 
+// ── CANDIDATURAS DE MONITOR ─────────────────────────
+
+export async function registrarCandidaturaMonitor(dados) {
+  return await addDoc(collection(db, "candidaturas"), {
+    ...dados,
+    tipo: "monitor",
+    status: "pendente",
+    criado_em: serverTimestamp()
+  });
+}
+
+export async function buscarCandidaturasPendentes() {
+  const q = query(collection(db, "candidaturas"), where("status", "==", "pendente"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+export async function buscarTodasCandidaturas() {
+  const snapshot = await getDocs(collection(db, "candidaturas"));
+  return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+export async function aprovarCandidatura(candidaturaId) {
+  const candidaturasRef = doc(db, "candidaturas", candidaturaId);
+  const candidaturasSnap = await getDoc(candidaturasRef);
+  if (!candidaturasSnap.exists()) return false;
+
+  const candidatura = candidaturasSnap.data();
+  await updateDoc(candidaturasRef, {
+    status: "aprovada",
+    aprovado_em: serverTimestamp()
+  });
+
+  const usuariosQuery = query(collection(db, "usuarios"), where("uid", "==", candidatura.uid));
+  const usuariosSnap = await getDocs(usuariosQuery);
+  if (!usuariosSnap.empty) {
+    await updateDoc(usuariosSnap.docs[0].ref, {
+      perfil: "monitor",
+      userType: "monitor",
+      aprovado: true,
+      perfil_solicitado: "monitor",
+      candidatura_status: "aprovada"
+    });
+  }
+
+  return true;
+}
+
+export async function rejeitarCandidatura(candidaturaId) {
+  await updateDoc(doc(db, "candidaturas", candidaturaId), {
+    status: "rejeitada",
+    atualizado_em: serverTimestamp()
+  });
+}
+
 // ── MONITORIAS ───────────────────────────────────────
 
 export async function criarMonitoria(dados) {
