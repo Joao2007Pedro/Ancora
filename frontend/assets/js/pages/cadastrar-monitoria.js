@@ -7,6 +7,13 @@ protegerPagina();
 let usuarioAtual = null;
 observarSessao((u) => {
   usuarioAtual = u;
+
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  const isMonitor = userData.userType === "monitor" || userData.perfil === "monitor";
+  if (u && !isMonitor) {
+    window.location.href = "./home.html";
+    usuarioAtual = null;
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {

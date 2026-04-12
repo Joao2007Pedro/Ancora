@@ -20,7 +20,11 @@ class SidebarMenu extends HTMLElement {
    */
   getUserType() {
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    return userData.userType || 'student'; // Padrão: student
+    if (userData.userType === 'monitor' || userData.perfil === 'monitor') {
+      return 'monitor';
+    }
+
+    return 'student';
   }
 
   /**
@@ -36,7 +40,7 @@ class SidebarMenu extends HTMLElement {
           </div>
           <div class="logo-text">
             <h2>Âncora</h2>
-            <p>Portal de Estudos</p>
+            <p>Portal do Aluno</p>
           </div>
         </div>
 
@@ -52,37 +56,33 @@ class SidebarMenu extends HTMLElement {
           </a>
           <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
-            <span>Minhas Monitorias</span>
+            <span>Monitorias Agendadas</span>
           </a>
           <a href="recursos.html" class="nav-item" data-page="recursos">
             <span class="material-symbols-outlined">library_books</span>
-            <span>Recursos</span>
+            <span>Indicações</span>
           </a>
           <a href="roadmap.html" class="nav-item" data-page="roadmap">
             <span class="material-symbols-outlined">map</span>
             <span>RoadMap</span>
           </a>
-          <a href="#" class="nav-item" data-page="chat">
+          <a href="#chat" class="nav-item" data-page="chat">
             <span class="material-symbols-outlined">chat</span>
             <span>Chat</span>
-          </a>
-          <a href="#" class="nav-item" data-page="dashboard">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span>Dashboard</span>
           </a>
         </nav>
 
         <!-- Ações Principais -->
         <div class="sidebar-action">
-          <button class="btn-sidebar-primary btn-new-monitoring" onclick="abrirNovaMonitoria()">
+          <button class="btn-sidebar-primary btn-become-monitor" onclick="tornarMonitor()">
             <span class="material-symbols-outlined">add</span>
-            <span>Nova Monitoria</span>
+            <span>Tornar-se Monitor</span>
           </button>
         </div>
 
         <!-- Rodapé -->
         <div class="sidebar-footer">
-          <a href="#" class="nav-item-footer" data-page="configuracoes">
+          <a href="#settings" class="nav-item-footer" data-page="configuracoes">
             <span class="material-symbols-outlined">settings</span>
             <span>Configurações</span>
           </a>
@@ -108,7 +108,7 @@ class SidebarMenu extends HTMLElement {
           </div>
           <div class="logo-text">
             <h2>Âncora</h2>
-            <p>Tutoring Portal</p>
+            <p>Painel do Monitor</p>
           </div>
         </div>
 
@@ -120,7 +120,7 @@ class SidebarMenu extends HTMLElement {
           </a>
           <a href="calendario.html" class="nav-item" data-page="agenda">
             <span class="material-symbols-outlined">calendar_today</span>
-            <span>Calendário</span>
+            <span>Agenda</span>
           </a>
           <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
@@ -142,21 +142,21 @@ class SidebarMenu extends HTMLElement {
 
         <!-- Ações Principais -->
         <div class="sidebar-action">
-          <button class="btn-sidebar-primary btn-become-monitor" onclick="tornarMonitor()">
+          <button class="btn-sidebar-primary btn-new-monitoring" onclick="abrirNovaMonitoria()">
             <span class="material-symbols-outlined">add</span>
-            <span>Tornar-se Monitor</span>
+            <span>Nova Monitoria</span>
           </button>
         </div>
 
         <!-- Rodapé -->
         <div class="sidebar-footer">
-          <a href="#settings" class="nav-item-footer" data-page="settings">
+          <a href="#settings" class="nav-item-footer" data-page="configuracoes">
             <span class="material-symbols-outlined">settings</span>
-            <span>Settings</span>
+            <span>Configurações</span>
           </a>
           <a href="#" class="nav-item-footer logout" onclick="fazerLogout(event)">
             <span class="material-symbols-outlined">logout</span>
-            <span>Logout</span>
+            <span>Sair</span>
           </a>
         </div>
       </aside>
@@ -206,6 +206,7 @@ class SidebarMenu extends HTMLElement {
   changeUserType(userType) {
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
     userData.userType = userType;
+    userData.perfil = userType === 'monitor' ? 'monitor' : 'aluno';
     localStorage.setItem('userData', JSON.stringify(userData));
     
     // Rerender a sidebar
@@ -227,7 +228,7 @@ function abrirNovaMonitoria() {
  */
 function tornarMonitor() {
   console.log('Abrindo página para tornar-se monitor...');
-  // Implementar navegação
+  window.location.href = 'cadastro.html';
 }
 
 /**
@@ -235,13 +236,16 @@ function tornarMonitor() {
  */
 function fazerLogout(event) {
   event.preventDefault();
-  
+
   if (confirm('Deseja realmente sair?')) {
-    // Limpar dados locais
+    if (typeof window.appLogout === 'function') {
+      window.appLogout();
+      return;
+    }
+
+    // Fallback caso o helper global não esteja disponível
     localStorage.removeItem('userData');
     localStorage.removeItem('userToken');
-    
-    // Redirecionar para login
     window.location.href = 'login.html';
   }
 }

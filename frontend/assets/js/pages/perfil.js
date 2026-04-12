@@ -1,4 +1,5 @@
 import { protegerPagina } from "../utils/auth-guard.js";
+import "../auth.js";
 
 /**
  * perfil.js
@@ -376,6 +377,16 @@ function getMonitorIdFromUrl() {
 // ─────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   protegerPagina();
+
+  function getUserTypeFromStorage() {
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    return userData.userType === "monitor" || userData.perfil === "monitor" ? "monitor" : "student";
+  }
+
+  if (getUserTypeFromStorage() !== "monitor") {
+    window.location.href = "./home.html";
+    return;
+  }
 
   // In production you would do:
   // const monitorId = getMonitorIdFromUrl();

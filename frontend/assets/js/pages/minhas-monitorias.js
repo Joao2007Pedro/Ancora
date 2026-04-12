@@ -4,6 +4,33 @@ import { observarSessao } from "../auth.js";
 
 protegerPagina();
 
+function getUserTypeFromStorage() {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  return userData.userType === "monitor" || userData.perfil === "monitor" ? "monitor" : "student";
+}
+
+function atualizarCopyDaPagina() {
+  const userType = getUserTypeFromStorage();
+  const titulo = document.querySelector(".header-titles h1");
+  const subtitulo = document.querySelector(".header-titles p");
+
+  document.title = userType === "monitor"
+    ? "Âncora — Minhas Monitorias"
+    : "Âncora — Monitorias Agendadas";
+
+  if (titulo) {
+    titulo.textContent = userType === "monitor" ? "Minhas Monitorias" : "Monitorias Agendadas";
+  }
+
+  if (subtitulo) {
+    subtitulo.textContent = userType === "monitor"
+      ? "Acompanhe e gerencie as monitorias que você oferece."
+      : "Veja as monitorias em que você vai participar.";
+  }
+}
+
+atualizarCopyDaPagina();
+
 observarSessao(async (usuario) => {
   if (!usuario) return;
 

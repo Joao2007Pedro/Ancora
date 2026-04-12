@@ -100,8 +100,8 @@ function getUserPermissions() {
       recursos: true,
       roadmap: true,
       chat: true,
-      dashboard: true,
-      canCreateMonitoring: true,
+      dashboard: false,
+      canCreateMonitoring: false,
       canViewMonitorDashboard: false,
       canBecomeMonitor: true,
       canManageLessons: false
@@ -113,8 +113,8 @@ function getUserPermissions() {
       recursos: true,
       roadmap: true,
       chat: true,
-      dashboard: false,
-      canCreateMonitoring: false,
+      dashboard: true,
+      canCreateMonitoring: true,
       canViewMonitorDashboard: true,
       canBecomeMonitor: false,
       canManageLessons: true

@@ -39,7 +39,7 @@ async function carregarMonitorias(filtro = null) {
           <button class="btn-agendar" onclick="window.location.href='./confirmacao.html?id=${m.id}'">
             Agendar Monitoria
           </button>
-          <button class="btn-perfil" onclick="window.location.href='/perfil?id=${m.monitor_id}'">
+          <button class="btn-perfil" onclick="window.location.href='./perfil.html?id=${m.monitor_id}'">
             Ver Perfil
           </button>
         </div>
