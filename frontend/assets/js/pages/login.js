@@ -30,21 +30,27 @@ formLogin?.addEventListener("submit", async (e) => {
   const email = document.querySelector("#email").value;
   const senha = document.querySelector("#senha").value;
   try {
+    window.__ancoraAuthFlowInProgress = true;
     await loginEmail(email, senha);
     window.location.href = "./home.html";
   } catch (err) {
     msgErro.textContent = getAuthErrorMessage(err);
     console.error("Erro login email:", err?.code, err?.message);
+  } finally {
+    window.__ancoraAuthFlowInProgress = false;
   }
 });
 
 btnGoogle?.addEventListener("click", async () => {
   msgErro.textContent = "";
   try {
+    window.__ancoraAuthFlowInProgress = true;
     await loginGoogle();
     window.location.href = "./home.html";
   } catch (err) {
     msgErro.textContent = getAuthErrorMessage(err);
     console.error("Erro login Google:", err?.code, err?.message);
+  } finally {
+    window.__ancoraAuthFlowInProgress = false;
   }
 });

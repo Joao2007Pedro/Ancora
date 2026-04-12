@@ -26,6 +26,10 @@ function salvarSessaoLocal(user, dadosPerfil = {}) {
   };
 
   localStorage.setItem("userData", JSON.stringify(userData));
+  if (typeof window !== "undefined") {
+    window.__ancoraUserData = userData;
+    window.dispatchEvent(new CustomEvent("ancora-user-data-updated", { detail: userData }));
+  }
   return userData;
 }
 
@@ -78,6 +82,10 @@ export async function cadastrarEmail(nome, email, senha, perfil, equipe) {
 
 export async function logout() {
   await signOut(auth);
+  if (typeof window !== "undefined") {
+    window.__ancoraUserData = null;
+    window.dispatchEvent(new CustomEvent("ancora-user-data-updated", { detail: null }));
+  }
   window.location.href = "/frontend/index.html";
 }
 

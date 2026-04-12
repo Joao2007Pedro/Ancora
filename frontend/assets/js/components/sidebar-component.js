@@ -1,17 +1,30 @@
 class SidebarMenu extends HTMLElement {
   connectedCallback() {
+    if (!this._onUserDataUpdated) {
+      this._onUserDataUpdated = () => {
+        this.connectedCallback();
+      };
+      window.addEventListener('ancora-user-data-updated', this._onUserDataUpdated);
+    }
+
     // Detectar tipo de usuário
-    const userType = this.getUserType();
-    
-    // Renderizar sidebar baseado no tipo de usuário
-    if (userType === 'monitor') {
+    this.renderByCurrentUserType();
+    this.setActiveClass();
+    this.attachEventListeners();
+  }
+
+  disconnectedCallback() {
+    if (this._onUserDataUpdated) {
+      window.removeEventListener('ancora-user-data-updated', this._onUserDataUpdated);
+    }
+  }
+
+  renderByCurrentUserType() {
+    if (this.getUserType() === 'monitor') {
       this.renderMonitorSidebar();
     } else {
       this.renderStudentSidebar();
     }
-    
-    this.setActiveClass();
-    this.attachEventListeners();
   }
 
   /**
@@ -19,7 +32,7 @@ class SidebarMenu extends HTMLElement {
    * @returns {string} 'monitor' ou 'student'
    */
   getUserType() {
-    const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+    const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
     if (userData.userType === 'monitor' || userData.perfil === 'monitor') {
       return 'monitor';
     }
@@ -208,6 +221,8 @@ class SidebarMenu extends HTMLElement {
     userData.userType = userType;
     userData.perfil = userType === 'monitor' ? 'monitor' : 'aluno';
     localStorage.setItem('userData', JSON.stringify(userData));
+    window.__ancoraUserData = userData;
+    window.dispatchEvent(new CustomEvent('ancora-user-data-updated', { detail: userData }));
     
     // Rerender a sidebar
     this.connectedCallback();

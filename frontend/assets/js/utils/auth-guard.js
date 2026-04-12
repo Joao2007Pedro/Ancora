@@ -10,7 +10,7 @@ export function protegerPagina() {
 
 export function redirecionarSeLogado() {
   observarSessao((usuario) => {
-    if (usuario) {
+    if (usuario && !window.__ancoraAuthFlowInProgress) {
       window.location.href = "/frontend/pages/home.html";
     }
   });

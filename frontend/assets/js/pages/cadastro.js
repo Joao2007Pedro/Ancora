@@ -30,10 +30,13 @@ form?.addEventListener("submit", async (e) => {
   const perfil = document.querySelector(".perfil-card.ativo")?.dataset.perfil || "aluno";
   const equipe = document.querySelector("#equipe")?.value || "";
   try {
+    window.__ancoraAuthFlowInProgress = true;
     await cadastrarEmail(nome, email, senha, perfil, equipe);
     window.location.href = "./home.html";
   } catch (err) {
     msgErro.textContent = getCadastroErrorMessage(err);
     console.error("Erro cadastro:", err?.code, err?.message);
+  } finally {
+    window.__ancoraAuthFlowInProgress = false;
   }
 });
