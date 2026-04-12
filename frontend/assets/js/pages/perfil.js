@@ -207,6 +207,11 @@ function renderProfile(data) {
     ratingRow.querySelector(".rating-count").textContent = `(${data.avaliacoes} Avaliações)`;
   }
 
+  const monitoriasStat = document.getElementById("statMonitorias");
+  if (monitoriasStat) {
+    monitoriasStat.textContent = String(data.monitoriasPublicadas || 12);
+  }
+
   // Tags
   const tagsRow = document.getElementById("tagsRow");
   if (tagsRow) {
@@ -241,6 +246,24 @@ function renderProfile(data) {
       btn.addEventListener("click", () => handleAgendarSessao(btn));
     });
   }
+}
+
+function initDashboardActions() {
+  const actions = [
+    { id: "btnNovaMonitoria", href: "./cadastrar-monitoria.html" },
+    { id: "btnEditarPerfil", href: "./cadastro.html" },
+    { id: "btnVerMonitorias", href: "./minhas-monitorias.html" },
+    { id: "btnVerAgenda", href: "./calendario.html" },
+    { id: "btnVerRecursos", href: "./recursos.html" },
+  ];
+
+  actions.forEach((action) => {
+    const button = document.getElementById(action.id);
+    if (!button) return;
+    button.addEventListener("click", () => {
+      window.location.href = action.href;
+    });
+  });
 }
 
 // ─────────────────────────────────────────────
@@ -397,6 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderFeitas();
   initBackButton();
   initLoadMore();
+  initDashboardActions();
 
   console.info("[perfil-do-monitor] Página inicializada.");
 });
