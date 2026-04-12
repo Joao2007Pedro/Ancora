@@ -151,6 +151,10 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">chat</span>
             <span>Chat</span>
           </a>
+          <a href="perfil.html" class="nav-item" data-page="dashboard">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+          </a>
         </nav>
 
         <!-- Ações Principais -->
