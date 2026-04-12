@@ -215,7 +215,8 @@
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1300e1, #3333ff);
+  background: #ffffff;
+  border: 1px solid rgba(19, 0, 225, 0.12);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -223,10 +224,10 @@
   flex-shrink: 0;
 }
 
-.page-header__brand-mark span {
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 800;
+.page-header__brand-image {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
 }
 
 .page-header__brand-text {

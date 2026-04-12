@@ -50,7 +50,7 @@ class SidebarMenu extends HTMLElement {
         <!-- Header com Logo -->
         <div class="sidebar-header">
           <div class="logo-box">
-            <div class="logo-placeholder">🔷</div>
+            <img src="../assets/images/logo/ancora-logo.png" alt="Logo Âncora" />
           </div>
           <div class="logo-text">
             <h2>Âncora</h2>
@@ -118,7 +118,7 @@ class SidebarMenu extends HTMLElement {
         <!-- Header com Logo -->
         <div class="sidebar-header">
           <div class="logo-box">
-            <div class="logo-placeholder">🔷</div>
+            <img src="../assets/images/logo/ancora-logo.png" alt="Logo Âncora" />
           </div>
           <div class="logo-text">
             <h2>Âncora</h2>
