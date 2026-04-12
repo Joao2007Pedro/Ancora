@@ -718,7 +718,7 @@ h1,h2,h3,.font-head { font-family: var(--font-head); }
 }
 
 .footer__logo { display: block; margin-bottom: .5rem; }
-.brand-logo--footer { width: 2rem; height: 2rem; filter: brightness(0) invert(1); }
+.brand-logo--footer { width: 2rem; height: 2rem; }
 .footer__copy { font-size: .75rem; color: rgba(232,238,244,.6); max-width: 22rem; }
 
 .footer__links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
