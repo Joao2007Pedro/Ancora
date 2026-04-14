@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/pages/dashboard.css" />
+    <link rel="stylesheet" href="../assets/css/pages/recursos.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <script src="../assets/js/components/sidebar-component.js"></script>
+  </head>
+  <body>
+    <sidebar-menu></sidebar-menu>
+    <main class="main-content">
+      <div class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p class="sub-titulo">
+          Gerencie suas monitorias, acompanhe solicitações e <br />organize sua
+          disponibilidade em um só lugar.
+        </p>
+      </div>
+      <section class="container">
+        <div class="card card-pendente">
+          <p>Pendentes</p>
+          <h2>3</h2>
+          <span class="aguardando">⏱ Aguardando resposta</span>
+        </div>
+
+        <div class="card card-aceita">
+          <p>Aceitas</p>
+          <h2>8</h2>
+          <span class="confirmados">✔ Confirmadas</span>
+        </div>
+
+        <div class="card card-recusada">
+          <p>Recusadas</p>
+          <h2>10</h2>
+          <span class="realizadas"> ✕ Não realizadas</span>
+        </div>
+
+        <section class="segunda-linha">
+          <div class="card-monitorias">
+            <h3>
+              <span class="material-symbols-outlined">calendar_month</span>
+              Próximas Monitorias
+            </h3>
+
+            <div class="info-monitoria">
+              <p class="label-info">Matéria</p>
+              <span class="tag-materia">📄 HTML</span>
+            </div>
+
+            <div class="info-monitoria">
+              <p class="label-info">Horário</p>
+              <p class="valor-info">14h às 15h</p>
+            </div>
+
+            <div class="info-monitoria">
+              <p class="label-info">Data</p>
+              <p class="valor-info">10/04/2026</p>
+            </div>
+
+            <button class="btn-detalhes">Ver detalhes</button>
+          </div>
+
+          <div class="card-solicitacoes">
+            <h3>
+              <span class="material-symbols-outlined">desktop_windows</span>
+              Solicitações Pendentes
+            </h3>
+
+            <div class="solicitacao-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="solicitacao-info">
+                <p class="nome-aluno">Ryan Almeida</p>
+                <p class="desc-solic">Solicitação de monitoria · HTML</p>
+              </div>
+              <div class="acoes">
+                <button class="btn-aceitar">Aceitar</button>
+                <button class="btn-recusar">Recusar</button>
+              </div>
+            </div>
+
+            <div class="solicitacao-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="solicitacao-info">
+                <p class="nome-aluno">Ryan Almeida</p>
+                <p class="desc-solic">Solicitação de monitoria · CSS</p>
+              </div>
+              <div class="acoes">
+                <button class="btn-aceitar">Aceitar</button>
+                <button class="btn-recusar">Recusar</button>
+              </div>
+            </div>
+
+            <div class="solicitacao-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="solicitacao-info">
+                <p class="nome-aluno">Ryan Almeida</p>
+                <p class="desc-solic">Solicitação de monitoria · JS</p>
+              </div>
+              <div class="acoes">
+                <button class="btn-aceitar">Aceitar</button>
+                <button class="btn-recusar">Recusar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="historico">
+          <h3>
+            <span class="material-symbols-outlined">history</span> Seu histórico
+            de monitorias
+          </h3>
+
+          <div class="historico-grid">
+            <div class="historico-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="historico-info">
+                <p class="nome-hist">HTML e CSS</p>
+                <p class="data-hist">07/04/2026</p>
+              </div>
+              <button class="btn-ver">VER</button>
+            </div>
+
+            <div class="historico-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="historico-info">
+                <p class="nome-hist">HTML e CSS</p>
+                <p class="data-hist">07/04/2026</p>
+              </div>
+              <button class="btn-ver">VER</button>
+            </div>
+
+            <div class="historico-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="historico-info">
+                <p class="nome-hist">HTML e CSS</p>
+                <p class="data-hist">07/04/2026</p>
+              </div>
+              <button class="btn-ver">VER</button>
+            </div>
+
+            <div class="historico-item">
+              <img src="../assets/img/avatar.png" alt="foto" class="avatar" />
+              <div class="historico-info">
+                <p class="nome-hist">HTML e CSS</p>
+                <p class="data-hist">07/04/2026</p>
+              </div>
+              <button class="btn-ver">VER</button>
+            </div>
+          </div>
+
+          <div class="ver-mais-wrap">
+            <button class="btn-ver-mais">Ver Mais</button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
