@@ -68,19 +68,19 @@ main {
 }
 
 .itens_titulo img {
-  width: 25px;
-  height: 25px;
-  aspect-ratio: 1/1;
+  width: 45px;
+  height: 35px;
   margin-top: 2%;
   align-self: center;
+  border-radius: 3px;
 }
 
 .itens_titulo h1 {
   font-family: "Space Grotesk";
-  color: var(--verde);
+  color: var(--branco);
   font-size: 38px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 48px;
   letter-spacing: 1px;
 }
@@ -469,12 +469,12 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .itens_titulo img {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 25px;
     align-self: center;
   }
 
@@ -631,8 +631,13 @@ main {
     padding: 20px 0;
   }
 
+  .itens_titulo img {
+    width: 45px;
+    height: 35px;
+  }
+
   .itens_titulo h1 {
-    font-size: 22px;
+    font-size: 30px;
   }
 
   .plataform {
@@ -805,8 +810,13 @@ main {
     width: 80%;
   }
 
+  .itens_titulo img {
+    width: 55px;
+    height: 45px;
+  }
+
   .itens_titulo h1 {
-    font-size: 25px;
+    font-size: 35px;
   }
 
   .plataform {
