@@ -258,9 +258,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--azul-escuro);
   color: var(--branco);
-  border-radius: 20px;
+  overflow: hidden;
 }
 
 .btn1 button {
@@ -1018,7 +1017,6 @@ main {
     width: 65px;
     height: 55px;
   }
-
 
   .plataform {
     width: 70%;
