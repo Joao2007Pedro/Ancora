@@ -7,13 +7,6 @@ protegerPagina();
 let usuarioAtual = null;
 observarSessao((u) => {
   usuarioAtual = u;
-
-  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-  const isMonitor = userData.userType === "monitor" || userData.perfil === "monitor";
-  if (u && !isMonitor) {
-    window.location.href = "./home.html";
-    usuarioAtual = null;
-  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -75,6 +68,18 @@ document.addEventListener("DOMContentLoaded", function () {
         item.classList.remove("active");
       });
       day.classList.add("active");
+    });
+  });
+
+  /* ── Seleção de sala Discord ── */
+  document.querySelectorAll(".sala-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".sala-btn").forEach(function (b) {
+        b.classList.remove("active");
+      });
+      btn.classList.add("active");
+      var linkInput = document.getElementById("link-discord");
+      if (linkInput) linkInput.value = btn.dataset.link;
     });
   });
 

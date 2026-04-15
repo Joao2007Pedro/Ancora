@@ -101,7 +101,38 @@
           <input id="horario-fim" type="time" value="16:00">
         </div>
 
-        <input id="link-discord" type="url" placeholder="Link do Discord (opcional)">
+        <div class="discord-field">
+          <div class="discord-label">
+            <svg width="18" height="14" viewBox="0 0 71 55" fill="none">
+              <path d="M60.1 4.9A58.5 58.5 0 0 0 45.5.7a40 40 0 0 0-1.8 3.6 54.2 54.2 0 0 0-16.3 0A40 40 0 0 0 25.6.7 58.4 58.4 0 0 0 11 4.9C1.6 19 -1 32.8.3 46.4a58.9 58.9 0 0 0 17.9 9.1 44.6 44.6 0 0 0 3.8-6.3 38.3 38.3 0 0 1-6-2.9l1.5-1.1a42 42 0 0 0 36 0l1.5 1.1a38.4 38.4 0 0 1-6 2.9 44.3 44.3 0 0 0 3.8 6.3 58.7 58.7 0 0 0 17.9-9.1C72 30.6 68.3 16.9 60 4.9ZM23.7 38c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.5 0 6.4 3.2 6.4 7.2s-2.9 7.2-6.4 7.2Zm23.6 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.5 0 6.4 3.2 6.4 7.2s-2.8 7.2-6.4 7.2Z" fill="#5865F2"/>
+            </svg>
+            <span>Sala do Discord</span>
+          </div>
+          <p class="discord-hint">Escolha a sala onde a monitoria vai acontecer.</p>
+          <div class="salas-grid" id="salas-discord">
+            <button type="button" class="sala-btn" data-link="https://discord.gg/6atQMwfsB">
+              <span class="sala-nome">Sala 1</span>
+              <span class="sala-link">discord.gg/6atQMwfsB</span>
+            </button>
+            <button type="button" class="sala-btn" data-link="https://discord.gg/zXwNqGAdM">
+              <span class="sala-nome">Sala 2</span>
+              <span class="sala-link">discord.gg/zXwNqGAdM</span>
+            </button>
+            <button type="button" class="sala-btn" data-link="https://discord.gg/guvyHqdzh">
+              <span class="sala-nome">Sala 3</span>
+              <span class="sala-link">discord.gg/guvyHqdzh</span>
+            </button>
+            <button type="button" class="sala-btn" data-link="https://discord.gg/PDZBdKv9T">
+              <span class="sala-nome">Sala 4</span>
+              <span class="sala-link">discord.gg/PDZBdKv9T</span>
+            </button>
+            <button type="button" class="sala-btn" data-link="https://discord.gg/n9d9aMsTM">
+              <span class="sala-nome">Sala 5</span>
+              <span class="sala-link">discord.gg/n9d9aMsTM</span>
+            </button>
+          </div>
+          <input type="hidden" id="link-discord">
+        </div>
 
         <button type="button" id="addSlot" class="btn-outline">Adicionar horário</button>
 

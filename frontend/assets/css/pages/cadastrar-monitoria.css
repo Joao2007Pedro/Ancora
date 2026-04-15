@@ -1,3 +1,6 @@
+astrar monitoria · CSS
+Copiar
+
 :root {
   --color-navy: #0a0f5c;
   --color-blue: #3333ff;
@@ -15,11 +18,11 @@
   --radius-full: 9999px;
   --sidebar-width: 16rem;
 }
-
+ 
 * {
   box-sizing: border-box;
 }
-
+ 
 body {
   margin: 0;
   min-height: 100vh;
@@ -31,29 +34,29 @@ body {
     var(--color-bg);
   color: var(--color-text);
 }
-
+ 
 img {
   max-width: 100%;
   display: block;
 }
-
+ 
 button,
 input,
 textarea {
   font: inherit;
 }
-
+ 
 button {
   cursor: pointer;
 }
-
+ 
 .main {
   flex: 1;
   margin-left: var(--sidebar-width);
   padding: 2.5rem 2rem;
   max-width: 1440px;
 }
-
+ 
 .header {
   display: flex;
   justify-content: space-between;
@@ -61,7 +64,7 @@ button {
   gap: 1.5rem;
   margin-bottom: 1.75rem;
 }
-
+ 
 .header h2 {
   margin: 0 0 0.5rem;
   font-family: 'Space Grotesk', sans-serif;
@@ -70,17 +73,17 @@ button {
   letter-spacing: -0.04em;
   color: var(--color-navy);
 }
-
+ 
 .header p {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.95rem;
 }
-
+ 
 .progress {
   min-width: 220px;
 }
-
+ 
 .progress span {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -89,7 +92,7 @@ button {
   letter-spacing: 0.12em;
   color: var(--color-blue);
 }
-
+ 
 .bar {
   width: 100%;
   height: 0.5rem;
@@ -97,7 +100,7 @@ button {
   overflow: hidden;
   background: rgba(51, 51, 255, 0.08);
 }
-
+ 
 .fill {
   width: 33%;
   height: 100%;
@@ -106,7 +109,7 @@ button {
   box-shadow: 0 0 18px rgba(204, 255, 0, 0.45);
   transition: width 0.4s ease;
 }
-
+ 
 .card {
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(221, 227, 233, 0.8);
@@ -115,39 +118,39 @@ button {
   padding: 2rem;
   backdrop-filter: blur(10px);
 }
-
+ 
 .grid {
   display: grid;
   grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
   gap: 2rem;
   padding-bottom: 2rem;
 }
-
+ 
 .grid.border {
   border-top: 1px solid var(--color-border);
   padding-top: 2rem;
 }
-
+ 
 h3 {
   margin: 0 0 0.5rem;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   color: var(--color-navy);
 }
-
+ 
 p {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.9rem;
 }
-
+ 
 .chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
-
+ 
 .chip,
 .toggle-group button,
 .btn-outline,
@@ -157,7 +160,7 @@ p {
   border: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
-
+ 
 .chip {
   padding: 0.75rem 1rem;
   border-radius: var(--radius-full);
@@ -166,7 +169,7 @@ p {
   color: var(--color-muted);
   font-weight: 700;
 }
-
+ 
 .chip:hover,
 .day:hover,
 .toggle-group button:hover,
@@ -175,14 +178,14 @@ p {
 .btn-primary:hover {
   transform: translateY(-1px);
 }
-
+ 
 .chip.active {
   background: var(--color-blue);
   color: #fff;
   border-color: var(--color-blue);
   box-shadow: var(--shadow-soft);
 }
-
+ 
 input,
 textarea {
   width: 100%;
@@ -194,18 +197,18 @@ textarea {
   color: var(--color-text);
   outline: none;
 }
-
+ 
 input:focus,
 textarea:focus {
   border-color: rgba(51, 51, 255, 0.35);
   box-shadow: 0 0 0 3px rgba(51, 51, 255, 0.08);
 }
-
+ 
 textarea {
   resize: vertical;
   min-height: 120px;
 }
-
+ 
 .toggle-group {
   display: flex;
   padding: 0.25rem;
@@ -214,7 +217,7 @@ textarea {
   background: var(--color-surface-soft);
   border: 1px solid rgba(221, 227, 233, 0.65);
 }
-
+ 
 .toggle-group button {
   flex: 1;
   padding: 0.85rem 1rem;
@@ -223,20 +226,20 @@ textarea {
   color: var(--color-muted);
   font-weight: 700;
 }
-
+ 
 .toggle-group button.active {
   background: var(--color-surface);
   color: var(--color-blue);
   box-shadow: 0 4px 10px rgba(10, 15, 92, 0.08);
 }
-
+ 
 .counter {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-top: 1.25rem;
 }
-
+ 
 .counter span {
   min-width: 2.25rem;
   text-align: center;
@@ -244,7 +247,7 @@ textarea {
   font-size: 1.1rem;
   color: var(--color-navy);
 }
-
+ 
 .counter button {
   width: 2.25rem;
   height: 2.25rem;
@@ -254,13 +257,13 @@ textarea {
   color: var(--color-navy);
   font-weight: 800;
 }
-
+ 
 .days {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
-
+ 
 .day {
   width: 3.5rem;
   height: 4.5rem;
@@ -270,55 +273,55 @@ textarea {
   color: var(--color-navy);
   font-weight: 800;
 }
-
+ 
 .day.active {
   background: linear-gradient(180deg, var(--color-lime), #e9ff55);
   border-color: rgba(10, 15, 92, 0.1);
 }
-
+ 
 .time {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin: 1.25rem 0;
 }
-
+ 
 .time input {
   max-width: 180px;
 }
-
+ 
 .btn-outline,
 .btn-primary {
   border-radius: var(--radius-full);
   padding: 0.95rem 1.2rem;
   font-weight: 800;
 }
-
+ 
 .btn-outline {
   background: transparent;
   border: 1.5px dashed var(--color-blue);
   color: var(--color-blue);
 }
-
+ 
 .btn-primary {
   background: var(--color-blue);
   color: #fff;
   box-shadow: 0 10px 18px rgba(51, 51, 255, 0.22);
 }
-
+ 
 .actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 2rem;
 }
-
+ 
 #slots {
   display: grid;
   gap: 0.75rem;
   margin-top: 1rem;
 }
-
+ 
 .slot {
   display: flex;
   align-items: center;
@@ -331,79 +334,179 @@ textarea {
   color: var(--color-navy);
   font-weight: 700;
 }
-
+ 
 .slot::before {
   content: '•';
   color: var(--color-lime);
   font-size: 1.4rem;
   line-height: 1;
 }
-
+ 
 @media (max-width: 1024px) {
   .main {
     padding: 2rem;
   }
-
+ 
   .header {
     flex-direction: column;
     align-items: flex-start;
   }
-
+ 
   .grid {
     grid-template-columns: 1fr;
   }
 }
-
+ 
 @media (max-width: 768px) {
   :root {
     --sidebar-width: 200px;
   }
-
+ 
   .main {
     margin-left: 200px;
     padding: 1.5rem;
   }
-
+ 
   .card {
     padding: 1.5rem;
   }
-
+ 
   .actions {
     justify-content: stretch;
     flex-direction: column;
   }
-
+ 
   .actions button {
     width: 100%;
   }
 }
-
+ 
 @media (max-width: 480px) {
   :root {
     --sidebar-width: 70px;
   }
-
+ 
   .main {
     margin-left: 70px;
     padding: 1.25rem;
   }
-
+ 
   .header h2 {
     font-size: 2rem;
   }
-
+ 
   .progress {
     width: 100%;
     min-width: 0;
   }
-
+ 
   .time input {
     max-width: none;
   }
-
+ 
   .btn-outline,
   .btn-primary {
     width: 100%;
     justify-content: center;
   }
+}
+/* ── Campo Discord ── */
+.discord-field {
+  margin-top: 1.25rem;
+}
+ 
+.discord-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #5865F2;
+  margin-bottom: 0.5rem;
+}
+ 
+.discord-label span {
+  color: #5865F2;
+}
+ 
+#link-discord {
+  border: 1.5px solid rgba(88, 101, 242, 0.25);
+  background: rgba(88, 101, 242, 0.04);
+  margin-top: 0;
+}
+ 
+#link-discord:focus {
+  border-color: #5865F2;
+  box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.12);
+}
+ 
+#link-discord::placeholder {
+  color: #a5b4fc;
+}
+ 
+.discord-hint {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 0.4rem;
+}
+ 
+/* validação visual */
+#link-discord:not(:placeholder-shown):valid {
+  border-color: #22C55E;
+  background: rgba(34, 197, 94, 0.04);
+}
+ 
+#link-discord:not(:placeholder-shown):invalid {
+  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.04);
+}
+ 
+/* ── Seletor de salas Discord ── */
+.salas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+ 
+.sala-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0.9rem 1rem;
+  background: var(--color-surface-soft);
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all .15s;
+  text-align: left;
+}
+ 
+.sala-btn:hover {
+  border-color: #5865F2;
+  background: rgba(88, 101, 242, 0.06);
+  transform: translateY(-1px);
+}
+ 
+.sala-btn.active {
+  border-color: #5865F2;
+  background: rgba(88, 101, 242, 0.1);
+  box-shadow: 0 0 0 3px rgba(88, 101, 242, 0.12);
+}
+ 
+.sala-nome {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #5865F2;
+}
+ 
+.sala-link {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  font-family: monospace;
+}
+ 
+.sala-btn.active .sala-link {
+  color: #5865F2;
 }
