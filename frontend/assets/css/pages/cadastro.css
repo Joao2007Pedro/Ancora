@@ -108,19 +108,18 @@ main {
 }
 
 .itens_titulo img {
-  width: 25px;
-  height: 25px;
-  aspect-ratio: 1/1;
+  width: 45px;
+  height: 35px;
   margin-top: 2%;
   align-self: center;
 }
 
 .itens_titulo h1 {
   font-family: "Space Grotesk";
-  color: var(--verde);
-  font-size: 38px;
+  color: var(--branco);
+  font-size: 48px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 48px;
   letter-spacing: 1px;
 }
@@ -575,12 +574,12 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .itens_titulo img {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 25px;
     align-self: center;
   }
 
@@ -787,6 +786,15 @@ main {
 
   .itens_titulo h1 {
     font-size: 22px;
+  }
+
+  .itens_titulo img {
+    width: 45px;
+    height: 35px;
+  }
+
+  .itens_titulo h1 {
+    font-size: 30px;
   }
 
   .plataform {
@@ -1003,8 +1011,14 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 25px;
+    font-size: 35px;
   }
+
+  .itens_titulo img {
+    width: 65px;
+    height: 55px;
+  }
+
 
   .plataform {
     width: 70%;
