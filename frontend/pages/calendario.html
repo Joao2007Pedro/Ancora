@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+<link rel="stylesheet" href="../assets/css/components.css"/>
+<link rel="stylesheet" href="../assets/css/pages/calendario.css"/>
+<script defer src="../assets/js/components/sidebar-component.js"></script>
+<script defer src="../assets/js/components/header-actions-component.js"></script>
+<script type="module" src="../assets/js/pages/calendario.js"></script>
+<title>Agenda</title>
+</head>
+
+<body>
+
+<sidebar-menu></sidebar-menu>
+
+<!-- Main -->
+<main class="main">
+
+<header class="header">
+  <section class="title">
+    <div class="page-header__brand">
+      <span class="page-header__brand-mark" aria-hidden="true">
+        <img src="../assets/images/logo/ancora_logo-sem-fundo.png" alt="" class="page-header__brand-image" />
+      </span>
+      <div class="page-header__brand-text">
+        <span class="page-header__brand-kicker">Âncora</span>
+        <span class="page-header__brand-name">Plataforma de Monitorias</span>
+      </div>
+    </div>
+    <p>Agenda de monitorias</p>
+    <h1>Veja o que vai <br>acontecer</h1>
+  </section>
+
+  <app-header-actions
+    search-placeholder="Buscar horário..."
+    avatar-src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHg40P3uJMWJmNFTKGX549MhF5555LxYNMpJ0Pf8nfH5kJtH3Yc6YOWNxBETEjnl_Ecy7iF_LSUNCiA8U4dqeg1zDhYI9FZ-RsIQYFBI9Zn8rxc9ITqC_jOOLItZ-NWjwviv-asHIXQCk_M8llDqmQpszGc8W-jZQv0AoDTzMUE6At9v9HgTvdRDdc-gtDhoHRZIjeHYRV1rirm1CTWrHFsff61NrhWVPQaXc9shxW46guZq43ReZKd7gQ8Oi6VPTGmbpeZea0eg7Q"
+    avatar-alt="Marcus Oliveira">
+  </app-header-actions>
+</header>
+
+<section class="agenda-layout">
+  <article class="calendar-card">
+    <div class="calendar-toolbar">
+      <button type="button" class="month-nav" id="btnPrevMonth" aria-label="Mês anterior">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <h2 id="monthLabel">Carregando...</h2>
+      <button type="button" class="month-nav" id="btnNextMonth" aria-label="Próximo mês">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </button>
+    </div>
+
+    <div class="weekdays">
+      <span>Dom</span>
+      <span>Seg</span>
+      <span>Ter</span>
+      <span>Qua</span>
+      <span>Qui</span>
+      <span>Sex</span>
+      <span>Sáb</span>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid">
+      <p class="calendar-loading">Carregando calendário...</p>
+    </div>
+  </article>
+
+  <aside class="events-card">
+    <div class="events-header">
+      <p>Monitorias do dia</p>
+      <h2 id="selectedDateTitle">Selecione uma data</h2>
+    </div>
+
+    <div class="events-list" id="eventsList">
+      <p class="empty">Selecione um dia para ver as monitorias.</p>
+    </div>
+  </aside>
+</section>
+
+<footer class="footer">
+  <div class="selected-info">
+    <div class="date">
+      <span id="selectedDayShort">---</span>
+      <strong id="selectedDayNumber">--</strong>
+    </div>
+    <div>
+      <p>Data selecionada</p>
+      <h2 id="selectedDateTime">Nenhuma data selecionada</h2>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="cancel" id="btnGoHome">Voltar para Home</button>
+    <button type="button" class="confirm" id="btnGoMonitorias">Ver Minhas Monitorias</button>
+  </div>
+</footer>
+
+</main>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+            <script>
+                new window.VLibras.Widget("https://vlibras.gov.br/app");
+            </script>
+
+
+</body>
+</html>

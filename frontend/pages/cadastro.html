@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+
+    <link rel="stylesheet" href="../assets/css/pages/cadastro.css" />
+    <script type="module" src="../assets/js/pages/cadastro.js"></script>
+
+    <!-- Fontes -->
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <section class="sec1">
+        <div class="container_sec1">
+          <div class="titulo">
+            <div class="itens_titulo">
+              <img src="../assets/images/login/Status Dot.png" alt="" />
+              <h1>Âncora</h1>
+            </div>
+          </div>
+          <div class="plataform">
+            <img src="../assets/images/login/Status Dot.png" alt="" />
+            <h2>Plataforma acadêmica</h2>
+          </div>
+          <div class="text_sec1">
+            <h1>
+              Conecte alunos <br />
+              e <span>monitores</span> em um só lugar.
+            </h1>
+          </div>
+          <div class="text2_sec2">
+            <h2>
+              Tire dúvidas, acompanhe o progresso e evolua junto com sua turma.
+            </h2>
+          </div>
+          <div class="items_container">
+            <div class="item" id="item1">
+              <div class="star">
+                <img src="../assets/images/login/Star.png" alt="" />
+              </div>
+              <h2>Avaliações em tempo real</h2>
+            </div>
+            <div class="item">
+              <div class="star">
+                <img src="../assets/images/login/Timer.png" alt="" />
+              </div>
+              <h2>Agendamento de monitoria</h2>
+            </div>
+            <div class="item">
+              <div class="star">
+                <img src="../assets/images/login/Users.png" alt="" />
+              </div>
+              <h2>Feed colaborativo da turma</h2>
+            </div>
+          </div>
+          <img id="eclipse" src="../assets/images/login/Ellipse 1.png" alt="" />
+          <img
+            id="eclipse2"
+            src="../assets/images/login/Ellipse 2.png"
+            alt=""
+          />
+        </div>
+      </section>
+      <section class="sec2">
+        <div class="container_buttons">
+          <div class="btn1">
+            <button onclick="window.location.href = '../pages/login.html'">
+              Entrar
+            </button>
+          </div>
+          <div class="btn1">
+            <button onclick="window.location.href = '../pages/cadastro.html'">
+              Criar conta
+            </button>
+          </div>
+        </div>
+        <div class="title_sec2">
+          <h1>Criar sua conta</h1>
+          <h2>Escolha seu perfil para começar</h2>
+        </div>
+
+        <div class="google">
+          <button>
+            <img src="../assets/images/login/google.png" alt="" />
+            <h2>Cadastrar com o Google</h2>
+          </button>
+        </div>
+
+        <div class="separar">
+          <div class="line">
+            <img src="../assets/images/login/Line 1.png" alt="" />
+          </div>
+          <h2>OU</h2>
+          <div class="line">
+            <img src="../assets/images/login/Line 1.png" alt="" />
+          </div>
+        </div>
+
+        <form id="form-cadastro" class="email_container">
+          <div class="container">
+            <h2>Nome completo</h2>
+            <div class="email">
+              <input type="text" id="nome" value="Seu nome completo" required />
+            </div>
+          </div>
+
+          <div class="container">
+            <h2>E-mail Institucional</h2>
+            <div class="email">
+              <input type="email" id="email" value="aluno@senacsp.edu.br" required />
+            </div>
+          </div>
+
+          <div class="container">
+            <h2>Senha</h2>
+            <div class="email">
+              <input type="password" id="senha" value="******" required />
+            </div>
+          </div>
+
+          <div class="container">
+            <h2>Turma</h2>
+            <div class="email">
+              <select id="equipe" required>
+                <option value="java-manha">Java (Manhã)</option>
+                <option value="java-tarde">Java (Tarde)</option>
+                <option value="python">Python (Tarde)</option>
+                <option value="csharp">C# (Manhã)</option>
+                <option value="kotlin">Kotlin (Manhã)</option>
+              </select>
+            </div>
+          </div>
+
+          <h2>Perfil de acesso</h2>
+        </form>
+
+        <div class="container_acess" id="perfis-selection">
+          <div class="aluno_access perfil-card ativo" data-perfil="aluno">
+            <div class="itens_acess">
+              <div class="star">
+                <img src="../assets/images/login/Users.png" alt="" />
+              </div>
+              <h2>Aluno</h2>
+              <h3>Busco monitoria</h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 25 25"
+                fill="none"
+              >
+                <rect width="25" height="25" rx="12.5" fill="#1300E1" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="aluno_access perfil-card" data-perfil="monitor">
+            <div class="itens_acess">
+              <div class="star">
+                <img src="../assets/images/login/Star.png" alt="" />
+              </div>
+              <h2>Monitor</h2>
+              <h3>Ofereço monitoria</h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 25 25"
+                fill="none"
+              >
+                <rect width="25" height="25" rx="12.5" fill="#94A3B8" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <p id="msg-erro" style="color: #EF4444; margin: 12px 0; text-align: center; min-height: 20px;"></p>
+
+        <div class="confirmar">
+          <button type="submit" form="form-cadastro">
+            Acessar plataforma
+            <!-- <img src="../assets/images/login/Right.png" alt="" /> -->
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Perfil selection handled by cadastro.js -->
+    <script>
+      // Fallback styling for perfil selection cards
+      const perfisSelection = document.querySelector("#perfis-selection");
+      perfisSelection?.addEventListener("click", (e) => {
+        const card = e.currentTarget.querySelector(".perfil-card.ativo");
+        if (card) {
+          card.classList.remove("ativo");
+          const rect = card.querySelector("rect");
+          if (rect) rect.setAttribute("fill", "#94A3B8");
+        }
+        
+        const clicked = e.target.closest(".perfil-card");
+        if (clicked) {
+          clicked.classList.add("ativo");
+          const rect = clicked.querySelector("rect");
+          if (rect) rect.setAttribute("fill", "#1300E1");
+        }
+      });
+    </script>
+
+    <!-- VLibras -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+  </body>
+</html>

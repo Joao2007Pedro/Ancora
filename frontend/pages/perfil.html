@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Âncora — Dashboard do Monitor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/perfil.css">
+</head>
+<body>
+  <sidebar-menu></sidebar-menu>
+
+  <!-- Decorative elements -->
+  <div class="decorative-blob"></div>
+  <div class="decorative-dot"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <header class="page-header dashboard-header">
+      <div>
+        <div class="page-header__brand">
+          <span class="page-header__brand-mark" aria-hidden="true">
+            <img src="../assets/images/logo/ancora_logo-sem-fundo.png" alt="" class="page-header__brand-image" />
+          </span>
+          <div class="page-header__brand-text">
+            <span class="page-header__brand-kicker">Âncora</span>
+            <span class="page-header__brand-name">Plataforma de Monitorias</span>
+          </div>
+        </div>
+        <p class="eyebrow">Painel do monitor</p>
+        <h1>Dashboard do Monitor</h1>
+        <p>Visão rápida da sua agenda, monitorias publicadas e próximas ações.</p>
+      </div>
+      <app-header-actions search-placeholder="Buscar monitoria..." avatar-alt="Perfil"></app-header-actions>
+    </header>
+
+    <section class="dashboard-grid">
+      <article class="dashboard-card dashboard-card--profile" id="profileCard">
+        <div class="monitor-identity">
+          <div class="avatar-monitor">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFfABGNLMoZ-8X_jfXvc6GdUUdwVVWKJkY0cxC-TfTDAmGiVt2bjp4zOH_Yf6fYuQyfwPuueo8QCq1zIU7Zf_Udb4QkclkQV8ukX81urZkcAiGZcWiMravBNuPdX56dxUH5q4esZRql_nj3ysolX7OK7nulJbDFRJ_PJOK1WqgvR4N-cvWTqadwAKUQjypwgpBl-Sc5Qa9qDjQ6nxv7J4OcfFgASj2sV9grBF0NxfQgGjlJd3Q6jHorgFOTlRqDSbL6CD0zgiaCMWh"
+              alt="Ricardo Santos"
+              id="monitorAvatar"
+            />
+            <span class="online-badge" id="onlineBadge"></span>
+          </div>
+          <div class="monitor-meta">
+            <h2 id="monitorNome">Ricardo Santos</h2>
+            <p id="monitorRole">Monitor • Equipe 1</p>
+            <div class="tags-row" id="tagsRow">
+              <span class="tag">HTML &amp; CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Git</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-summary">
+          <div class="rating-row" id="ratingRow">
+            <div class="stars">
+              <span class="material-symbols-outlined icon-filled star">star</span>
+              <span class="material-symbols-outlined icon-filled star">star</span>
+              <span class="material-symbols-outlined icon-filled star">star</span>
+              <span class="material-symbols-outlined icon-filled star">star</span>
+              <span class="material-symbols-outlined icon-filled star">star</span>
+            </div>
+            <span class="rating-value" id="ratingValue">4,9</span>
+            <span class="rating-count" id="ratingCount">(32 Avaliações)</span>
+          </div>
+
+          <p class="profile-bio" id="sobreTexto">
+            Apaixonado por desenvolvimento web desde os 14 anos. Tenho experiência sólida em HTML, CSS e JavaScript e gosto de ensinar com exemplos práticos do dia a dia.
+          </p>
+        </div>
+
+        <div class="quick-actions">
+          <button class="btn-action-primary" id="btnNovaMonitoria">Nova Monitoria</button>
+          <button class="btn-action-secondary" id="btnEditarPerfil">Editar perfil</button>
+        </div>
+      </article>
+
+      <article class="dashboard-card dashboard-card--stats">
+        <div class="section-head">
+          <h3>Resumo rápido</h3>
+          <p>Panorama do seu trabalho hoje</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Monitorias publicadas</span>
+            <strong id="statMonitorias">12</strong>
+            <small>3 ativas esta semana</small>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Alunos atendidos</span>
+            <strong>48</strong>
+            <small>+11 desde ontem</small>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Avaliação média</span>
+            <strong>4,9</strong>
+            <small>Baseada em 32 feedbacks</small>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Próxima sessão</span>
+            <strong>14:00</strong>
+            <small>Hoje, monitoria de JavaScript</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="dashboard-card dashboard-card--schedule">
+        <div class="section-head">
+          <h3>Horários disponíveis</h3>
+          <p>Janelas abertas para novos agendamentos</p>
+        </div>
+
+        <div class="horarios-list" id="horariosList">
+          <div class="horario-item">
+            <div class="horario-info">
+              <span class="dia">Terça-feira</span>
+              <span class="hora">14:00 - 15:00</span>
+            </div>
+            <button class="btn-disponivel">Disponível</button>
+          </div>
+          <div class="horario-item">
+            <div class="horario-info">
+              <span class="dia">Sexta-feira</span>
+              <span class="hora">14:00 - 15:00</span>
+            </div>
+            <button class="btn-disponivel">Disponível</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dashboard-card dashboard-card--next">
+        <div class="section-head">
+          <h3>Próximas monitorias</h3>
+          <p>Sessões que estão para acontecer</p>
+        </div>
+
+        <div class="next-list">
+          <div class="next-item">
+            <div>
+              <strong>Práticas de Flexbox</strong>
+              <p>Hoje • 14:30 • 8 inscritos</p>
+            </div>
+            <span class="next-badge">Online</span>
+          </div>
+          <div class="next-item">
+            <div>
+              <strong>Grid Layout na Prática</strong>
+              <p>Sexta • 16:00 • 5 inscritos</p>
+            </div>
+            <span class="next-badge next-badge--alt">Presencial</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dashboard-card dashboard-card--roadmap">
+        <div class="section-head">
+          <h3>Atalhos</h3>
+          <p>Acesso rápido às áreas mais usadas</p>
+        </div>
+
+        <div class="shortcut-list">
+          <button class="shortcut-item" id="btnVerMonitorias">Ver monitorias</button>
+          <button class="shortcut-item" id="btnVerAgenda">Abrir agenda</button>
+          <button class="shortcut-item" id="btnVerRecursos">Ir para recursos</button>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <script defer src="../assets/js/components/sidebar-component.js"></script>
+  <script defer src="../assets/js/components/header-actions-component.js"></script>
+  <script type="module" src="../assets/js/pages/perfil.js"></script>
+</body>
+</html>

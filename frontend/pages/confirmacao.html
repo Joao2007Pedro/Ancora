@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/pages/confirmacao.css">
+
+    <!-- Components -->
+    <script src="../assets/js/components/sidebar-component.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <sidebar-menu></sidebar-menu>
+
+    <main class="confirmation-page">
+        <div class="confirmation-container">
+            <!-- Header -->
+            <header class="confirmation-header">
+                <span class="section-label">Resumo do Pedido</span>
+                <h1 class="page-title">Confirmar agendamento</h1>
+            </header>
+
+            <!-- Card Resumo -->
+            <section class="confirmation-card">
+                <!-- Monitor Profile -->
+                <div class="monitor-info">
+                    <div class="monitor-avatar">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0rHmpgUmUDqMEE2icWB1QWtAf447FVXALCYfE9ihfNpBDAhqNaMUOT1ubG7jazLBnofvz7nOipYI6db8euVYalVFYI-TLhkeXueUIDGj17khXQRS3IqE6gISjtbb8YoAFyzkxfhEJCwdl67Vlagv7TzImHn69BRpSzr4dvaYmhjfmt2BUAZjeXKJR0lTlXjsd9sYCt8mSHHYAmHiM_YSnRDaOGru3s2zN5waIGTaD09LStJATBQonvCrigMAWLAzAFLdMeCb5EcFi" alt="Lucas Mendonça">
+                        <span class="verified-icon">✓</span>
+                    </div>
+                    <div class="monitor-details">
+                        <h2 class="monitor-name" id="monitor-nome">Lucas Mendonça</h2>
+                        <span class="monitor-badge">Monitor Senior</span>
+                    </div>
+                </div>
+
+                <!-- Detalhes de Agendamento -->
+                <div class="booking-details">
+                    <div class="detail-item highlight">
+                        <div class="detail-icon calendar-icon">
+                            <span class="material-symbols-outlined">calendar_today</span>
+                        </div>
+                        <div class="detail-content">
+                            <label>Data e Horário</label>
+                            <p id="sessao-data">24 de Outubro, 2023 • 14:30 - 15:30</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-icon video-icon">
+                            <span class="material-symbols-outlined">videocam</span>
+                        </div>
+                        <div class="detail-content">
+                            <label>Formato da Sessão</label>
+                            <p id="sessao-formato">Online via Discord</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-icon subject-icon">
+                            <span class="material-symbols-outlined">history_edu</span>
+                        </div>
+                        <div class="detail-content">
+                            <label>Matéria</label>
+                            <p id="sessao-assunto">Lógica de Programação I</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="action-buttons">
+                    <button class="btn-confirm" id="btn-confirmar" type="button">
+                        Confirmar agendamento
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                    <button class="btn-cancel" id="btn-cancelar" type="button">
+                        Cancelar
+                    </button>
+                </div>
+
+                <!-- Indicador de Progresso -->
+                <div class="progress-indicator">
+                    <span></span>
+                    <span></span>
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </section>
+
+            <!-- Mensagem Informativa -->
+            <p class="info-text">
+                Ao confirmar, você receberá o link de acesso e materiais de apoio diretamente no seu e-mail cadastrado.
+            </p>
+        </div>
+    </main>
+
+    <script type="module" src="../assets/js/pages/confirmacao.js"></script>
+</body>
+</html>

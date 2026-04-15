@@ -1,0 +1,18 @@
+.env
+.env.*
+!.env.example
+
+# Firebase web config is public by design; keep tracked for static deployments
+
+# Dependencies and editor files
+node_modules/
+.vscode/
+
+# OS and logs
+.DS_Store
+*.log
+firebase-debug.log
+
+# Firebase CLI cache
+.firebase/
+.firebaserc

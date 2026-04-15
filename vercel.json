@@ -1,0 +1,18 @@
+{
+  "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/frontend/assets/$1" },
+    { "source": "/pages/(.*)", "destination": "/frontend/pages/$1" },
+    { "source": "/", "destination": "/frontend/index.html" },
+    { "source": "/login", "destination": "/frontend/pages/login.html" },
+    { "source": "/cadastro", "destination": "/frontend/pages/cadastro.html" },
+    { "source": "/home", "destination": "/frontend/pages/home.html" },
+    { "source": "/calendario", "destination": "/frontend/pages/calendario.html" },
+    { "source": "/confirmacao", "destination": "/frontend/pages/confirmacao.html" },
+    { "source": "/confirmacao.html", "destination": "/frontend/pages/confirmacao.html" },
+    { "source": "/minhas-monitorias", "destination": "/frontend/pages/minhas-monitorias.html" },
+    { "source": "/cadastrar-monitoria", "destination": "/frontend/pages/cadastrar-monitoria.html" },
+    { "source": "/roadmap", "destination": "/frontend/pages/roadmap.html" },
+    { "source": "/perfil", "destination": "/frontend/pages/perfil.html" },
+    { "source": "/recursos", "destination": "/frontend/pages/recursos.html" }
+  ]
+}

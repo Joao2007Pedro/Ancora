@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../assets/css/pages/login.css" />
+    <script type="module" src="../assets/js/pages/login.js"></script>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!--  -->
+  </head>
+  <body>
+    <main>
+      <section class="sec1">
+        <div class="titulo">
+          <div class="itens_titulo">
+            <img src="../assets/images/login/Status Dot.png" alt="" />
+            <h1>Âncora</h1>
+          </div>
+        </div>
+
+        <div class="plataform">
+          <img src="../assets/images/login/Status Dot.png" alt="" />
+          <h2>Plataforma acadêmica</h2>
+        </div>
+
+        <div class="text_sec1">
+          <h1>
+            Conecte alunos <br />
+            e <span>monitores</span> em um só lugar.
+          </h1>
+        </div>
+
+        <div class="text2_sec2">
+          <h2>
+            Tire dúvidas, acompanhe o progresso e evolua junto com sua turma.
+          </h2>
+        </div>
+
+        <div class="items_container">
+          <div class="item" id="item1">
+            <div class="star">
+              <img src="../assets/images/login/Star.png" alt="" />
+            </div>
+            <h2>Avaliações em tempo real</h2>
+          </div>
+
+          <div class="item">
+            <div class="star">
+              <img src="../assets/images/login/Timer.png" alt="" />
+            </div>
+            <h2>Agendamento de monitoria</h2>
+          </div>
+
+          <div class="item">
+            <div class="star">
+              <img src="../assets/images/login/Users.png" alt="" />
+            </div>
+            <h2>Feed colaborativo da turma</h2>
+          </div>
+        </div>
+        <img id="eclipse" src="../assets/images/login/Ellipse 1.png" alt="" />
+        <img id="eclipse2" src="../assets/images/login/Ellipse 2.png" alt="" />
+      </section>
+      <section class="sec2">
+        <div class="container_buttons">
+          <div class="btn1">
+            <button onclick="window.location.href = '../pages/login.html'">
+              Entrar
+            </button>
+          </div>
+          <div class="btn1">
+            <button onclick="window.location.href = '../pages/cadastro.html'">
+              Criar conta
+            </button>
+          </div>
+        </div>
+        <div class="title_sec2">
+          <h1>Bem-vindo de volta!</h1>
+          <h2>Acesse com sua conta institucional</h2>
+        </div>
+
+        <div class="google">
+          <button id="btn-google">
+            <img src="../assets/images/login/google.png" alt="" />
+            <h2>Entrar com o Google</h2>
+          </button>
+        </div>
+
+        <div class="separar">
+          <div class="line">
+            <img src="../assets/images/login/Line 1.png" alt="" />
+          </div>
+          <h2>OU</h2>
+          <div class="line">
+            <img src="../assets/images/login/Line 1.png" alt="" />
+          </div>
+        </div>
+
+        <form id="form-login" class="email_container">
+          <div class="container">
+            <h2>E-mail Institucional</h2>
+            <div class="email">
+              <input type="email" id="email" value="aluno@senacsp.edu.br" required />
+            </div>
+          </div>
+
+          <div class="container">
+            <h2>Senha</h2>
+            <div class="email">
+              <input type="password" id="senha" value="******" required />
+            </div>
+          </div>
+          <h2><a href="">Esqueceu a senha?</a></h2>
+          <p id="msg-erro" style="color: #EF4444; margin-top: 12px; text-align: center; min-height: 20px;"></p>
+        </form>
+
+        <div class="confirmar">
+          <button type="submit" form="form-login">
+            Acessar plataforma
+            <!-- <img src="../assets/images/login/Right.png" alt="" /> -->
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- VLibras -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
+    </script>
+  </body>
+</html>
+<!--  -->
