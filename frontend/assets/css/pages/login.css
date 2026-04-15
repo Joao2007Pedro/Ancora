@@ -219,9 +219,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--azul-escuro);
   color: var(--branco);
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .btn1 button {
