@@ -159,6 +159,22 @@ h1, h2, h3, .font-headline {
   gap: 2rem;
 }
 
+.monitorias-loading,
+.monitorias-empty {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  border: 1px dashed var(--outline-variant);
+  border-radius: 20px;
+  background: var(--surface-container-low);
+  color: var(--on-surface-variant);
+  text-align: center;
+}
+
+.monitorias-loading p,
+.monitorias-empty p {
+  font-weight: 600;
+}
+
 @media (min-width: 1024px) {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }

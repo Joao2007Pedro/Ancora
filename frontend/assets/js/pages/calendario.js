@@ -1,6 +1,6 @@
 import { protegerPagina } from "../utils/auth-guard.js";
 import { observarSessao } from "../auth.js";
-import { buscarMonitorias } from "../utils/firebase-db.js";
+import { buscarMonitorias, buscarMonitoriasDoMonitor } from "../utils/firebase-db.js";
 
 protegerPagina();
 
@@ -166,9 +166,24 @@ function renderCalendar() {
 async function loadAgendaForUser() {
   if (!state.currentUser) return;
 
-  const allMonitorias = (await buscarMonitorias({ status: "ativa" })).filter(isTodayOrFuture);
-  state.monitorias = allMonitorias;
-  state.visibleMonitorias = allMonitorias;
+  let monitoriasVisiveis = [];
+
+  try {
+    monitoriasVisiveis = (await buscarMonitorias({ status: "ativa" })).filter(isTodayOrFuture);
+  } catch (error) {
+    console.error("Erro ao carregar monitorias ativas:", error);
+  }
+
+  if (monitoriasVisiveis.length === 0 && state.userType === "monitor") {
+    try {
+      monitoriasVisiveis = (await buscarMonitoriasDoMonitor(state.currentUser.uid)).filter(isTodayOrFuture);
+    } catch (error) {
+      console.error("Erro ao carregar monitorias do monitor:", error);
+    }
+  }
+
+  state.monitorias = monitoriasVisiveis;
+  state.visibleMonitorias = monitoriasVisiveis;
 
   const firstUpcoming = state.visibleMonitorias
     .map((m) => toIsoDate(m.data))
@@ -211,6 +226,9 @@ function bindStaticActions() {
 
 document.addEventListener("DOMContentLoaded", () => {
   bindStaticActions();
+  renderCalendar();
+  updateFooterSelection(null);
+  renderEventsForDate(null);
 
   observarSessao(async (usuario) => {
     if (!usuario) return;

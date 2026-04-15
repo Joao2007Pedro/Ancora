@@ -383,11 +383,11 @@ function renderCard(m) {
       <div class="card-slots">${slots}</div>
       <div class="card-acoes">
         <button class="btn-agendar"
-          onclick="window.location.href='./confirmacao.html?id=${m.id}'">
+          onclick="window.location.href='/confirmacao?id=${m.id}'">
           Agendar Monitoria
         </button>
         <button class="btn-perfil"
-          onclick="window.location.href='./perfil.html?id=${m.monitor_id}'">
+          onclick="window.location.href='/perfil?id=${m.monitor_id}'">
           Ver Perfil
         </button>
       </div>

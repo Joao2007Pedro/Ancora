@@ -237,10 +237,10 @@ async function editarPerfil() {
 
 function bindActions() {
   const actions = [
-    { id: "btnNovaMonitoria", href: "./cadastrar-monitoria.html" },
-    { id: "btnVerMonitorias", href: "./minhas-monitorias.html" },
-    { id: "btnVerAgenda", href: "./calendario.html" },
-    { id: "btnVerRecursos", href: "./recursos.html" }
+    { id: "btnNovaMonitoria", href: "/cadastrar-monitoria" },
+    { id: "btnVerMonitorias", href: "/minhas-monitorias" },
+    { id: "btnVerAgenda", href: "/calendario" },
+    { id: "btnVerRecursos", href: "/recursos" }
   ];
 
   actions.forEach((action) => {
@@ -269,7 +269,7 @@ async function loadPerfil(usuario) {
 
   const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
   if (!isMonitor(userData)) {
-    window.location.href = "./home.html";
+    window.location.href = "/home";
     return;
   }
 

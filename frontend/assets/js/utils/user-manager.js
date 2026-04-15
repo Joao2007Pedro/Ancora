@@ -140,7 +140,7 @@ function hasPermission(resource) {
  * @param {string} redirectTo - URL para redirecionar
  * @returns {boolean} true se tem permissão
  */
-function checkPermissionOrRedirect(resource, redirectTo = '../pages/login.html') {
+function checkPermissionOrRedirect(resource, redirectTo = '/login') {
   if (!hasPermission(resource)) {
     console.warn(`Acesso negado ao recurso: ${resource}`);
     window.location.href = redirectTo;

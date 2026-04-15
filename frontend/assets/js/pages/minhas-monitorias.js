@@ -72,6 +72,10 @@ function renderCard(item, tipo) {
   `;
 }
 
+function renderEmptyState(message) {
+  return `<div class="monitorias-empty"><p>${message}</p></div>`;
+}
+
 /* ─────────────────────────────────────────
    CARREGA MONITORIAS DO ALUNO
 ───────────────────────────────────────── */
@@ -82,8 +86,10 @@ observarSessao(async (usuario) => {
   const lista = document.querySelector("#lista-minhas-monitorias");
   if (!lista) return;
 
+  lista.innerHTML = `<div class="monitorias-loading" aria-live="polite"><p>Carregando suas monitorias...</p></div>`;
+
   if (inscricoes.length === 0) {
-    lista.innerHTML = "<p>Você ainda não tem monitorias agendadas.</p>";
+    lista.innerHTML = renderEmptyState("Você ainda não tem monitorias agendadas.");
     return;
   }
 
@@ -99,6 +105,11 @@ observarSessao(async (usuario) => {
   const proximas   = detalhes.filter((i) => i.status === "confirmada" && i.monitoria?.data >= hoje);
   const passadas   = detalhes.filter((i) => i.status === "confirmada" && i.monitoria?.data < hoje);
   const canceladas = detalhes.filter((i) => i.status === "cancelada");
+
+  if (detalhes.length === 0) {
+    lista.innerHTML = renderEmptyState("Você ainda não tem monitorias agendadas.");
+    return;
+  }
 
   lista.innerHTML = `
     <div class="aba-conteudo" id="tab-proximas">

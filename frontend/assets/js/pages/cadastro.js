@@ -32,7 +32,7 @@ form?.addEventListener("submit", async (e) => {
   try {
     window.__ancoraAuthFlowInProgress = true;
     await cadastrarEmail(nome, email, senha, perfil, equipe);
-    window.location.href = "./home.html";
+    window.location.href = "/home";
   } catch (err) {
     msgErro.textContent = getCadastroErrorMessage(err);
     console.error("Erro cadastro:", err?.code, err?.message);

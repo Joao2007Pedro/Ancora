@@ -1,0 +1,169 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Admin control via dedicated collection: /admins/{uid}
+    // Create this doc manually in Firestore for your admin user.
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    match /admins/{uid} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // usuarios docs currently use auto-ID and have field uid inside document.
+    match /usuarios/{userDocId} {
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid;
+
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid);
+
+      // User can update own profile fields; sensitive fields are admin-only.
+      allow update: if isAdmin()
+        || (
+          signedIn()
+          && resource.data.uid == request.auth.uid
+          && request.resource.data.uid == resource.data.uid
+          && (
+            !('role' in request.resource.data)
+            || request.resource.data.role == resource.data.role
+          )
+          && (
+            !('aprovado' in request.resource.data)
+            || request.resource.data.aprovado == resource.data.aprovado
+          )
+          && (
+            !('perfil' in request.resource.data)
+            || request.resource.data.perfil == resource.data.perfil
+          )
+          && (
+            !('userType' in request.resource.data)
+            || request.resource.data.userType == resource.data.userType
+          )
+          && (
+            !('candidatura_status' in request.resource.data)
+            || request.resource.data.candidatura_status == resource.data.candidatura_status
+          )
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    match /candidaturas/{candidaturaId} {
+      // Student creates own candidacy.
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pendente';
+
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.uid == request.auth.uid);
+
+      // Approval/rejection is admin-only.
+      allow update, delete: if isAdmin();
+    }
+
+    match /monitorias/{monitoriaId} {
+      // Global agenda reads active monitorias, admins read everything,
+      // monitor owner can read own pending/rejected too.
+      allow read: if signedIn() && (
+        isAdmin()
+        || resource.data.status == 'ativa'
+        || resource.data.monitor_id == request.auth.uid
+      );
+
+      // Monitor creates own monitoria in pending approval.
+      allow create: if signedIn()
+        && request.resource.data.monitor_id == request.auth.uid
+        && request.resource.data.status == 'pendente_aprovacao';
+
+      // Admin can approve/reject/change status.
+      // Monitor can edit own monitoria content but cannot self-approve by status.
+      allow update: if isAdmin()
+        || (
+          signedIn()
+          && resource.data.monitor_id == request.auth.uid
+          && request.resource.data.monitor_id == resource.data.monitor_id
+          && request.resource.data.status == resource.data.status
+        )
+        // Student can only add/remove their own uid from inscritos.
+        || (
+          signedIn()
+          && resource.data.status == 'ativa'
+          && request.resource.data.diff(resource.data).changedKeys().hasOnly(['inscritos'])
+          && (
+            (
+              request.resource.data.inscritos.size() == resource.data.inscritos.size() + 1
+              && request.auth.uid in request.resource.data.inscritos
+              && !(request.auth.uid in resource.data.inscritos)
+              && request.resource.data.inscritos.hasAll(resource.data.inscritos)
+            )
+            ||
+            (
+              request.resource.data.inscritos.size() + 1 == resource.data.inscritos.size()
+              && !(request.auth.uid in request.resource.data.inscritos)
+              && request.auth.uid in resource.data.inscritos
+              && resource.data.inscritos.hasAll(request.resource.data.inscritos)
+            )
+          )
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    match /inscricoes/{inscricaoId} {
+      // Student confirms own attendance only for active monitoria.
+      allow create: if signedIn()
+        && request.resource.data.aluno_id == request.auth.uid
+        && request.resource.data.status == 'confirmada'
+        && get(/databases/$(database)/documents/monitorias/$(request.resource.data.monitoria_id)).data.status == 'ativa';
+
+      // Student can read own; monitor can read inscriptions of own monitoria; admin reads all.
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.aluno_id == request.auth.uid)
+        || (
+          signedIn()
+          && get(/databases/$(database)/documents/monitorias/$(resource.data.monitoria_id)).data.monitor_id == request.auth.uid
+        );
+
+      // Student can only cancel own inscription.
+      allow update: if isAdmin()
+        || (
+          signedIn()
+          && resource.data.aluno_id == request.auth.uid
+          && request.resource.data.aluno_id == resource.data.aluno_id
+          && request.resource.data.monitoria_id == resource.data.monitoria_id
+          && request.resource.data.status == 'cancelada'
+        );
+
+      allow delete: if isAdmin();
+    }
+
+    match /roadmaps/{roadmapId} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    // Keep closed until messaging is fully implemented with proper constraints.
+    match /mensagens/{mensagemId} {
+      allow read, write: if false;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
