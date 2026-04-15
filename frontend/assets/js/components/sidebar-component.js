@@ -80,10 +80,6 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">map</span>
             <span>RoadMap</span>
           </a>
-          <a href="#chat" class="nav-item" data-page="chat">
-            <span class="material-symbols-outlined">chat</span>
-            <span>Chat</span>
-          </a>
         </nav>
 
         <!-- Ações Principais -->
@@ -147,10 +143,6 @@ class SidebarMenu extends HTMLElement {
           <a href="roadmap.html" class="nav-item" data-page="roadmap">
             <span class="material-symbols-outlined">map</span>
             <span>Roadmap</span>
-          </a>
-          <a href="#chat" class="nav-item" data-page="chat">
-            <span class="material-symbols-outlined">chat</span>
-            <span>Chat</span>
           </a>
           <a href="perfil.html" class="nav-item" data-page="dashboard">
             <span class="material-symbols-outlined">dashboard</span>
@@ -247,8 +239,42 @@ function abrirNovaMonitoria() {
  * Ação para tornar-se monitor
  */
 function tornarMonitor() {
-  console.log('Abrindo página para tornar-se monitor...');
-  window.location.href = 'cadastro.html';
+  const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
+
+  if (userData.userType === 'monitor' || userData.perfil === 'monitor') {
+    alert('Você já é monitor.');
+    return;
+  }
+
+  if (userData.perfil_solicitado === 'monitor' && userData.candidatura_status === 'pendente') {
+    alert('Sua solicitação já está em análise.');
+    return;
+  }
+
+  if (typeof window.appSolicitarMonitor !== 'function') {
+    alert('Não foi possível solicitar agora. Recarregue a página e tente novamente.');
+    return;
+  }
+
+  window.appSolicitarMonitor()
+    .then((result) => {
+      if (result?.status === 'ja-monitor') {
+        alert('Você já é monitor.');
+        return;
+      }
+
+      if (result?.status === 'ja-pendente') {
+        alert('Sua solicitação já está em análise.');
+        return;
+      }
+
+      alert('Solicitação enviada com sucesso! Agora ela aparece como pendente para aprovação.');
+      window.location.href = 'home.html';
+    })
+    .catch((error) => {
+      console.error('Erro ao solicitar monitoria:', error);
+      alert('Erro ao enviar solicitação. Tente novamente.');
+    });
 }
 
 /**

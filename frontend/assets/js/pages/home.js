@@ -195,12 +195,14 @@ buscarMonitorias({ status: "ativa" })
 ───────────────────────────────────────── */
 observarSessao((usuario) => {
   if (!usuario) return;
-  const nome = usuario.displayName || "Aluno";
+  const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+  const nome = userData.nome || usuario.displayName || "Aluno";
+  const foto = userData.foto_url || usuario.photoURL || "";
   const iniciais = nome.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
   const mob = document.getElementById("avatarMobile");
   if (mob) {
-    mob.innerHTML = usuario.photoURL
-      ? `<img src="${usuario.photoURL}" alt="${nome}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+    mob.innerHTML = foto
+      ? `<img src="${foto}" alt="${nome}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
       : iniciais;
   }
   renderPendingBanner();

@@ -18,6 +18,28 @@ document.addEventListener("DOMContentLoaded", function () {
   var slotsContainer = document.getElementById("slots");
   var criarButton = document.getElementById("btn-criar-monitoria");
 
+  function gerarProximasDatas() {
+    var diasWrap = document.querySelector(".days");
+    if (!diasWrap) return;
+
+    var base = new Date();
+    base.setHours(0, 0, 0, 0);
+    var botoes = [];
+
+    for (var i = 0; i < 5; i += 1) {
+      var d = new Date(base);
+      d.setDate(base.getDate() + i);
+      var iso = d.toISOString().slice(0, 10);
+      botoes.push(
+        '<button type="button" class="day' + (i === 0 ? ' active' : '') + '" data-data="' + iso + '">' + d.getDate() + '</button>'
+      );
+    }
+
+    diasWrap.innerHTML = botoes.join("");
+  }
+
+  gerarProximasDatas();
+
   function renderCount() {
     if (countEl) {
       countEl.textContent = String(count);
@@ -122,6 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
+      var userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+
       await criarMonitoria({
         titulo,
         descricao,
@@ -130,8 +154,8 @@ document.addEventListener("DOMContentLoaded", function () {
         formato,
         vagas,
         monitor_id: usuarioAtual.uid,
-        monitor_nome: usuarioAtual.displayName || "Monitor",
-        monitor_foto: usuarioAtual.photoURL || "",
+        monitor_nome: userData.nome || usuarioAtual.displayName || "Monitor",
+        monitor_foto: userData.foto_url || usuarioAtual.photoURL || "",
         data,
         horario_inicio: horarioInicio,
         horario_fim: horarioFim,

@@ -80,10 +80,6 @@
           <span class="material-symbols-outlined">map</span>
           <span>RoadMap</span>
         </a>
-        <a href="#" class="drawer-nav-item">
-          <span class="material-symbols-outlined">chat</span>
-          <span>Chat</span>
-        </a>
 
         <div class="drawer-nav-divider"></div>
 
@@ -96,7 +92,7 @@
       <!-- CTA Tornar-se Monitor -->
       ${tipo !== 'monitor' ? `
       <div class="drawer-cta">
-        <button class="drawer-cta-btn" onclick="window.location.href='/cadastro'">
+        <button class="drawer-cta-btn" id="drawerBecomeMonitor">
           <span class="material-symbols-outlined">school</span>
           Tornar-se Monitor
         </button>
@@ -175,6 +171,30 @@
       } catch {}
       localStorage.removeItem('userData');
       window.location.href = '/login';
+    });
+
+    document.getElementById('drawerBecomeMonitor')?.addEventListener('click', async () => {
+      if (typeof window.appSolicitarMonitor !== 'function') {
+        alert('Não foi possível solicitar agora. Recarregue a página e tente novamente.');
+        return;
+      }
+
+      try {
+        const result = await window.appSolicitarMonitor();
+        if (result?.status === 'ja-monitor') {
+          alert('Você já é monitor.');
+          return;
+        }
+        if (result?.status === 'ja-pendente') {
+          alert('Sua solicitação já está em análise.');
+          return;
+        }
+        alert('Solicitação enviada com sucesso!');
+        fecharDrawer();
+      } catch (error) {
+        console.error('Erro ao solicitar monitoria:', error);
+        alert('Erro ao enviar solicitação. Tente novamente.');
+      }
     });
   }
 

@@ -8,8 +8,13 @@ import {
 // ── AVATAR ───────────────────────────────────────────
 
 export function gerarAvatar(nome) {
-  const iniciais = nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+  const baseNome = (nome || "Usuario").trim();
+  const iniciais = baseNome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
   return `https://ui-avatars.com/api/?name=${iniciais}&background=3333FF&color=fff&size=128`;
+}
+
+export function resolverFotoUsuario(userData = {}) {
+  return userData.foto_url || userData.photoURL || gerarAvatar(userData.nome || userData.email || "Usuario");
 }
 
 // ── USUÁRIOS ─────────────────────────────────────────
@@ -90,6 +95,45 @@ export async function rejeitarCandidatura(candidaturaId) {
     status: "rejeitada",
     atualizado_em: serverTimestamp()
   });
+}
+
+export async function solicitarCandidaturaMonitor(uid) {
+  const usuario = await buscarUsuarioPorUid(uid);
+  if (!usuario) {
+    throw new Error("Usuário não encontrado.");
+  }
+
+  if (usuario.perfil === "monitor" && usuario.aprovado !== false) {
+    return { status: "ja-monitor", usuario };
+  }
+
+  const q = query(collection(db, "candidaturas"), where("uid", "==", uid));
+  const snapshot = await getDocs(q);
+  const candidaturas = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  const pendente = candidaturas.find((c) => c.status === "pendente");
+  if (pendente) {
+    return { status: "ja-pendente", candidatura: pendente, usuario };
+  }
+
+  await registrarCandidaturaMonitor({
+    uid,
+    nome: usuario.nome || "",
+    email: usuario.email || "",
+    equipe: usuario.equipe || "",
+    perfil_solicitado: "monitor"
+  });
+
+  const userRef = doc(db, "usuarios", usuario.id);
+  await updateDoc(userRef, {
+    perfil: "aluno",
+    userType: "student",
+    aprovado: false,
+    perfil_solicitado: "monitor",
+    candidatura_status: "pendente",
+    atualizado_em: serverTimestamp()
+  });
+
+  return { status: "solicitado" };
 }
 
 // ── MONITORIAS ───────────────────────────────────────

@@ -411,6 +411,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+  if (userData.nome) {
+    monitorData.nome = userData.nome;
+  }
+  if (userData.foto_url) {
+    monitorData.avatar = userData.foto_url;
+  }
+  if (userData.equipe) {
+    monitorData.role = `Monitor • ${userData.equipe}`;
+  }
+
   // In production you would do:
   // const monitorId = getMonitorIdFromUrl();
   // const data = await buscarMonitorPorId(monitorId);
