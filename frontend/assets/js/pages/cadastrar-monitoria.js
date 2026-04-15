@@ -7,28 +7,34 @@ let observarSessao = (callback) => {
   callback(userData.uid ? { uid: userData.uid, displayName: userData.nome || "", photoURL: userData.foto_url || "" } : null);
 };
 
-try {
-  const [guard, db, auth] = await Promise.all([
-    import("../utils/auth-guard.js"),
-    import("../utils/firebase-db.js"),
-    import("../auth.js")
-  ]);
+let usuarioAtual = null;
 
-  protegerPagina = guard.protegerPagina || protegerPagina;
-  criarMonitoria = db.criarMonitoria || criarMonitoria;
-  observarSessao = auth.observarSessao || observarSessao;
-} catch (error) {
-  console.warn("[Ancora] Falha ao iniciar integrações de cadastro:", error);
+async function inicializarDependencias() {
+  try {
+    const [guard, db, auth] = await Promise.all([
+      import("../utils/auth-guard.js"),
+      import("../utils/firebase-db.js"),
+      import("../auth.js")
+    ]);
+
+    protegerPagina = guard.protegerPagina || protegerPagina;
+    criarMonitoria = db.criarMonitoria || criarMonitoria;
+    observarSessao = auth.observarSessao || observarSessao;
+
+    protegerPagina();
+    observarSessao((u) => {
+      usuarioAtual = u;
+    });
+
+    console.log("[Ancora] Integrações de cadastro carregadas com sucesso.");
+  } catch (error) {
+    console.error("[Ancora] Falha crítica nas dependências do cadastro:", error);
+  }
 }
 
-protegerPagina();
-
-let usuarioAtual = null;
-observarSessao((u) => {
-  usuarioAtual = u;
-});
-
 document.addEventListener("DOMContentLoaded", function () {
+  void inicializarDependencias();
+
   var count = 8;
   var currentStep = 1;
   var countEl = document.getElementById("count");

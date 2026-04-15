@@ -6,22 +6,25 @@ let observarSessao = (callback) => {
 let buscarMonitorias = async () => [];
 let buscarMonitoriasDoMonitor = async () => [];
 
-try {
-  const [guard, auth, db] = await Promise.all([
-    import("../utils/auth-guard.js"),
-    import("../auth.js"),
-    import("../utils/firebase-db.js")
-  ]);
+async function inicializarDependenciasAgenda() {
+  try {
+    const [guard, auth, db] = await Promise.all([
+      import("../utils/auth-guard.js"),
+      import("../auth.js"),
+      import("../utils/firebase-db.js")
+    ]);
 
-  protegerPagina = guard.protegerPagina || protegerPagina;
-  observarSessao = auth.observarSessao || observarSessao;
-  buscarMonitorias = db.buscarMonitorias || buscarMonitorias;
-  buscarMonitoriasDoMonitor = db.buscarMonitoriasDoMonitor || buscarMonitoriasDoMonitor;
-} catch (error) {
-  console.warn("[Ancora] Agenda em modo fallback:", error);
+    protegerPagina = guard.protegerPagina || protegerPagina;
+    observarSessao = auth.observarSessao || observarSessao;
+    buscarMonitorias = db.buscarMonitorias || buscarMonitorias;
+    buscarMonitoriasDoMonitor = db.buscarMonitoriasDoMonitor || buscarMonitoriasDoMonitor;
+
+    protegerPagina();
+    console.log("[Ancora] Integrações de agenda carregadas com sucesso.");
+  } catch (error) {
+    console.warn("[Ancora] Agenda em modo fallback:", error);
+  }
 }
-
-protegerPagina();
 
 const monthNames = [
   "Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho",
@@ -263,6 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCalendar();
   updateFooterSelection(null);
   renderEventsForDate(null);
+
+  void inicializarDependenciasAgenda();
 
   observarSessao(async (usuario) => {
     if (!usuario) return;
