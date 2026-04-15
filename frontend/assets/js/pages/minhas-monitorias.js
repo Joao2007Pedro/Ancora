@@ -41,6 +41,7 @@ function renderCard(item, tipo) {
   if (!m) return "";
 
   const temDiscord = tipo === "proxima" && m.link_discord;
+  const salaDiscord = m.sala_discord_nome || "Sala do Discord";
 
   const botaoEntrar = temDiscord
     ? `<a href="${m.link_discord}" target="_blank" rel="noopener"
@@ -55,6 +56,7 @@ function renderCard(item, tipo) {
       <strong>${m.assunto || "Monitoria"}</strong>
       <p>${m.monitor_nome || "Monitor"}</p>
       <p>${m.data || "Data a combinar"} · ${m.horario_inicio || "--:--"}–${m.horario_fim || "--:--"}</p>
+      ${m.link_discord ? `<p class="discord-room">${salaDiscord}</p>` : ""}
       <span class="badge-formato">${(m.formato || "online").toUpperCase()}</span>
       ${tipo === "proxima" ? `
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center;">

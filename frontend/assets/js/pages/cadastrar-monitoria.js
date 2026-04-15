@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var addSlotButton = document.getElementById("addSlot");
   var slotsContainer = document.getElementById("slots");
   var criarButton = document.getElementById("btn-criar-monitoria");
+  var salaSelecionada = null;
 
   function gerarProximasDatas() {
     var diasWrap = document.querySelector(".days");
@@ -94,14 +95,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ── Seleção de sala Discord ── */
+  var salas = document.querySelectorAll(".sala-btn");
+
+  if (salas.length) {
+    salas[0].classList.add("active");
+    salaSelecionada = {
+      link: salas[0].dataset.link || "",
+      nome: salas[0].querySelector(".sala-nome")?.textContent.trim() || "Sala 1"
+    };
+    var linkInputInicial = document.getElementById("link-discord");
+    if (linkInputInicial) linkInputInicial.value = salaSelecionada.link;
+  }
+
   document.querySelectorAll(".sala-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
       document.querySelectorAll(".sala-btn").forEach(function (b) {
         b.classList.remove("active");
       });
       btn.classList.add("active");
+      salaSelecionada = {
+        link: btn.dataset.link || "",
+        nome: btn.querySelector(".sala-nome")?.textContent.trim() || "Sala"
+      };
       var linkInput = document.getElementById("link-discord");
-      if (linkInput) linkInput.value = btn.dataset.link;
+      if (linkInput) linkInput.value = salaSelecionada.link;
     });
   });
 
@@ -137,9 +154,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var horarioInicio = document.querySelector("#horario-inicio")?.value || "";
     var horarioFim = document.querySelector("#horario-fim")?.value || "";
     var linkDiscord = document.querySelector("#link-discord")?.value || "";
+    var salaDiscordNome = salaSelecionada?.nome || "";
 
     if (!assunto || !titulo) {
       alert("Preencha pelo menos o assunto e o título.");
+      return;
+    }
+
+    if (!linkDiscord) {
+      alert("Escolha uma sala do Discord antes de criar a monitoria.");
       return;
     }
 
@@ -159,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data,
         horario_inicio: horarioInicio,
         horario_fim: horarioFim,
+        sala_discord_nome: salaDiscordNome,
         link_discord: linkDiscord,
         status: "pendente_aprovacao"
       });
