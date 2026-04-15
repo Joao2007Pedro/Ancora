@@ -1,6 +1,25 @@
-import { protegerPagina } from "../utils/auth-guard.js";
-import { criarMonitoria } from "../utils/firebase-db.js";
-import { observarSessao } from "../auth.js";
+let protegerPagina = () => {};
+let criarMonitoria = async () => {
+  throw new Error("Serviço indisponível no momento.");
+};
+let observarSessao = (callback) => {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  callback(userData.uid ? { uid: userData.uid, displayName: userData.nome || "", photoURL: userData.foto_url || "" } : null);
+};
+
+try {
+  const [guard, db, auth] = await Promise.all([
+    import("../utils/auth-guard.js"),
+    import("../utils/firebase-db.js"),
+    import("../auth.js")
+  ]);
+
+  protegerPagina = guard.protegerPagina || protegerPagina;
+  criarMonitoria = db.criarMonitoria || criarMonitoria;
+  observarSessao = auth.observarSessao || observarSessao;
+} catch (error) {
+  console.warn("[Ancora] Falha ao iniciar integrações de cadastro:", error);
+}
 
 protegerPagina();
 
@@ -269,7 +288,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   criarButton?.addEventListener("click", async function () {
-    if (!usuarioAtual) return;
+    if (!usuarioAtual?.uid) {
+      alert("Sua sessão ainda não foi carregada. Recarregue a página e entre novamente.");
+      return;
+    }
 
     var assunto = document.querySelector(".chip.active")?.textContent.trim();
     var titulo = document.querySelector("#titulo-monitoria")?.value.trim();
@@ -316,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "/home";
     } catch (err) {
       console.error(err);
-      alert("Erro ao criar monitoria: " + err.message);
+      alert("Erro ao criar monitoria: " + (err?.message || "falha inesperada"));
     }
   });
 
