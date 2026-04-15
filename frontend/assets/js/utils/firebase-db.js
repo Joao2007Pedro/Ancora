@@ -155,6 +155,12 @@ export async function buscarMonitorias(filtros = {}) {
   return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
+export async function buscarMonitoriasDoMonitor(uid) {
+  const q = query(collection(db, "monitorias"), where("monitor_id", "==", uid));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
 export async function buscarMonitoriaPorId(id) {
   const snap = await getDoc(doc(db, "monitorias", id));
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;

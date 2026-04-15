@@ -43,6 +43,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   gerarProximasDatas();
 
+  const diasWrap = document.querySelector('.days');
+  diasWrap?.addEventListener('click', function (event) {
+    const day = event.target.closest('.day');
+    if (!day || !diasWrap.contains(day)) return;
+
+    document.querySelectorAll('.day').forEach(function (item) {
+      item.classList.remove('active');
+    });
+
+    day.classList.add('active');
+  });
+
   function renderCount() {
     if (countEl) {
       countEl.textContent = String(count);
@@ -84,15 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         btn.classList.add("active");
       });
-    });
-  });
-
-  document.querySelectorAll(".day").forEach(function (day) {
-    day.addEventListener("click", function () {
-      document.querySelectorAll(".day").forEach(function (item) {
-        item.classList.remove("active");
-      });
-      day.classList.add("active");
     });
   });
 
