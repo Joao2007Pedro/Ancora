@@ -29,11 +29,11 @@ async function carregarResumo() {
 
   // Mostra sala do Discord se existir
   if (monitoria.link_discord) {
-    mostrarBotaoDiscord(monitoria.link_discord, false);
+    mostrarBotaoDiscord(monitoria.link_discord, false, monitoria.sala_discord_nome || "Sala do Discord");
   }
 }
 
-function mostrarBotaoDiscord(link, destacado = true) {
+function mostrarBotaoDiscord(link, destacado = true, nomeSala = "Sala do Discord") {
   // Evita duplicar
   document.getElementById("discord-section")?.remove();
 
@@ -51,6 +51,9 @@ function mostrarBotaoDiscord(link, destacado = true) {
   section.innerHTML = `
     <p style="font-size:13px;color:#5865F2;font-weight:600;margin-bottom:10px;">
       ${destacado ? "✅ Presença confirmada! Acesse a sala:" : "📍 Sala da monitoria:"}
+    </p>
+    <p style="font-size:12px;color:#64748b;font-weight:700;margin-bottom:10px;">
+      ${nomeSala}
     </p>
     <a href="${link}" target="_blank" rel="noopener"
       style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
@@ -92,7 +95,7 @@ document.querySelector("#btn-confirmar")?.addEventListener("click", async () => 
 
     // Se tiver Discord, mostra o botão em destaque
     if (monitoriaAtual?.link_discord) {
-      mostrarBotaoDiscord(monitoriaAtual.link_discord, true);
+      mostrarBotaoDiscord(monitoriaAtual.link_discord, true, monitoriaAtual.sala_discord_nome || "Sala do Discord");
     } else {
       // Sem Discord: redireciona normalmente
       alert("Presença confirmada!");
