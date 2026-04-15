@@ -1,437 +1,307 @@
 import { protegerPagina } from "../utils/auth-guard.js";
-import "../auth.js";
+import { observarSessao } from "../auth.js";
+import { buscarUsuarioPorUid, atualizarPerfil, buscarMonitorias, gerarAvatar } from "../utils/firebase-db.js";
 
-/**
- * perfil.js
- *
- * Interações da página de perfil do monitor.
- * Em produção, os dados devem vir de firebase-db.js.
- */
+protegerPagina();
 
-// ─────────────────────────────────────────────
-// MOCK DATA  (replace with firebase-db calls)
-// ─────────────────────────────────────────────
-const monitorData = {
-  id: "monitor_001",
-  nome: "Ricardo Santos",
-  role: "Monitor • Equipe 1",
-  avatar:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDFfABGNLMoZ-8X_jfXvc6GdUUdwVVWKJkY0cxC-TfTDAmGiVt2bjp4zOH_Yf6fYuQyfwPuueo8QCq1zIU7Zf_Udb4QkclkQV8ukX81urZkcAiGZcWiMravBNuPdX56dxUH5q4esZRql_nj3ysolX7OK7nulJbDFRJ_PJOK1WqgvR4N-cvWTqadwAKUQjypwgpBl-Sc5Qa9qDjQ6nxv7J4OcfFgASj2sV9grBF0NxfQgGjlJd3Q6jHorgFOTlRqDSbL6CD0zgiaCMWh",
-  rating: 4.9,
-  avaliacoes: 32,
-  tags: ["HTML & CSS", "JavaScript", "Git"],
-  sobre:
-    "Apaixonado por desenvolvimento web desde os 14 anos. Tenho experiência sólida em HTML, CSS e JavaScript e gosto de ensinar com exemplos práticos do dia a dia.",
-  online: true,
-  horarios: [
-    { dia: "Terça-Feira", hora: "14:00 - 15:00" },
-    { dia: "Sexta-Feira", hora: "14:00 - 15:00" },
-  ],
+const state = {
+  user: null,
+  perfil: null,
+  monitorias: []
 };
 
-const feitasData = [
-  {
-    id: "g1",
-    curso: "CURSO BÁSICO DE HTML E CSS",
-    aula: "AULA 1",
-    titulo: "Práticas de Flexbox",
-    tags: ["HTML & CSS", "INICIANTE"],
-    descricao:
-      "Nesta aula, você vai aprender como o Flexbox revolucionou o layout no CSS. Esqueça o uso de float ou cálculos complexos de margens: aprenda a alinhar elementos de forma inteligente e responsiva com...",
-    thumb: null,
-  },
-  {
-    id: "g2",
-    curso: "CURSO BÁSICO DE HTML E CSS",
-    aula: "AULA 1",
-    titulo: "Práticas de Flexbox",
-    tags: ["HTML & CSS", "INICIANTE"],
-    descricao:
-      "Nesta aula, você vai aprender como o Flexbox revolucionou o layout no CSS. Esqueça o uso de float ou cálculos complexos de margens: aprenda a alinhar elementos de forma inteligente e responsiva com...",
-    thumb: null,
-  },
-  {
-    id: "g3",
-    curso: "CURSO BÁSICO DE HTML E CSS",
-    aula: "AULA 2",
-    titulo: "Grid Layout na Prática",
-    tags: ["HTML & CSS", "INICIANTE"],
-    descricao:
-      "Aprenda a usar CSS Grid para criar layouts complexos de forma simples e eficiente. Veja exemplos reais e como combinar Grid com Flexbox para máxima flexibilidade...",
-    thumb: null,
-  },
-  {
-    id: "g4",
-    curso: "CURSO BÁSICO DE HTML E CSS",
-    aula: "AULA 3",
-    titulo: "Animações com CSS",
-    tags: ["HTML & CSS", "INTERMEDIÁRIO"],
-    descricao:
-      "Descubra como usar keyframes, transitions e transform para criar animações fluidas e profissionais diretamente no CSS, sem JavaScript...",
-    thumb: null,
-  },
-];
-
-// ─────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────
-
-/**
- * Build star HTML for a given rating (0–5, supports half).
- * We keep it simple: all full stars since the mock is 4.9.
- */
-function buildStars(rating) {
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  let html = "";
-  for (let i = 0; i < full; i++) {
-    html += `<span class="material-symbols-outlined icon-filled star">star</span>`;
-  }
-  if (half) {
-    html += `<span class="material-symbols-outlined icon-filled star">star_half</span>`;
-  }
-  return html;
+function isMonitor(userData) {
+  return userData.userType === "monitor" || userData.perfil === "monitor";
 }
 
-/**
- * Renders a single monitoria feita card element from data.
- */
-function createFeitaCard(item, savedIds) {
-  const isSaved = savedIds.has(item.id);
-  const card = document.createElement("div");
-  card.className = "feita-card";
-  card.dataset.id = item.id;
-
-  const tagHtml = item.tags
-    .map((t, idx) =>
-      `<span class="gtag ${idx === 0 ? "gtag-dark" : "gtag-accent"}">${escapeHtml(t)}</span>`
-    )
-    .join("");
-
-  const thumbContent = item.thumb
-    ? `<img src="${escapeHtml(item.thumb)}" alt="${escapeHtml(item.titulo)}"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
-       <div class="thumb-fallback" style="display:none">
-         <span class="material-symbols-outlined">play_circle</span>
-       </div>`
-    : `<div class="thumb-fallback">
-         <span class="material-symbols-outlined">play_circle</span>
-       </div>`;
-
-  card.innerHTML = `
-    <div class="feita-thumb">
-      ${thumbContent}
-      <div class="thumb-overlay">
-        <div class="tag-curso">${escapeHtml(item.curso)}</div>
-        <div class="tag-aula">${escapeHtml(item.aula)}</div>
-      </div>
-      <button class="btn-bookmark${isSaved ? " saved" : ""}" aria-label="Salvar" data-id="${item.id}">
-        <span class="material-symbols-outlined">bookmark</span>
-      </button>
-      <button class="btn-play-overlay" aria-label="Reproduzir ${escapeHtml(item.titulo)}">
-        <span class="material-symbols-outlined icon-filled">play_circle</span>
-      </button>
-    </div>
-    <div class="feita-info">
-      <div class="feita-tags">${tagHtml}</div>
-      <h4>${escapeHtml(item.titulo)}</h4>
-      <p>${escapeHtml(item.descricao)}</p>
-    </div>
-  `;
-
-  return card;
+function toIsoDate(value) {
+  if (!value) return null;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toISOString().slice(0, 10);
 }
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+function sanitizeText(value, fallback = "") {
+  const v = String(value || "").trim();
+  return v || fallback;
 }
 
-// ─────────────────────────────────────────────
-// SAVED / BOOKMARK STATE  (localStorage)
-// ─────────────────────────────────────────────
-const SAVED_KEY = "proa_saved_feitas";
-
-function getSavedIds() {
-  try {
-    return new Set(JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"));
-  } catch {
-    return new Set();
-  }
+function updateSessionUserData(patch) {
+  const current = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+  const merged = { ...current, ...patch };
+  localStorage.setItem("userData", JSON.stringify(merged));
+  window.__ancoraUserData = merged;
+  window.dispatchEvent(new CustomEvent("ancora-user-data-updated", { detail: merged }));
 }
 
-function toggleSaved(id) {
-  const saved = getSavedIds();
-  if (saved.has(id)) {
-    saved.delete(id);
-  } else {
-    saved.add(id);
-  }
-  localStorage.setItem(SAVED_KEY, JSON.stringify([...saved]));
-  return saved.has(id);
-}
+function renderIdentity() {
+  if (!state.perfil) return;
 
-// ─────────────────────────────────────────────
-// RENDER PROFILE
-// ─────────────────────────────────────────────
-function renderProfile(data) {
-  // Avatar
-  const avatarImg = document.getElementById("monitorAvatar");
-  if (avatarImg && data.avatar) avatarImg.src = data.avatar;
+  const nome = sanitizeText(state.perfil.nome, "Monitor");
+  const equipe = sanitizeText(state.perfil.equipe, "Equipe");
+  const foto = sanitizeText(state.perfil.foto_url, "") || gerarAvatar(nome);
+  const sobre = sanitizeText(
+    state.perfil.descricao_monitor || state.perfil.sobre || state.perfil.bio,
+    "Adicione uma descrição do seu perfil para que os alunos conheçam melhor sua experiência."
+  );
 
+  const monitorNome = document.getElementById("monitorNome");
+  const monitorRole = document.getElementById("monitorRole");
+  const monitorAvatar = document.getElementById("monitorAvatar");
+  const sobreTexto = document.getElementById("sobreTexto");
   const headerActions = document.querySelector("app-header-actions");
-  if (headerActions && data.avatar) {
-    headerActions.setAttribute("avatar-src", data.avatar);
-    headerActions.setAttribute("profile-name", data.nome);
+
+  if (monitorNome) monitorNome.textContent = nome;
+  if (monitorRole) monitorRole.textContent = `Monitor • ${equipe}`;
+  if (monitorAvatar) monitorAvatar.src = foto;
+  if (sobreTexto) sobreTexto.textContent = sobre;
+
+  if (headerActions) {
+    headerActions.setAttribute("avatar-src", foto);
+    headerActions.setAttribute("profile-name", nome);
+    headerActions.setAttribute("avatar-alt", nome);
   }
 
-  // Online badge
-  const onlineBadge = document.getElementById("onlineBadge");
-  if (onlineBadge) onlineBadge.style.display = data.online ? "block" : "none";
+  updateSessionUserData({ nome, foto_url: foto, equipe });
+}
 
-  // Name / role
-  const nomeEl = document.getElementById("monitorNome");
-  if (nomeEl) nomeEl.textContent = data.nome;
-
-  const roleEl = document.getElementById("monitorRole");
-  if (roleEl) roleEl.textContent = data.role;
-
-  // Rating
-  const ratingRow = document.getElementById("ratingRow");
-  if (ratingRow) {
-    ratingRow.querySelector(".stars").innerHTML = buildStars(data.rating);
-    ratingRow.querySelector(".rating-value").textContent = String(data.rating).replace(".", ",");
-    ratingRow.querySelector(".rating-count").textContent = `(${data.avaliacoes} Avaliações)`;
-  }
-
-  const monitoriasStat = document.getElementById("statMonitorias");
-  if (monitoriasStat) {
-    monitoriasStat.textContent = String(data.monitoriasPublicadas || 12);
-  }
-
-  // Tags
+function renderTags() {
   const tagsRow = document.getElementById("tagsRow");
-  if (tagsRow) {
-    tagsRow.innerHTML = data.tags
-      .map((t) => `<span class="tag">${escapeHtml(t)}</span>`)
-      .join("");
+  if (!tagsRow) return;
+
+  const assuntos = new Set();
+  state.monitorias.forEach((m) => {
+    if (m.assunto) assuntos.add(m.assunto);
+  });
+
+  const tags = Array.from(assuntos).slice(0, 4);
+  if (!tags.length) {
+    tagsRow.innerHTML = '<span class="tag">Sem tags ainda</span>';
+    return;
   }
 
-  // Sobre
-  const sobreEl = document.getElementById("sobreTexto");
-  if (sobreEl) sobreEl.textContent = data.sobre;
+  tagsRow.innerHTML = tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+}
 
-  // Horarios
+function renderStats() {
+  const total = state.monitorias.length;
+  const hoje = new Date().toISOString().slice(0, 10);
+  const ativas = state.monitorias.filter((m) => (m.status || "ativa") === "ativa").length;
+  const proximas = state.monitorias
+    .filter((m) => {
+      const iso = toIsoDate(m.data);
+      return iso && iso >= hoje;
+    })
+    .sort((a, b) => String(toIsoDate(a.data)).localeCompare(String(toIsoDate(b.data))));
+
+  const statMonitorias = document.getElementById("statMonitorias");
+  if (statMonitorias) statMonitorias.textContent = String(total);
+
+  const statBoxes = document.querySelectorAll(".stat-box");
+  if (statBoxes.length >= 1) {
+    statBoxes[0].querySelector("strong").textContent = String(total);
+    const activeCount = ativas === 1 ? "1 ativa" : `${ativas} ativas`;
+    statBoxes[0].querySelector("small").textContent = `${activeCount} no momento`;
+  }
+
+  if (statBoxes.length >= 4) {
+    const proxima = proximas[0];
+    if (proxima) {
+      statBoxes[3].querySelector("strong").textContent = proxima.horario_inicio || "--:--";
+      statBoxes[3].querySelector("small").textContent = `${proxima.data || "Data a definir"} • ${proxima.assunto || "Monitoria"}`;
+    } else {
+      statBoxes[3].querySelector("strong").textContent = "--:--";
+      statBoxes[3].querySelector("small").textContent = "Sem sessões futuras";
+    }
+  }
+}
+
+function renderHorarios() {
   const horariosList = document.getElementById("horariosList");
-  if (horariosList) {
-    horariosList.innerHTML = data.horarios
-      .map(
-        (h) => `
+  if (!horariosList) return;
+
+  const hoje = new Date().toISOString().slice(0, 10);
+  const proximas = state.monitorias
+    .filter((m) => {
+      const iso = toIsoDate(m.data);
+      return iso && iso >= hoje;
+    })
+    .sort((a, b) => String(toIsoDate(a.data)).localeCompare(String(toIsoDate(b.data))))
+    .slice(0, 4);
+
+  if (!proximas.length) {
+    horariosList.innerHTML = `
+      <div class="horario-item">
+        <div class="horario-info">
+          <span class="dia">Nenhuma agenda cadastrada</span>
+          <span class="hora">Crie uma nova monitoria para aparecer aqui.</span>
+        </div>
+        <button class="btn-disponivel" disabled>Sem agenda</button>
+      </div>
+    `;
+    return;
+  }
+
+  horariosList.innerHTML = proximas
+    .map((m) => {
+      const hora = `${m.horario_inicio || "--:--"} - ${m.horario_fim || "--:--"}`;
+      return `
         <div class="horario-item">
           <div class="horario-info">
-            <span class="dia">${escapeHtml(h.dia)}</span>
-            <span class="hora">${escapeHtml(h.hora)}</span>
+            <span class="dia">${m.data || "Data a definir"}</span>
+            <span class="hora">${hora} • ${m.assunto || "Monitoria"}</span>
           </div>
           <button class="btn-disponivel">Disponível</button>
         </div>
-      `
-      )
-      .join("");
-
-    // Bind schedule buttons
-    horariosList.querySelectorAll(".btn-disponivel").forEach((btn) => {
-      btn.addEventListener("click", () => handleAgendarSessao(btn));
-    });
-  }
+      `;
+    })
+    .join("");
 }
 
-function initDashboardActions() {
+function renderProximasMonitorias() {
+  const nextList = document.querySelector(".next-list");
+  if (!nextList) return;
+
+  const hoje = new Date().toISOString().slice(0, 10);
+  const proximas = state.monitorias
+    .filter((m) => {
+      const iso = toIsoDate(m.data);
+      return iso && iso >= hoje;
+    })
+    .sort((a, b) => String(toIsoDate(a.data)).localeCompare(String(toIsoDate(b.data))))
+    .slice(0, 2);
+
+  if (!proximas.length) {
+    nextList.innerHTML = `
+      <div class="next-item">
+        <div>
+          <strong>Sem monitorias próximas</strong>
+          <p>Cadastre uma nova monitoria para começar.</p>
+        </div>
+        <span class="next-badge next-badge--alt">Aguardando</span>
+      </div>
+    `;
+    return;
+  }
+
+  nextList.innerHTML = proximas
+    .map((m) => {
+      const inscritos = Array.isArray(m.inscritos) ? m.inscritos.length : 0;
+      const badgeClass = (m.formato || "online").toLowerCase() === "online" ? "next-badge" : "next-badge next-badge--alt";
+      const badgeText = (m.formato || "online").toLowerCase() === "online" ? "Online" : "Presencial";
+      return `
+        <div class="next-item">
+          <div>
+            <strong>${m.titulo || m.assunto || "Monitoria"}</strong>
+            <p>${m.data || "Data a definir"} • ${m.horario_inicio || "--:--"} • ${inscritos} inscrito(s)</p>
+          </div>
+          <span class="${badgeClass}">${badgeText}</span>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+async function editarPerfil() {
+  if (!state.user || !state.perfil) return;
+
+  const descricaoAtual = sanitizeText(
+    state.perfil.descricao_monitor || state.perfil.sobre || state.perfil.bio,
+    ""
+  );
+
+  const novaDescricao = window.prompt("Atualize sua descrição de perfil:", descricaoAtual);
+  if (novaDescricao === null) return;
+
+  const descricaoLimpa = sanitizeText(novaDescricao);
+  if (!descricaoLimpa) {
+    alert("A descrição não pode ficar vazia.");
+    return;
+  }
+
+  const equipeAtual = sanitizeText(state.perfil.equipe, "");
+  const novaEquipe = window.prompt("Atualize sua equipe (opcional):", equipeAtual);
+  if (novaEquipe === null) return;
+
+  const patch = {
+    descricao_monitor: descricaoLimpa,
+    equipe: sanitizeText(novaEquipe, equipeAtual)
+  };
+
+  await atualizarPerfil(state.user.uid, patch);
+  state.perfil = { ...state.perfil, ...patch };
+  renderIdentity();
+  alert("Perfil atualizado com sucesso!");
+}
+
+function bindActions() {
   const actions = [
     { id: "btnNovaMonitoria", href: "./cadastrar-monitoria.html" },
-    { id: "btnEditarPerfil", href: "./cadastro.html" },
     { id: "btnVerMonitorias", href: "./minhas-monitorias.html" },
     { id: "btnVerAgenda", href: "./calendario.html" },
-    { id: "btnVerRecursos", href: "./recursos.html" },
+    { id: "btnVerRecursos", href: "./recursos.html" }
   ];
 
   actions.forEach((action) => {
-    const button = document.getElementById(action.id);
-    if (!button) return;
-    button.addEventListener("click", () => {
+    const el = document.getElementById(action.id);
+    if (!el) return;
+    el.addEventListener("click", () => {
       window.location.href = action.href;
     });
   });
-}
 
-// ─────────────────────────────────────────────
-// RENDER FEITAS
-// ─────────────────────────────────────────────
-const PAGE_SIZE = 2;
-let visibleCount = PAGE_SIZE;
-
-function renderFeitas() {
-  const grid = document.getElementById("feitasGrid");
-  const loadMoreSection = document.getElementById("loadMoreSection");
-  const loadMoreLabel = document.getElementById("loadMoreLabel");
-  if (!grid) return;
-
-  const savedIds = getSavedIds();
-
-  grid.innerHTML = "";
-  feitasData.slice(0, visibleCount).forEach((item) => {
-    grid.appendChild(createFeitaCard(item, savedIds));
-  });
-
-  // Update label
-  if (loadMoreLabel) {
-    loadMoreLabel.textContent = `Exibindo ${Math.min(visibleCount, feitasData.length)} de ${feitasData.length} monitorias feitas`;
-  }
-
-  // Hide load-more when all are shown
-  if (loadMoreSection) {
-    if (visibleCount >= feitasData.length) {
-      loadMoreSection.classList.add("all-loaded");
-    } else {
-      loadMoreSection.classList.remove("all-loaded");
-    }
-  }
-
-  // Re-bind bookmark buttons
-  bindBookmarks();
-}
-
-// ─────────────────────────────────────────────
-// BOOKMARK INTERACTION
-// ─────────────────────────────────────────────
-function bindBookmarks() {
-  document.querySelectorAll(".btn-bookmark").forEach((btn) => {
-    // Remove old listeners by cloning
-    const fresh = btn.cloneNode(true);
-    btn.parentNode.replaceChild(fresh, btn);
-    fresh.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const id = fresh.dataset.id;
-      const isNowSaved = toggleSaved(id);
-      fresh.classList.toggle("saved", isNowSaved);
-      fresh.setAttribute(
-        "aria-label",
-        isNowSaved ? "Remover dos salvos" : "Salvar"
-      );
-
-      // Brief visual feedback
-      fresh.style.transform = "scale(1.3)";
-      setTimeout(() => {
-        fresh.style.transform = "";
-      }, 200);
-    });
-  });
-}
-
-// ─────────────────────────────────────────────
-// SCHEDULE BUTTON
-// ─────────────────────────────────────────────
-function handleAgendarSessao(btn) {
-  const item = btn.closest(".horario-item");
-  const dia = item?.querySelector(".dia")?.textContent || "";
-  const hora = item?.querySelector(".hora")?.textContent || "";
-
-  // Visual feedback
-  btn.textContent = "Agendado ✓";
-  btn.style.background = "var(--lime)";
-  btn.style.color = "var(--navy)";
-  btn.disabled = true;
-
-  // In production: call agendarSessao(monitorData.id, dia, hora)
-  console.info(`[perfil-do-monitor] Agendar sessão — ${dia} ${hora}`);
-}
-
-// ─────────────────────────────────────────────
-// BACK BUTTON
-// ─────────────────────────────────────────────
-function initBackButton() {
-  const btn = document.getElementById("btnVoltar");
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    // In production: history.back() or navigate to /monitorias
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = "./minhas-monitorias.html";
-    }
-  });
-}
-
-// ─────────────────────────────────────────────
-// LOAD MORE
-// ─────────────────────────────────────────────
-function initLoadMore() {
-  const btn = document.getElementById("btnCarregarMais");
-  if (!btn) return;
-
-  btn.addEventListener("click", () => {
-    visibleCount += PAGE_SIZE;
-    renderFeitas();
-
-    // Scroll to newly added cards smoothly
-    const grid = document.getElementById("feitasGrid");
-    if (grid) {
-      const cards = grid.querySelectorAll(".feita-card");
-      const firstNew = cards[visibleCount - PAGE_SIZE];
-      if (firstNew) {
-        firstNew.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  const btnEditarPerfil = document.getElementById("btnEditarPerfil");
+  if (btnEditarPerfil) {
+    btnEditarPerfil.addEventListener("click", async () => {
+      try {
+        await editarPerfil();
+      } catch (error) {
+        console.error("Erro ao editar perfil:", error);
+        alert("Não foi possível atualizar o perfil. Tente novamente.");
       }
-    }
-  });
-}
-
-// ─────────────────────────────────────────────
-// URL PARAMS  (for real navigation: ?monitorId=xxx)
-// ─────────────────────────────────────────────
-function getMonitorIdFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("monitorId") || null;
-}
-
-// ─────────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────────
-document.addEventListener("DOMContentLoaded", () => {
-  protegerPagina();
-
-  function getUserTypeFromStorage() {
-    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-    return userData.userType === "monitor" || userData.perfil === "monitor" ? "monitor" : "student";
+    });
   }
+}
 
-  if (getUserTypeFromStorage() !== "monitor") {
+async function loadPerfil(usuario) {
+  state.user = usuario;
+
+  const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+  if (!isMonitor(userData)) {
     window.location.href = "./home.html";
     return;
   }
 
-  const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
-  if (userData.nome) {
-    monitorData.nome = userData.nome;
-  }
-  if (userData.foto_url) {
-    monitorData.avatar = userData.foto_url;
-  }
-  if (userData.equipe) {
-    monitorData.role = `Monitor • ${userData.equipe}`;
+  const perfil = await buscarUsuarioPorUid(usuario.uid);
+  if (!perfil) {
+    alert("Não foi possível carregar seu perfil.");
+    return;
   }
 
-  // In production you would do:
-  // const monitorId = getMonitorIdFromUrl();
-  // const data = await buscarMonitorPorId(monitorId);
-  // renderProfile(data);
+  state.perfil = perfil;
+  const todasMonitorias = await buscarMonitorias({ status: "ativa" });
+  state.monitorias = todasMonitorias.filter((m) => m.monitor_id === usuario.uid);
 
-  renderProfile(monitorData);
-  renderFeitas();
-  initBackButton();
-  initLoadMore();
-  initDashboardActions();
+  renderIdentity();
+  renderTags();
+  renderStats();
+  renderHorarios();
+  renderProximasMonitorias();
+}
 
-  console.info("[perfil-do-monitor] Página inicializada.");
+document.addEventListener("DOMContentLoaded", () => {
+  bindActions();
+
+  observarSessao(async (usuario) => {
+    if (!usuario) return;
+
+    try {
+      await loadPerfil(usuario);
+    } catch (error) {
+      console.error("Erro ao carregar dashboard do monitor:", error);
+      const monitorNome = document.getElementById("monitorNome");
+      if (monitorNome) monitorNome.textContent = "Erro ao carregar perfil";
+    }
+  });
 });
