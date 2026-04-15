@@ -108,18 +108,19 @@ main {
 }
 
 .itens_titulo img {
-  width: 45px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
+  aspect-ratio: 1/1;
   margin-top: 2%;
   align-self: center;
 }
 
 .itens_titulo h1 {
   font-family: "Space Grotesk";
-  color: var(--branco);
-  font-size: 48px;
+  color: var(--verde);
+  font-size: 38px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 48px;
   letter-spacing: 1px;
 }
@@ -258,8 +259,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--azul-escuro);
   color: var(--branco);
-  overflow: hidden;
+  border-radius: 20px;
 }
 
 .btn1 button {
@@ -573,12 +575,12 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .itens_titulo img {
-    width: 35px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     align-self: center;
   }
 
@@ -785,15 +787,6 @@ main {
 
   .itens_titulo h1 {
     font-size: 22px;
-  }
-
-  .itens_titulo img {
-    width: 45px;
-    height: 35px;
-  }
-
-  .itens_titulo h1 {
-    font-size: 30px;
   }
 
   .plataform {
@@ -1010,12 +1003,7 @@ main {
   }
 
   .itens_titulo h1 {
-    font-size: 35px;
-  }
-
-  .itens_titulo img {
-    width: 65px;
-    height: 55px;
+    font-size: 25px;
   }
 
   .plataform {
