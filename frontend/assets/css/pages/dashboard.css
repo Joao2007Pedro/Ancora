@@ -6,11 +6,11 @@
 }
 
 body {
+  background-color: #e2edff;
   display: flex;
 }
 
 main {
-  background-color: #e2edff;
   min-height: 100vh;
   flex: 1;
 }
@@ -40,7 +40,6 @@ h1 {
   margin-top: 6px;
 }
 
-/* ---- CONTAINER vira coluna pra empilhar tudo ---- */
 .container {
   display: flex;
   flex-direction: column;
@@ -123,7 +122,6 @@ h1 {
   margin-top: 6px;
 }
 
-/* ---- segunda-linha ocupa as 3 colunas do grid ---- */
 .segunda-linha {
   grid-column: 1 / -1;
   display: grid;
@@ -269,7 +267,6 @@ h1 {
   cursor: pointer;
 }
 
-/* ---- histórico ocupa as 3 colunas ---- */
 .historico {
   grid-column: 1 / -1;
   background-color: white;
@@ -352,4 +349,119 @@ h1 {
   padding: 10px 40px;
   border-radius: 20px;
   cursor: pointer;
+}
+
+/* ==========
+   TABLET ( 1024px)
+   ========== */
+@media (max-width: 1024px) {
+  sidebar-menu {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+.dashboard-header {
+  padding: 30px 24px 20px 24px;
+}
+
+.container {
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0 24px 40px 24px;
+  gap: 1rem;
+}
+
+.segunda-linha {
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.historico-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ==========
+   MOBILE (768px)
+   ========== */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 0.75rem;
+  }
+
+  .dashboard-header {
+    padding: 20px 16px 16px 16px;
+  }
+
+  h1 {
+    font-size: 180%;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    padding: 0 16px 32px 16px;
+    gap: 1rem;
+  }
+
+  .card-pendente,
+  .card-aceita,
+  .card-recusada {
+    grid-column: auto;
+  }
+
+  .segunda-linha {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+  }
+
+  .historico {
+    grid-column: 1 / -1;
+  }
+
+  .historico-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .acoes {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .btn-aceitar,
+  .btn-recusar {
+    width: 100%;
+    text-align: center;
+  }
+
+  .solicitacao-item {
+    flex-wrap: wrap;
+  }
+
+  .solicitacao-info {
+    min-width: 0;
+  }
+}
+
+/* =========
+   MOBILE PEQUENO (480px)
+   ======== */
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 150%;
+  }
+
+  .card h2 {
+    font-size: 200%;
+  }
 }
