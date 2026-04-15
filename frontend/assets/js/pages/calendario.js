@@ -1,6 +1,6 @@
 import { protegerPagina } from "../utils/auth-guard.js";
 import { observarSessao } from "../auth.js";
-import { buscarMonitorias, buscarInscricoesDoAluno } from "../utils/firebase-db.js";
+import { buscarMonitorias } from "../utils/firebase-db.js";
 
 protegerPagina();
 
@@ -60,6 +60,8 @@ function buildEventCard(monitoria) {
   const descricao = monitoria.descricao || "Sem descricao.";
   const horarioInicio = monitoria.horario_inicio || "--:--";
   const horarioFim = monitoria.horario_fim || "--:--";
+  const salaDiscord = monitoria.sala_discord_nome || "";
+  const confirmarHref = monitoria.id ? `/confirmacao?id=${encodeURIComponent(monitoria.id)}` : "/confirmacao";
 
   return `
     <article class="event-item">
@@ -70,7 +72,11 @@ function buildEventCard(monitoria) {
       <p class="event-topic">${assunto}</p>
       <p class="event-time">${horarioInicio} - ${horarioFim}</p>
       <p class="event-monitor">Monitor: ${monitoria.monitor_nome || "A definir"}</p>
+      ${salaDiscord ? `<p class="event-room">${salaDiscord}</p>` : ""}
       <p class="event-description">${descricao}</p>
+      <div class="event-actions">
+        <a class="event-confirm" href="${confirmarHref}">Confirmar presença</a>
+      </div>
     </article>
   `;
 }
@@ -162,17 +168,7 @@ async function loadAgendaForUser() {
 
   const allMonitorias = (await buscarMonitorias({ status: "ativa" })).filter(isTodayOrFuture);
   state.monitorias = allMonitorias;
-
-  if (state.userType === "monitor") {
-    state.visibleMonitorias = allMonitorias.filter((m) => m.monitor_id === state.currentUser.uid);
-  } else {
-    const inscricoes = await buscarInscricoesDoAluno(state.currentUser.uid);
-    const inscritas = new Set(inscricoes.filter((i) => i.status !== "cancelada").map((i) => i.monitoria_id));
-    state.visibleMonitorias = allMonitorias.filter((m) => {
-      const inscritos = Array.isArray(m.inscritos) ? m.inscritos : [];
-      return inscritos.includes(state.currentUser.uid) || inscritas.has(m.id);
-    });
-  }
+  state.visibleMonitorias = allMonitorias;
 
   const firstUpcoming = state.visibleMonitorias
     .map((m) => toIsoDate(m.data))
@@ -205,11 +201,11 @@ function bindStaticActions() {
   });
 
   btnHome?.addEventListener("click", () => {
-    window.location.href = "./home.html";
+    window.location.href = "/home";
   });
 
   btnMonitorias?.addEventListener("click", () => {
-    window.location.href = "./minhas-monitorias.html";
+    window.location.href = "/minhas-monitorias";
   });
 }
 
