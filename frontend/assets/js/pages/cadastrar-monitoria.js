@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
         status: "pendente_aprovacao"
       });
       alert("Monitoria enviada para aprovação do admin.");
-      window.location.href = "./home.html";
+      window.location.href = "/home";
     } catch (err) {
       console.error(err);
       alert("Erro ao criar monitoria: " + err.message);
