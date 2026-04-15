@@ -1,6 +1,25 @@
-import { protegerPagina } from "../utils/auth-guard.js";
-import { observarSessao } from "../auth.js";
-import { buscarMonitorias, buscarMonitoriasDoMonitor } from "../utils/firebase-db.js";
+let protegerPagina = () => {};
+let observarSessao = (callback) => {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  callback(userData.uid ? { uid: userData.uid } : null);
+};
+let buscarMonitorias = async () => [];
+let buscarMonitoriasDoMonitor = async () => [];
+
+try {
+  const [guard, auth, db] = await Promise.all([
+    import("../utils/auth-guard.js"),
+    import("../auth.js"),
+    import("../utils/firebase-db.js")
+  ]);
+
+  protegerPagina = guard.protegerPagina || protegerPagina;
+  observarSessao = auth.observarSessao || observarSessao;
+  buscarMonitorias = db.buscarMonitorias || buscarMonitorias;
+  buscarMonitoriasDoMonitor = db.buscarMonitoriasDoMonitor || buscarMonitoriasDoMonitor;
+} catch (error) {
+  console.warn("[Ancora] Agenda em modo fallback:", error);
+}
 
 protegerPagina();
 
@@ -106,6 +125,11 @@ function renderEventsForDate(isoDate) {
   const eventsList = document.getElementById("eventsList");
   if (!eventsList) return;
 
+  if (!isoDate) {
+    eventsList.innerHTML = `<p class="empty">Selecione um dia para ver as monitorias.</p>`;
+    return;
+  }
+
   const events = state.visibleMonitorias
     .filter((m) => toIsoDate(m.data) === isoDate)
     .sort((a, b) => String(a.horario_inicio || "").localeCompare(String(b.horario_inicio || "")));
@@ -164,7 +188,17 @@ function renderCalendar() {
 }
 
 async function loadAgendaForUser() {
-  if (!state.currentUser) return;
+  if (!state.currentUser?.uid) {
+    state.monitorias = [];
+    state.visibleMonitorias = [];
+    state.selectedDateIso = new Date().toISOString().slice(0, 10);
+    state.currentMonthDate = new Date(`${state.selectedDateIso}T00:00:00`);
+    state.currentMonthDate.setDate(1);
+    renderCalendar();
+    updateFooterSelection(state.selectedDateIso);
+    renderEventsForDate(state.selectedDateIso);
+    return;
+  }
 
   let monitoriasVisiveis = [];
 
