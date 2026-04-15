@@ -253,8 +253,9 @@ html, body { overflow-x: hidden; }
    TABLET  ≤ 1024px
    ============================================= */
 @media (max-width: 1024px) {
-  .main-content { margin-left: 0; padding: 24px; }
+  .main-content { margin-left: 256px; padding: 24px; }
   .page-header  { flex-direction: column; gap: 16px; }
+  .lista-monitorias { grid-template-columns: 1fr; gap: 12px; }
 }
 
 /* =============================================
@@ -275,7 +276,7 @@ html, body { overflow-x: hidden; }
 
   /* filtros: scroll horizontal */
   .filtros-grupo { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .filtros { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+  .filtros { flex-wrap: wrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
   .filtros::-webkit-scrollbar { display: none; }
   .filtro-btn { flex-shrink: 0; padding: 7px 16px; font-size: 13px; }
 
