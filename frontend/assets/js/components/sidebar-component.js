@@ -72,23 +72,23 @@ class SidebarMenu extends HTMLElement {
 
         <!-- Navegação Principal -->
         <nav class="sidebar-nav">
-          <a href="home.html" class="nav-item" data-page="home">
+          <a href="/home" class="nav-item" data-page="home">
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
           </a>
-          <a href="calendario.html" class="nav-item" data-page="agenda">
+          <a href="/calendario" class="nav-item" data-page="agenda">
             <span class="material-symbols-outlined">calendar_today</span>
             <span>Agenda</span>
           </a>
-          <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
+          <a href="/minhas-monitorias" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
             <span>Monitorias Agendadas</span>
           </a>
-          <a href="recursos.html" class="nav-item" data-page="recursos">
+          <a href="/recursos" class="nav-item" data-page="recursos">
             <span class="material-symbols-outlined">library_books</span>
             <span>Indicações</span>
           </a>
-          <a href="roadmap.html" class="nav-item" data-page="roadmap">
+          <a href="/roadmap" class="nav-item" data-page="roadmap">
             <span class="material-symbols-outlined">map</span>
             <span>RoadMap</span>
           </a>
@@ -145,27 +145,27 @@ class SidebarMenu extends HTMLElement {
 
         <!-- Navegação Principal -->
         <nav class="sidebar-nav">
-          <a href="home.html" class="nav-item" data-page="home">
+          <a href="/home" class="nav-item" data-page="home">
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
           </a>
-          <a href="calendario.html" class="nav-item" data-page="agenda">
+          <a href="/calendario" class="nav-item" data-page="agenda">
             <span class="material-symbols-outlined">calendar_today</span>
             <span>Agenda</span>
           </a>
-          <a href="minhas-monitorias.html" class="nav-item" data-page="minhas-monitorias">
+          <a href="/minhas-monitorias" class="nav-item" data-page="minhas-monitorias">
             <span class="material-symbols-outlined">history_edu</span>
             <span>Minhas Monitorias</span>
           </a>
-          <a href="recursos.html" class="nav-item" data-page="recursos">
+          <a href="/recursos" class="nav-item" data-page="recursos">
             <span class="material-symbols-outlined">library_books</span>
             <span>Recursos</span>
           </a>
-          <a href="roadmap.html" class="nav-item" data-page="roadmap">
+          <a href="/roadmap" class="nav-item" data-page="roadmap">
             <span class="material-symbols-outlined">map</span>
             <span>Roadmap</span>
           </a>
-          <a href="perfil.html" class="nav-item" data-page="dashboard">
+          <a href="/perfil" class="nav-item" data-page="dashboard">
             <span class="material-symbols-outlined">dashboard</span>
             <span>Dashboard</span>
           </a>
