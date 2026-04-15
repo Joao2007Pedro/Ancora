@@ -6,7 +6,14 @@ import {
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { criarUsuario, buscarUsuarioPorUid, gerarAvatar, registrarCandidaturaMonitor } from "./utils/firebase-db.js";
+import {
+  criarUsuario,
+  buscarUsuarioPorUid,
+  gerarAvatar,
+  registrarCandidaturaMonitor,
+  solicitarCandidaturaMonitor,
+  resolverFotoUsuario
+} from "./utils/firebase-db.js";
 
 function mapPerfilToUserType(perfil, aprovado) {
   if (perfil === "monitor" && aprovado !== false) {
@@ -23,7 +30,12 @@ function salvarSessaoLocal(user, dadosPerfil = {}) {
     uid: user.uid,
     nome: dadosPerfil.nome || user.displayName || "",
     email: dadosPerfil.email || user.email || "",
-    foto_url: dadosPerfil.foto_url || user.photoURL || gerarAvatar(user.displayName || user.email || "Usuario"),
+    foto_url: resolverFotoUsuario({
+      ...dadosPerfil,
+      photoURL: user.photoURL,
+      nome: dadosPerfil.nome || user.displayName || "",
+      email: dadosPerfil.email || user.email || ""
+    }),
     perfil,
     userType: mapPerfilToUserType(perfil, aprovado),
     equipe: dadosPerfil.equipe || "",
@@ -122,8 +134,20 @@ export async function logout() {
   window.location.href = "/frontend/index.html";
 }
 
+export async function solicitarTornarMonitor() {
+  const user = auth.currentUser;
+  if (!user) {
+    throw new Error("Você precisa estar logado para solicitar monitoria.");
+  }
+
+  const result = await solicitarCandidaturaMonitor(user.uid);
+  await sincronizarSessaoLocal(user);
+  return result;
+}
+
 if (typeof window !== "undefined") {
   window.appLogout = logout;
+  window.appSolicitarMonitor = solicitarTornarMonitor;
 }
 
 export function observarSessao(callback) {

@@ -1,0 +1,108 @@
+.main-content {
+  margin-left: 280px;
+  padding: 28px;
+}
+
+.page-header h1 {
+  color: var(--navy);
+  font-size: 2rem;
+}
+
+.page-header p {
+  color: var(--cinza-700);
+}
+
+.admin-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-section {
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sombra);
+  padding: 18px;
+}
+
+.admin-section h2 {
+  margin-bottom: 14px;
+  color: var(--navy);
+}
+
+.loading,
+.vazio {
+  color: var(--cinza-700);
+}
+
+.admin-card {
+  border: 1px solid var(--cinza-300);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.admin-card-info {
+  display: grid;
+  gap: 4px;
+}
+
+.admin-card-info strong {
+  color: var(--navy);
+}
+
+.admin-card-info span,
+.motivo {
+  color: var(--cinza-700);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: #edf1ff;
+  color: var(--azul);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.admin-card-acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-aprovar,
+.btn-rejeitar {
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--branco);
+  font-weight: 700;
+  padding: 8px 12px;
+}
+
+.btn-aprovar {
+  background: var(--sucesso);
+}
+
+.btn-rejeitar {
+  background: var(--erro);
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}

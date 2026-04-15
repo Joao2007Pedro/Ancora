@@ -6,14 +6,12 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-
-    <!-- Fivecon -->
+  <!-- Fivecon -->
     <link
       rel="shortcut icon"
       href="../assets/images/logo/ancora_logo-sem-fundo.png"
       type="image/x-icon"
-    />
-
+  />
 
 <link rel="stylesheet" href="../assets/css/components.css"/>
 <link rel="stylesheet" href="../assets/css/pages/calendario.css"/>
@@ -33,7 +31,7 @@
 <header class="header">
   <section class="title">
     <div class="page-header__brand">
-      <span class="page-header__brand-mark" aria-hidden="true" style="background-color: #2821F4;">
+      <span class="page-header__brand-mark" aria-hidden="true">
         <img src="../assets/images/logo/ancora_logo-sem-fundo.png" alt="" class="page-header__brand-image" />
       </span>
       <div class="page-header__brand-text">
@@ -47,7 +45,6 @@
 
   <app-header-actions
     search-placeholder="Buscar horário..."
-    avatar-src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHg40P3uJMWJmNFTKGX549MhF5555LxYNMpJ0Pf8nfH5kJtH3Yc6YOWNxBETEjnl_Ecy7iF_LSUNCiA8U4dqeg1zDhYI9FZ-RsIQYFBI9Zn8rxc9ITqC_jOOLItZ-NWjwviv-asHIXQCk_M8llDqmQpszGc8W-jZQv0AoDTzMUE6At9v9HgTvdRDdc-gtDhoHRZIjeHYRV1rirm1CTWrHFsff61NrhWVPQaXc9shxW46guZq43ReZKd7gQ8Oi6VPTGmbpeZea0eg7Q"
     avatar-alt="Marcus Oliveira">
   </app-header-actions>
 </header>
@@ -110,6 +107,11 @@
 </footer>
 
 </main>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+            <script>
+                new window.VLibras.Widget("https://vlibras.gov.br/app");
+            </script>
+
     <!-- VLibras -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
@@ -121,7 +123,5 @@
     <script>
       new window.VLibras.Widget("https://vlibras.gov.br/app");
     </script>
-
-
 </body>
 </html>

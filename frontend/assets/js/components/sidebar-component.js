@@ -1,4 +1,8 @@
 class SidebarMenu extends HTMLElement {
+  getUserData() {
+    return window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
+  }
+
   connectedCallback() {
     if (!this._onUserDataUpdated) {
       this._onUserDataUpdated = () => {
@@ -32,7 +36,7 @@ class SidebarMenu extends HTMLElement {
    * @returns {string} 'monitor' ou 'student'
    */
   getUserType() {
-    const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
+    const userData = this.getUserData();
     const aprovado = userData.aprovado !== false;
     if ((userData.userType === 'monitor' || userData.perfil === 'monitor') && aprovado) {
       return 'monitor';
@@ -45,6 +49,14 @@ class SidebarMenu extends HTMLElement {
    * Renderiza a sidebar para alunos
    */
   renderStudentSidebar() {
+    const userData = this.getUserData();
+    const adminItem = userData?.role === 'admin'
+      ? `<a href="/admin-dashboard" class="nav-item" data-page="admin-dashboard">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+            <span>Admin</span>
+         </a>`
+      : '';
+
     this.innerHTML = `
       <aside class="sidebar">
         <!-- Header com Logo -->
@@ -80,10 +92,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">map</span>
             <span>RoadMap</span>
           </a>
-          <a href="#chat" class="nav-item" data-page="chat">
-            <span class="material-symbols-outlined">chat</span>
-            <span>Chat</span>
-          </a>
+          ${adminItem}
         </nav>
 
         <!-- Ações Principais -->
@@ -113,6 +122,14 @@ class SidebarMenu extends HTMLElement {
    * Renderiza a sidebar para monitores
    */
   renderMonitorSidebar() {
+    const userData = this.getUserData();
+    const adminItem = userData?.role === 'admin'
+      ? `<a href="/admin-dashboard" class="nav-item" data-page="admin-dashboard">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+            <span>Admin</span>
+         </a>`
+      : '';
+
     this.innerHTML = `
       <aside class="sidebar">
         <!-- Header com Logo -->
@@ -148,14 +165,11 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">map</span>
             <span>Roadmap</span>
           </a>
-          <a href="#chat" class="nav-item" data-page="chat">
-            <span class="material-symbols-outlined">chat</span>
-            <span>Chat</span>
-          </a>
           <a href="perfil.html" class="nav-item" data-page="dashboard">
             <span class="material-symbols-outlined">dashboard</span>
             <span>Dashboard</span>
           </a>
+          ${adminItem}
         </nav>
 
         <!-- Ações Principais -->
@@ -240,15 +254,21 @@ customElements.define('sidebar-menu', SidebarMenu);
  * Abre formulário para nova monitoria
  */
 function abrirNovaMonitoria() {
-  window.location.href = 'cadastrar-monitoria.html';
+  window.location.href = '/cadastrar-monitoria';
 }
 
 /**
  * Ação para tornar-se monitor
  */
 function tornarMonitor() {
-  console.log('Abrindo página para tornar-se monitor...');
-  window.location.href = 'cadastro.html';
+  const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
+
+  if (userData.userType === 'monitor' || userData.perfil === 'monitor') {
+    alert('Você já é monitor.');
+    return;
+  }
+
+  window.location.href = '/candidatura';
 }
 
 /**
@@ -266,6 +286,6 @@ function fazerLogout(event) {
     // Fallback caso o helper global não esteja disponível
     localStorage.removeItem('userData');
     localStorage.removeItem('userToken');
-    window.location.href = 'login.html';
+    window.location.href = '/login';
   }
 }

@@ -13,6 +13,8 @@
     { "source": "/cadastrar-monitoria", "destination": "/frontend/pages/cadastrar-monitoria.html" },
     { "source": "/roadmap", "destination": "/frontend/pages/roadmap.html" },
     { "source": "/perfil", "destination": "/frontend/pages/perfil.html" },
-    { "source": "/recursos", "destination": "/frontend/pages/recursos.html" }
+    { "source": "/recursos", "destination": "/frontend/pages/recursos.html" },
+    { "source": "/candidatura", "destination": "/frontend/pages/candidatura.html" },
+    { "source": "/admin-dashboard", "destination": "/frontend/pages/admin-dashboard.html" }
   ]
 }

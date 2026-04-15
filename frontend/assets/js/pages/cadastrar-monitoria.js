@@ -7,13 +7,6 @@ protegerPagina();
 let usuarioAtual = null;
 observarSessao((u) => {
   usuarioAtual = u;
-
-  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-  const isMonitor = userData.userType === "monitor" || userData.perfil === "monitor";
-  if (u && !isMonitor) {
-    window.location.href = "./home.html";
-    usuarioAtual = null;
-  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -24,6 +17,28 @@ document.addEventListener("DOMContentLoaded", function () {
   var addSlotButton = document.getElementById("addSlot");
   var slotsContainer = document.getElementById("slots");
   var criarButton = document.getElementById("btn-criar-monitoria");
+
+  function gerarProximasDatas() {
+    var diasWrap = document.querySelector(".days");
+    if (!diasWrap) return;
+
+    var base = new Date();
+    base.setHours(0, 0, 0, 0);
+    var botoes = [];
+
+    for (var i = 0; i < 5; i += 1) {
+      var d = new Date(base);
+      d.setDate(base.getDate() + i);
+      var iso = d.toISOString().slice(0, 10);
+      botoes.push(
+        '<button type="button" class="day' + (i === 0 ? ' active' : '') + '" data-data="' + iso + '">' + d.getDate() + '</button>'
+      );
+    }
+
+    diasWrap.innerHTML = botoes.join("");
+  }
+
+  gerarProximasDatas();
 
   function renderCount() {
     if (countEl) {
@@ -78,6 +93,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  /* ── Seleção de sala Discord ── */
+  document.querySelectorAll(".sala-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".sala-btn").forEach(function (b) {
+        b.classList.remove("active");
+      });
+      btn.classList.add("active");
+      var linkInput = document.getElementById("link-discord");
+      if (linkInput) linkInput.value = btn.dataset.link;
+    });
+  });
+
   if (addSlotButton && slotsContainer) {
     addSlotButton.addEventListener("click", function () {
       var start = document.querySelector("#horario-inicio")?.value || "";
@@ -117,6 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
+      var userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+
       await criarMonitoria({
         titulo,
         descricao,
@@ -125,14 +154,15 @@ document.addEventListener("DOMContentLoaded", function () {
         formato,
         vagas,
         monitor_id: usuarioAtual.uid,
-        monitor_nome: usuarioAtual.displayName || "Monitor",
-        monitor_foto: usuarioAtual.photoURL || "",
+        monitor_nome: userData.nome || usuarioAtual.displayName || "Monitor",
+        monitor_foto: userData.foto_url || usuarioAtual.photoURL || "",
         data,
         horario_inicio: horarioInicio,
         horario_fim: horarioFim,
-        link_discord: linkDiscord
+        link_discord: linkDiscord,
+        status: "pendente_aprovacao"
       });
-      alert("Monitoria criada com sucesso!");
+      alert("Monitoria enviada para aprovação do admin.");
       window.location.href = "./home.html";
     } catch (err) {
       console.error(err);

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Âncora — Quero ser Monitor</title>
+  <link rel="stylesheet" href="../assets/css/global.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/candidatura.css">
+  <script defer src="../assets/js/components/sidebar-component.js"></script>
+  <script type="module" src="../assets/js/pages/candidatura.js"></script>
+</head>
+<body>
+  <sidebar-menu></sidebar-menu>
+
+  <main class="main-content">
+    <div class="candidatura-wrapper">
+      <div class="candidatura-header">
+        <a href="/home" class="btn-voltar">← Voltar</a>
+        <h1>Quero ser Monitor</h1>
+        <p>Compartilhe seu conhecimento com a turma e ajude outros alunos a evoluir.</p>
+      </div>
+
+      <div id="estado-candidatura" class="estado-card" style="display:none"></div>
+
+      <form id="form-candidatura" class="candidatura-form">
+        <div class="campo">
+          <label>Assuntos que você domina</label>
+          <div class="assuntos-grid">
+            <label class="assunto-check">
+              <input type="checkbox" value="HTML & CSS"> HTML & CSS
+            </label>
+            <label class="assunto-check">
+              <input type="checkbox" value="JavaScript"> JavaScript
+            </label>
+            <label class="assunto-check">
+              <input type="checkbox" value="React"> React
+            </label>
+            <label class="assunto-check">
+              <input type="checkbox" value="Banco de Dados"> Banco de Dados
+            </label>
+            <label class="assunto-check">
+              <input type="checkbox" value="Java"> Java
+            </label>
+            <label class="assunto-check">
+              <input type="checkbox" value="Spring Boot"> Spring Boot
+            </label>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="motivo">Por que você quer ser monitor?</label>
+          <textarea id="motivo" rows="4" placeholder="Conte sua experiência e motivação..."></textarea>
+        </div>
+
+        <p id="msg-erro" class="msg-erro"></p>
+
+        <button type="submit" class="btn-primary">Enviar candidatura</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

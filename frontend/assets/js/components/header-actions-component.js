@@ -1,9 +1,38 @@
 class AppHeaderActions extends HTMLElement {
+  static get observedAttributes() {
+    return ["search-placeholder", "avatar-src", "avatar-alt", "profile-name"];
+  }
+
   connectedCallback() {
+    if (!this._onUserDataUpdated) {
+      this._onUserDataUpdated = () => this.render();
+      window.addEventListener("ancora-user-data-updated", this._onUserDataUpdated);
+    }
+    this.render();
+  }
+
+  disconnectedCallback() {
+    if (this._onUserDataUpdated) {
+      window.removeEventListener("ancora-user-data-updated", this._onUserDataUpdated);
+    }
+  }
+
+  attributeChangedCallback() {
+    if (this.isConnected) {
+      this.render();
+    }
+  }
+
+  render() {
+    const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
+    const nome = userData.nome || "Perfil";
+    const fallbackAvatar = userData.foto_url
+      || `https://ui-avatars.com/api/?name=${encodeURIComponent(nome)}&background=3333FF&color=fff&size=96`;
+
     const placeholder = this.getAttribute("search-placeholder") || "Buscar...";
-    const avatarSrc = this.getAttribute("avatar-src") || "";
-    const avatarAlt = this.getAttribute("avatar-alt") || "Perfil";
-    const profileName = this.getAttribute("profile-name") || "";
+    const avatarSrc = this.getAttribute("avatar-src") || fallbackAvatar;
+    const avatarAlt = this.getAttribute("avatar-alt") || nome;
+    const profileName = this.getAttribute("profile-name") || userData.nome || "";
 
     const hasName = profileName.trim().length > 0;
     const profileClass = hasName

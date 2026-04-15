@@ -8,8 +8,13 @@ import {
 // ── AVATAR ───────────────────────────────────────────
 
 export function gerarAvatar(nome) {
-  const iniciais = nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+  const baseNome = (nome || "Usuario").trim();
+  const iniciais = baseNome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
   return `https://ui-avatars.com/api/?name=${iniciais}&background=3333FF&color=fff&size=128`;
+}
+
+export function resolverFotoUsuario(userData = {}) {
+  return userData.foto_url || userData.photoURL || gerarAvatar(userData.nome || userData.email || "Usuario");
 }
 
 // ── USUÁRIOS ─────────────────────────────────────────
@@ -92,13 +97,52 @@ export async function rejeitarCandidatura(candidaturaId) {
   });
 }
 
+export async function solicitarCandidaturaMonitor(uid) {
+  const usuario = await buscarUsuarioPorUid(uid);
+  if (!usuario) {
+    throw new Error("Usuário não encontrado.");
+  }
+
+  if (usuario.perfil === "monitor" && usuario.aprovado !== false) {
+    return { status: "ja-monitor", usuario };
+  }
+
+  const q = query(collection(db, "candidaturas"), where("uid", "==", uid));
+  const snapshot = await getDocs(q);
+  const candidaturas = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  const pendente = candidaturas.find((c) => c.status === "pendente");
+  if (pendente) {
+    return { status: "ja-pendente", candidatura: pendente, usuario };
+  }
+
+  await registrarCandidaturaMonitor({
+    uid,
+    nome: usuario.nome || "",
+    email: usuario.email || "",
+    equipe: usuario.equipe || "",
+    perfil_solicitado: "monitor"
+  });
+
+  const userRef = doc(db, "usuarios", usuario.id);
+  await updateDoc(userRef, {
+    perfil: "aluno",
+    userType: "student",
+    aprovado: false,
+    perfil_solicitado: "monitor",
+    candidatura_status: "pendente",
+    atualizado_em: serverTimestamp()
+  });
+
+  return { status: "solicitado" };
+}
+
 // ── MONITORIAS ───────────────────────────────────────
 
 export async function criarMonitoria(dados) {
   return await addDoc(collection(db, "monitorias"), {
     ...dados,
     inscritos: [],
-    status: "ativa",
+    status: dados.status || "pendente_aprovacao",
     criado_em: serverTimestamp()
   });
 }
@@ -201,4 +245,88 @@ export async function buscarProgressoAluno(uid) {
   const snap = await getDocs(q);
   if (snap.empty) return {};
   return snap.docs[0].data().progresso || {};
+}
+
+// ── CANDIDATURAS ─────────────────────────────────────
+
+export async function criarCandidatura(uid, nome, email, assuntos, motivo) {
+  const q = query(collection(db, "candidaturas"), where("uid", "==", uid));
+  const snap = await getDocs(q);
+
+  if (!snap.empty) {
+    const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const pendente = docs.find((c) => c.status === "pendente");
+    if (pendente) {
+      throw new Error("Você já tem uma candidatura em andamento.");
+    }
+  }
+
+  return await addDoc(collection(db, "candidaturas"), {
+    uid,
+    nome,
+    email,
+    assuntos,
+    motivo,
+    status: "pendente",
+    criado_em: serverTimestamp()
+  });
+}
+
+export async function buscarCandidaturas(status = "pendente") {
+  const q = query(collection(db, "candidaturas"), where("status", "==", status));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export async function atualizarCandidatura(candidaturaId, uid, novoStatus) {
+  await updateDoc(doc(db, "candidaturas", candidaturaId), {
+    status: novoStatus,
+    atualizado_em: serverTimestamp()
+  });
+
+  if (novoStatus === "aprovada") {
+    await atualizarPerfil(uid, {
+      perfil: "monitor",
+      userType: "monitor",
+      aprovado: true,
+      perfil_solicitado: "monitor",
+      candidatura_status: "aprovada"
+    });
+    return;
+  }
+
+  if (novoStatus === "rejeitada") {
+    await atualizarPerfil(uid, {
+      aprovado: false,
+      perfil_solicitado: "monitor",
+      candidatura_status: "rejeitada"
+    });
+  }
+}
+
+export async function buscarCandidaturaDoUsuario(uid) {
+  const q = query(collection(db, "candidaturas"), where("uid", "==", uid));
+  const snap = await getDocs(q);
+  return snap.empty ? null : { id: snap.docs[0].id, ...snap.docs[0].data() };
+}
+
+// ── ADMIN ────────────────────────────────────────────
+
+export async function verificarSeAdmin(uid) {
+  const usuario = await buscarUsuarioPorUid(uid);
+  return usuario?.role === "admin";
+}
+
+export async function buscarMonitoriasPendentes() {
+  const q = query(collection(db, "monitorias"), where("status", "==", "pendente_aprovacao"));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export async function aprovarMonitoria(id) {
+  await updateDoc(doc(db, "monitorias", id), { status: "ativa", atualizado_em: serverTimestamp() });
+}
+
+export async function rejeitarMonitoria(id) {
+  await updateDoc(doc(db, "monitorias", id), { status: "rejeitada", atualizado_em: serverTimestamp() });
 }
