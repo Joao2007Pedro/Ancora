@@ -159,9 +159,10 @@ document.addEventListener("DOMContentLoaded", function () {
         data,
         horario_inicio: horarioInicio,
         horario_fim: horarioFim,
-        link_discord: linkDiscord
+        link_discord: linkDiscord,
+        status: "pendente_aprovacao"
       });
-      alert("Monitoria criada com sucesso!");
+      alert("Monitoria enviada para aprovação do admin.");
       window.location.href = "./home.html";
     } catch (err) {
       console.error(err);

@@ -20,6 +20,7 @@
     const nome  = userData.nome || userData.displayName || 'Aluno';
     const foto  = userData.foto_url || userData.photoURL || null;
     const tipo  = userData.userType || 'student';
+    const isAdmin = userData.role === 'admin';
     const iniciais = nome.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
 
     const avatarHtml = foto
@@ -83,16 +84,21 @@
 
         <div class="drawer-nav-divider"></div>
 
-        <a href="#" class="drawer-nav-item">
+        <a href="/perfil" class="drawer-nav-item ${isActive('perfil')}">
           <span class="material-symbols-outlined">dashboard</span>
           <span>Dashboard</span>
         </a>
+        ${isAdmin ? `
+        <a href="/admin-dashboard" class="drawer-nav-item ${isActive('admin-dashboard')}">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          <span>Admin</span>
+        </a>` : ''}
       </div>
 
       <!-- CTA Tornar-se Monitor -->
       ${tipo !== 'monitor' ? `
       <div class="drawer-cta">
-        <button class="drawer-cta-btn" id="drawerBecomeMonitor">
+        <button class="drawer-cta-btn" id="drawerBecomeMonitor" onclick="window.location.href='/candidatura'">
           <span class="material-symbols-outlined">school</span>
           Tornar-se Monitor
         </button>
@@ -173,28 +179,8 @@
       window.location.href = '/login';
     });
 
-    document.getElementById('drawerBecomeMonitor')?.addEventListener('click', async () => {
-      if (typeof window.appSolicitarMonitor !== 'function') {
-        alert('Não foi possível solicitar agora. Recarregue a página e tente novamente.');
-        return;
-      }
-
-      try {
-        const result = await window.appSolicitarMonitor();
-        if (result?.status === 'ja-monitor') {
-          alert('Você já é monitor.');
-          return;
-        }
-        if (result?.status === 'ja-pendente') {
-          alert('Sua solicitação já está em análise.');
-          return;
-        }
-        alert('Solicitação enviada com sucesso!');
-        fecharDrawer();
-      } catch (error) {
-        console.error('Erro ao solicitar monitoria:', error);
-        alert('Erro ao enviar solicitação. Tente novamente.');
-      }
+    document.getElementById('drawerBecomeMonitor')?.addEventListener('click', () => {
+      fecharDrawer();
     });
   }
 

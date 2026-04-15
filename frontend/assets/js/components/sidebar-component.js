@@ -1,4 +1,8 @@
 class SidebarMenu extends HTMLElement {
+  getUserData() {
+    return window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
+  }
+
   connectedCallback() {
     if (!this._onUserDataUpdated) {
       this._onUserDataUpdated = () => {
@@ -32,7 +36,7 @@ class SidebarMenu extends HTMLElement {
    * @returns {string} 'monitor' ou 'student'
    */
   getUserType() {
-    const userData = window.__ancoraUserData || JSON.parse(localStorage.getItem('userData') || '{}');
+    const userData = this.getUserData();
     const aprovado = userData.aprovado !== false;
     if ((userData.userType === 'monitor' || userData.perfil === 'monitor') && aprovado) {
       return 'monitor';
@@ -45,6 +49,14 @@ class SidebarMenu extends HTMLElement {
    * Renderiza a sidebar para alunos
    */
   renderStudentSidebar() {
+    const userData = this.getUserData();
+    const adminItem = userData?.role === 'admin'
+      ? `<a href="/admin-dashboard" class="nav-item" data-page="admin-dashboard">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+            <span>Admin</span>
+         </a>`
+      : '';
+
     this.innerHTML = `
       <aside class="sidebar">
         <!-- Header com Logo -->
@@ -80,6 +92,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">map</span>
             <span>RoadMap</span>
           </a>
+          ${adminItem}
         </nav>
 
         <!-- Ações Principais -->
@@ -109,6 +122,14 @@ class SidebarMenu extends HTMLElement {
    * Renderiza a sidebar para monitores
    */
   renderMonitorSidebar() {
+    const userData = this.getUserData();
+    const adminItem = userData?.role === 'admin'
+      ? `<a href="/admin-dashboard" class="nav-item" data-page="admin-dashboard">
+            <span class="material-symbols-outlined">admin_panel_settings</span>
+            <span>Admin</span>
+         </a>`
+      : '';
+
     this.innerHTML = `
       <aside class="sidebar">
         <!-- Header com Logo -->
@@ -148,6 +169,7 @@ class SidebarMenu extends HTMLElement {
             <span class="material-symbols-outlined">dashboard</span>
             <span>Dashboard</span>
           </a>
+          ${adminItem}
         </nav>
 
         <!-- Ações Principais -->
@@ -246,35 +268,7 @@ function tornarMonitor() {
     return;
   }
 
-  if (userData.perfil_solicitado === 'monitor' && userData.candidatura_status === 'pendente') {
-    alert('Sua solicitação já está em análise.');
-    return;
-  }
-
-  if (typeof window.appSolicitarMonitor !== 'function') {
-    alert('Não foi possível solicitar agora. Recarregue a página e tente novamente.');
-    return;
-  }
-
-  window.appSolicitarMonitor()
-    .then((result) => {
-      if (result?.status === 'ja-monitor') {
-        alert('Você já é monitor.');
-        return;
-      }
-
-      if (result?.status === 'ja-pendente') {
-        alert('Sua solicitação já está em análise.');
-        return;
-      }
-
-      alert('Solicitação enviada com sucesso! Agora ela aparece como pendente para aprovação.');
-      window.location.href = 'home.html';
-    })
-    .catch((error) => {
-      console.error('Erro ao solicitar monitoria:', error);
-      alert('Erro ao enviar solicitação. Tente novamente.');
-    });
+  window.location.href = '/candidatura';
 }
 
 /**
