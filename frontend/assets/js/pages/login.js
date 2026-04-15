@@ -32,7 +32,7 @@ formLogin?.addEventListener("submit", async (e) => {
   try {
     window.__ancoraAuthFlowInProgress = true;
     await loginEmail(email, senha);
-    window.location.href = "./home.html";
+    window.location.href = "/home";
   } catch (err) {
     msgErro.textContent = getAuthErrorMessage(err);
     console.error("Erro login email:", err?.code, err?.message);
@@ -46,7 +46,7 @@ btnGoogle?.addEventListener("click", async () => {
   try {
     window.__ancoraAuthFlowInProgress = true;
     await loginGoogle();
-    window.location.href = "./home.html";
+    window.location.href = "/home";
   } catch (err) {
     msgErro.textContent = getAuthErrorMessage(err);
     console.error("Erro login Google:", err?.code, err?.message);

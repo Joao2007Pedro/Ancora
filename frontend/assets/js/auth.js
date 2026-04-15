@@ -131,7 +131,7 @@ export async function logout() {
     window.__ancoraUserData = null;
     window.dispatchEvent(new CustomEvent("ancora-user-data-updated", { detail: null }));
   }
-  window.location.href = "/frontend/index.html";
+  window.location.href = "/";
 }
 
 export async function solicitarTornarMonitor() {

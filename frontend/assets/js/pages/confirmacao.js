@@ -99,7 +99,7 @@ document.querySelector("#btn-confirmar")?.addEventListener("click", async () => 
     } else {
       // Sem Discord: redireciona normalmente
       alert("Presença confirmada!");
-      window.location.href = "./minhas-monitorias";
+      window.location.href = "/minhas-monitorias";
     }
   } catch (err) {
     console.error(err);
