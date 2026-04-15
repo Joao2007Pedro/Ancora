@@ -115,6 +115,7 @@
             <span>Sala do Discord</span>
           </div>
           <p class="discord-hint">Escolha a sala onde a monitoria vai acontecer.</p>
+          <p class="discord-status" id="discord-status">Discord opcional. Nenhuma sala selecionada.</p>
           <div class="salas-grid" id="salas-discord">
             <button type="button" class="sala-btn" data-link="https://discord.gg/6atQMwfsB">
               <span class="sala-nome">Sala 1</span>
@@ -136,6 +137,10 @@
               <span class="sala-nome">Sala 5</span>
               <span class="sala-link">discord.gg/n9d9aMsTM</span>
             </button>
+            <button type="button" class="sala-btn sala-btn--none" data-link="" data-nome="">
+              <span class="sala-nome">Sem Discord</span>
+              <span class="sala-link">monitoria presencial ou sem sala</span>
+            </button>
           </div>
           <input type="hidden" id="link-discord">
         </div>
@@ -147,7 +152,7 @@
     </div>
 
     <div class="actions">
-      <button type="button" class="btn-outline">Cancelar</button>
+      <button type="button" class="btn-outline" id="btn-cancelar-monitoria">Cancelar</button>
       <button type="button" class="btn-primary" id="btn-criar-monitoria">Próximo</button>
     </div>
 

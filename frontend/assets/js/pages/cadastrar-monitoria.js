@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var addSlotButton = document.getElementById("addSlot");
   var slotsContainer = document.getElementById("slots");
   var criarButton = document.getElementById("btn-criar-monitoria");
+  var cancelarButton = document.getElementById("btn-cancelar-monitoria");
+  var discordStatusEl = document.getElementById("discord-status");
   var salaSelecionada = null;
 
   function gerarProximasDatas() {
@@ -95,16 +97,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ── Seleção de sala Discord ── */
-  var salas = document.querySelectorAll(".sala-btn");
+  function atualizarStatusDiscord() {
+    if (!discordStatusEl) return;
 
-  if (salas.length) {
-    salas[0].classList.add("active");
-    salaSelecionada = {
-      link: salas[0].dataset.link || "",
-      nome: salas[0].querySelector(".sala-nome")?.textContent.trim() || "Sala 1"
-    };
-    var linkInputInicial = document.getElementById("link-discord");
-    if (linkInputInicial) linkInputInicial.value = salaSelecionada.link;
+    if (salaSelecionada?.link) {
+      discordStatusEl.textContent = "Sala selecionada: " + (salaSelecionada.nome || "Discord");
+      return;
+    }
+
+    discordStatusEl.textContent = "Discord opcional. Nenhuma sala selecionada.";
   }
 
   document.querySelectorAll(".sala-btn").forEach(function (btn) {
@@ -112,15 +113,24 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelectorAll(".sala-btn").forEach(function (b) {
         b.classList.remove("active");
       });
-      btn.classList.add("active");
-      salaSelecionada = {
-        link: btn.dataset.link || "",
-        nome: btn.querySelector(".sala-nome")?.textContent.trim() || "Sala"
-      };
+      var link = btn.dataset.link || "";
+      var nome = btn.dataset.nome || btn.querySelector(".sala-nome")?.textContent.trim() || "";
+
+      if (link) {
+        btn.classList.add("active");
+        salaSelecionada = { link: link, nome: nome || "Sala" };
+      } else {
+        salaSelecionada = null;
+      }
+
       var linkInput = document.getElementById("link-discord");
-      if (linkInput) linkInput.value = salaSelecionada.link;
+      if (linkInput) linkInput.value = link;
+
+      atualizarStatusDiscord();
     });
   });
+
+  atualizarStatusDiscord();
 
   if (addSlotButton && slotsContainer) {
     addSlotButton.addEventListener("click", function () {
@@ -161,11 +171,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (!linkDiscord) {
-      alert("Escolha uma sala do Discord antes de criar a monitoria.");
-      return;
-    }
-
     try {
       var userData = window.__ancoraUserData || JSON.parse(localStorage.getItem("userData") || "{}");
 
@@ -192,6 +197,15 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error(err);
       alert("Erro ao criar monitoria: " + err.message);
     }
+  });
+
+  cancelarButton?.addEventListener("click", function () {
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+
+    window.location.href = "/home";
   });
 
   renderCount();

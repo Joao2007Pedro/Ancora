@@ -449,6 +449,13 @@ textarea {
   color: var(--color-muted);
   margin-top: 0.4rem;
 }
+
+.discord-status {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-blue);
+}
  
 /* validação visual */
 #link-discord:not(:placeholder-shown):valid {
@@ -509,4 +516,12 @@ textarea {
  
 .sala-btn.active .sala-link {
   color: #5865F2;
+}
+
+.sala-btn--none {
+  border-style: dashed;
+}
+
+.sala-btn--none .sala-nome {
+  color: var(--color-navy);
 }
