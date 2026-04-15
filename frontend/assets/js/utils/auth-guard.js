@@ -18,19 +18,35 @@ export function redirecionarSeLogado() {
 }
 
 export function protegerPaginaAdmin() {
-  observarSessao(async (usuario) => {
-    if (!usuario) {
-      window.location.href = "/login";
-      return;
-    }
+  return new Promise((resolve, reject) => {
+    let resolvido = false;
 
-    try {
-      const isAdmin = await verificarSeAdmin(usuario.uid);
-      if (!isAdmin) {
-        window.location.href = "/home";
+    observarSessao(async (usuario) => {
+      if (resolvido) return; // Evita executar o callback múltiplas vezes
+
+      if (!usuario) {
+        resolvido = true;
+        window.location.href = "/login";
+        reject(new Error('Não autenticado'));
+        return;
       }
-    } catch {
-      window.location.href = "/home";
-    }
+
+      try {
+        const isAdmin = await verificarSeAdmin(usuario.uid);
+        if (!isAdmin) {
+          resolvido = true;
+          window.location.href = "/home";
+          reject(new Error('Não é admin'));
+        } else {
+          resolvido = true;
+          resolve();
+        }
+      } catch (error) {
+        console.error('Erro ao verificar admin:', error);
+        resolvido = true;
+        window.location.href = "/home";
+        reject(error);
+      }
+    });
   });
 }

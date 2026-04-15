@@ -254,7 +254,7 @@ customElements.define('sidebar-menu', SidebarMenu);
  * Abre formulário para nova monitoria
  */
 function abrirNovaMonitoria() {
-  window.location.href = 'cadastrar-monitoria.html';
+  window.location.href = '/cadastrar-monitoria';
 }
 
 /**
@@ -286,6 +286,6 @@ function fazerLogout(event) {
     // Fallback caso o helper global não esteja disponível
     localStorage.removeItem('userData');
     localStorage.removeItem('userToken');
-    window.location.href = 'login.html';
+    window.location.href = '/login';
   }
 }

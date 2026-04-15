@@ -45,32 +45,35 @@ observarSessao(async (usuario) => {
       return;
     }
 
-    formEl?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (msgErro) msgErro.textContent = "";
+    if (formEl) {
+      formEl.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (msgErro) msgErro.textContent = "";
 
-      const assuntos = [...document.querySelectorAll(".assunto-check input:checked")].map((cb) => cb.value);
-      const motivo = document.querySelector("#motivo")?.value.trim() || "";
+        try {
+          const assuntos = [...document.querySelectorAll(".assunto-check input:checked")].map((cb) => cb.value);
+          const motivo = document.querySelector("#motivo")?.value.trim() || "";
 
-      if (assuntos.length === 0) {
-        if (msgErro) msgErro.textContent = "Selecione pelo menos um assunto.";
-        return;
-      }
+          if (assuntos.length === 0) {
+            if (msgErro) msgErro.textContent = "Selecione pelo menos um assunto.";
+            return;
+          }
 
-      if (motivo.length < 30) {
-        if (msgErro) msgErro.textContent = "Escreva um pouco mais sobre sua motivação (mínimo 30 caracteres).";
-        return;
-      }
+          if (motivo.length < 30) {
+            if (msgErro) msgErro.textContent = "Escreva um pouco mais sobre sua motivação (mínimo 30 caracteres).";
+            return;
+          }
 
-      try {
-        await criarCandidatura(usuario.uid, usuario.displayName || "Aluno", usuario.email || "", assuntos, motivo);
-        mostrarEstado({ status: "pendente" });
-      } catch (err) {
-        if (msgErro) msgErro.textContent = err.message || "Não foi possível enviar a candidatura.";
-      }
-    });
+          await criarCandidatura(usuario.uid, usuario.displayName || "Aluno", usuario.email || "", assuntos, motivo);
+          mostrarEstado({ status: "pendente" });
+        } catch (err) {
+          console.error("Erro ao enviar candidatura:", err);
+          if (msgErro) msgErro.textContent = err.message || "Não foi possível enviar a candidatura.";
+        }
+      });
+    }
   } catch (error) {
-    if (msgErro) msgErro.textContent = "Erro ao carregar candidatura. Tente novamente.";
     console.error("Erro de candidatura:", error);
+    if (msgErro) msgErro.textContent = "Erro ao carregar candidatura. Tente novamente.";
   }
 });
