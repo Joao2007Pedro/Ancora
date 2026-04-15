@@ -11,15 +11,23 @@ observarSessao((u) => {
 
 document.addEventListener("DOMContentLoaded", function () {
   var count = 8;
+  var currentStep = 1;
   var countEl = document.getElementById("count");
   var plusButton = document.getElementById("plus");
   var minusButton = document.getElementById("minus");
   var addSlotButton = document.getElementById("addSlot");
   var slotsContainer = document.getElementById("slots");
+  var stepPanels = Array.from(document.querySelectorAll(".wizard-step"));
   var criarButton = document.getElementById("btn-criar-monitoria");
   var cancelarButton = document.getElementById("btn-cancelar-monitoria");
+  var voltarButton = document.getElementById("btn-voltar-monitoria");
+  var proximoButton = document.getElementById("btn-proximo-monitoria");
+  var progressSpan = document.querySelector(".progress span");
+  var progressFill = document.querySelector(".fill");
+  var resumoMonitoria = document.getElementById("resumo-monitoria");
   var discordStatusEl = document.getElementById("discord-status");
   var salaSelecionada = null;
+  var horariosSelecionados = [];
 
   function gerarProximasDatas() {
     var diasWrap = document.querySelector(".days");
@@ -42,6 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   gerarProximasDatas();
+
+  var firstDay = document.querySelector(".day");
+  if (firstDay) {
+    firstDay.classList.add("active");
+  }
 
   const diasWrap = document.querySelector('.days');
   diasWrap?.addEventListener('click', function (event) {
@@ -99,6 +112,94 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  function obterValorAtivo(selector, fallback) {
+    var active = document.querySelector(selector);
+    return active ? (active.dataset?.nivel || active.dataset?.formato || active.textContent.trim()) : fallback;
+  }
+
+  function atualizarResumo() {
+    if (!resumoMonitoria) return;
+
+    var assunto = document.querySelector(".chip.active")?.textContent.trim() || "Não definido";
+    var titulo = document.querySelector("#titulo-monitoria")?.value.trim() || "Sem título";
+    var descricao = document.querySelector("#descricao-monitoria")?.value.trim() || "Sem descrição";
+    var nivel = document.querySelector(".nivel-btn.active")?.textContent.trim() || "Não definido";
+    var formato = document.querySelector(".formato-btn.active")?.textContent.trim() || "Não definido";
+    var vagas = document.querySelector("#count")?.textContent.trim() || "0";
+    var dia = document.querySelector(".day.active")?.dataset.data || "Sem data";
+    var inicio = document.querySelector("#horario-inicio")?.value || "--:--";
+    var fim = document.querySelector("#horario-fim")?.value || "--:--";
+    var sala = salaSelecionada?.nome || "Sem sala selecionada";
+    var listaHorarios = horariosSelecionados.length
+      ? horariosSelecionados.map(function (item) { return `<li>${item}</li>`; }).join("")
+      : `<li>Dia ${dia} • ${inicio} - ${fim}</li>`;
+
+    resumoMonitoria.innerHTML = `
+      <div class="review-item"><strong>Título</strong><p>${titulo}</p></div>
+      <div class="review-item"><strong>Tema</strong><p>${assunto}</p></div>
+      <div class="review-item"><strong>Descrição</strong><p>${descricao}</p></div>
+      <div class="review-grid">
+        <div class="review-item"><strong>Nível</strong><p>${nivel}</p></div>
+        <div class="review-item"><strong>Formato</strong><p>${formato}</p></div>
+        <div class="review-item"><strong>Vagas</strong><p>${vagas}</p></div>
+        <div class="review-item"><strong>Sala</strong><p>${sala}</p></div>
+      </div>
+      <div class="review-item"><strong>Horários</strong><ul>${listaHorarios}</ul></div>
+    `;
+  }
+
+  function atualizarUIStep() {
+    stepPanels.forEach(function (panel) {
+      panel.classList.toggle("active", Number(panel.dataset.step) === currentStep);
+    });
+
+    if (progressSpan) {
+      progressSpan.textContent = "PASSO " + String(currentStep).padStart(2, "0") + " DE 03";
+    }
+
+    if (progressFill) {
+      progressFill.style.width = (currentStep / 3) * 100 + "%";
+    }
+
+    if (voltarButton) {
+      voltarButton.hidden = currentStep === 1;
+    }
+
+    if (proximoButton) {
+      proximoButton.hidden = currentStep !== 1 && currentStep !== 2;
+    }
+
+    if (criarButton) {
+      criarButton.hidden = currentStep !== 3;
+    }
+
+    atualizarResumo();
+  }
+
+  function irParaStep(step) {
+    currentStep = Math.min(3, Math.max(1, step));
+    atualizarUIStep();
+  }
+
+  function validarStep1() {
+    var titulo = document.querySelector("#titulo-monitoria")?.value.trim();
+    if (!titulo) {
+      alert("Preencha o título antes de continuar.");
+      return false;
+    }
+    return true;
+  }
+
+  function validarStep2() {
+    var inicio = document.querySelector("#horario-inicio")?.value || "";
+    var fim = document.querySelector("#horario-fim")?.value || "";
+    if (!inicio || !fim) {
+      alert("Preencha o horário antes de continuar.");
+      return false;
+    }
+    return true;
+  }
+
   /* ── Seleção de sala Discord ── */
   function atualizarStatusDiscord() {
     if (!discordStatusEl) return;
@@ -130,6 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (linkInput) linkInput.value = link;
 
       atualizarStatusDiscord();
+      atualizarResumo();
     });
   });
 
@@ -151,8 +253,20 @@ document.addEventListener("DOMContentLoaded", function () {
       slot.textContent = "Dia " + day + " • " + start + " - " + end;
 
       slotsContainer.appendChild(slot);
+      horariosSelecionados.push(slot.textContent);
+      atualizarResumo();
     });
   }
+
+  proximoButton?.addEventListener("click", function () {
+    if (currentStep === 1 && !validarStep1()) return;
+    if (currentStep === 2 && !validarStep2()) return;
+    irParaStep(currentStep + 1);
+  });
+
+  voltarButton?.addEventListener("click", function () {
+    irParaStep(currentStep - 1);
+  });
 
   criarButton?.addEventListener("click", async function () {
     if (!usuarioAtual) return;
@@ -168,6 +282,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var horarioFim = document.querySelector("#horario-fim")?.value || "";
     var linkDiscord = document.querySelector("#link-discord")?.value || "";
     var salaDiscordNome = salaSelecionada?.nome || "";
+    var horarios = horariosSelecionados.length
+      ? horariosSelecionados.slice()
+      : ["Dia " + (document.querySelector(".day.active")?.textContent.trim() || "--") + " • " + horarioInicio + " - " + horarioFim];
 
     if (!assunto || !titulo) {
       alert("Preencha pelo menos o assunto e o título.");
@@ -190,6 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
         data,
         horario_inicio: horarioInicio,
         horario_fim: horarioFim,
+        horarios,
         sala_discord_nome: salaDiscordNome,
         link_discord: linkDiscord,
         status: "pendente_aprovacao"
@@ -211,5 +329,12 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "/home";
   });
 
+  ["input", "change", "click"].forEach(function (eventName) {
+    document.addEventListener(eventName, function () {
+      atualizarResumo();
+    }, true);
+  });
+
+  atualizarUIStep();
   renderCount();
 });

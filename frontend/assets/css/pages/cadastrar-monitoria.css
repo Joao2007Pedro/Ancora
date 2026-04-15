@@ -116,6 +116,14 @@ button {
   padding: 2rem;
   backdrop-filter: blur(10px);
 }
+
+.wizard-step {
+  display: none;
+}
+
+.wizard-step.active {
+  display: block;
+}
  
 .grid {
   display: grid;
@@ -312,6 +320,57 @@ textarea {
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.actions button[hidden] {
+  display: none;
+}
+
+#btn-voltar-monitoria {
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-navy);
+}
+
+.review-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 18px;
+  background: var(--color-surface-soft);
+  border: 1px solid rgba(221, 227, 233, 0.9);
+}
+
+.review-item {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.review-item strong {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-blue);
+}
+
+.review-item p,
+.review-item li {
+  color: var(--color-text);
+  font-size: 0.92rem;
+}
+
+.review-item ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
  
 #slots {
@@ -377,6 +436,10 @@ textarea {
  
   .actions button {
     width: 100%;
+  }
+
+  .review-grid {
+    grid-template-columns: 1fr;
   }
 }
  
