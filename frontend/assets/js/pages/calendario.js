@@ -20,9 +20,8 @@ async function inicializarDependenciasAgenda() {
     buscarMonitoriasDoMonitor = db.buscarMonitoriasDoMonitor || buscarMonitoriasDoMonitor;
 
     protegerPagina();
-    console.log("[Ancora] Integrações de agenda carregadas com sucesso.");
   } catch (error) {
-    console.warn("[Ancora] Agenda em modo fallback:", error);
+    void error;
   }
 }
 
@@ -60,10 +59,15 @@ function toIsoDate(value) {
   return parsed.toISOString().slice(0, 10);
 }
 
+function getLocalTodayIso() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+}
+
 function isTodayOrFuture(monitoria) {
   const iso = toIsoDate(monitoria?.data);
   if (!iso) return false;
-  const todayIso = new Date().toISOString().slice(0, 10);
+  const todayIso = getLocalTodayIso();
   return iso >= todayIso;
 }
 
@@ -206,16 +210,22 @@ async function loadAgendaForUser() {
   let monitoriasVisiveis = [];
 
   try {
-    monitoriasVisiveis = (await buscarMonitorias({ status: "ativa" })).filter(isTodayOrFuture);
+    const resultados = await buscarMonitorias({ status: "ativa" });
+
+    monitoriasVisiveis = resultados.filter((monitoria) => {
+      const dataConvertida = toIsoDate(monitoria.data);
+      const futuro = isTodayOrFuture(monitoria);
+      return futuro;
+    });
   } catch (error) {
-    console.error("Erro ao carregar monitorias ativas:", error);
+    void error;
   }
 
   if (monitoriasVisiveis.length === 0 && state.userType === "monitor") {
     try {
       monitoriasVisiveis = (await buscarMonitoriasDoMonitor(state.currentUser.uid)).filter(isTodayOrFuture);
     } catch (error) {
-      console.error("Erro ao carregar monitorias do monitor:", error);
+      void error;
     }
   }
 
@@ -281,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (eventsList) {
         eventsList.innerHTML = `<p class="empty">Erro ao carregar agenda. Tente novamente.</p>`;
       }
-      console.error("Erro ao carregar agenda:", error);
+      void error;
     }
   });
 });
