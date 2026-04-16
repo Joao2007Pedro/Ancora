@@ -401,3 +401,81 @@ h1, h2, h3, .font-headline {
     font-size: 2rem;
   }
 }
+
+@media (max-width: 640px) {
+  .top-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .header-titles h1 {
+    font-size: 1.65rem;
+    line-height: 1.1;
+  }
+
+  .header-titles p {
+    font-size: 0.9rem;
+  }
+
+  .tabs {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tab {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .cards-grid {
+    gap: 1rem;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+
+  .card-details {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tutor-info img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .tutor-info h3 {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .main-content {
+    padding: 1rem 0.75rem;
+  }
+
+  .header-titles h1 {
+    font-size: 1.45rem;
+  }
+
+  .tab {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .monitorias-loading,
+  .monitorias-empty {
+    padding: 1.25rem 1rem;
+  }
+
+  .badge {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.68rem;
+  }
+}

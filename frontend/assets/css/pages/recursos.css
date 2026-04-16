@@ -135,7 +135,7 @@
 
 .cards {
   width: 31%;
-  min-height: 470px;
+  min-height: 420px;
   border-radius: 24px;
   border-left: 8px solid var(--azul);
   background: var(--branco);
@@ -174,7 +174,7 @@
 
 .titles_card {
   width: 90%;
-  min-height: 180px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -402,5 +402,51 @@
     width: auto;
     min-width: 110px;
     padding: 0 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .main-content {
+    padding: 12px;
+  }
+
+  .titles-header h1 {
+    font-size: 22px;
+  }
+
+  .container_buttons h2,
+  .container_buttons_2 h2 {
+    font-size: 9px;
+    line-height: 13px;
+  }
+
+  .buttons button,
+  .buttons_2 button {
+    min-width: 72px;
+    font-size: 12px;
+  }
+
+  .cards {
+    border-left-width: 6px;
+    border-radius: 18px;
+  }
+
+  .titles_card h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .titles_card h3 {
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .buttons_card {
+    gap: 8px;
+  }
+
+  .buttons_card button {
+    min-width: 96px;
+    padding: 0 12px;
   }
 }

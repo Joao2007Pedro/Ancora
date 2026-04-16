@@ -799,8 +799,8 @@ a {
     bottom: -200px;
     left: 50%;
     transform: translateX(-50%);
-    width: 800px;
-    height: 400px;
+    width: min(90vw, 800px);
+    height: min(45vw, 400px);
     background-color: var(--color-blue);
     opacity: 0.03;
     filter: blur(150px);
@@ -927,6 +927,10 @@ a {
         padding: 2rem;
     }
 
+    .content-area {
+        max-width: 100%;
+    }
+
     .header {
         flex-direction: column;
         align-items: flex-start;
@@ -961,7 +965,11 @@ a {
     }
 
     .header__title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 9vw, 2.5rem);
+    }
+
+    .header__subtitle {
+        font-size: 1rem;
     }
 
     .filter-bar {
@@ -978,7 +986,7 @@ a {
     }
 
     .progress-card__title {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
     }
 
     .progress-stats {
@@ -1019,5 +1027,38 @@ a {
     .deco-dot--lime,
     .deco-dots {
         display: none;
+    }
+}
+
+@media (max-width: 390px) {
+    .main {
+        padding: 1rem;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .progress-card {
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .modulo-header {
+        flex-wrap: wrap;
+    }
+
+    .modulo-badge {
+        margin-left: 0;
+    }
+
+    .modulo-acoes,
+    .topicos-lista {
+        margin-left: 0;
     }
 }

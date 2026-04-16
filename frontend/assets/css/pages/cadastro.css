@@ -1200,19 +1200,61 @@ main {
   #aluno {
     width: 25%;
     height: 45px;
-    border-radius: 12px;
+
+  }
+}
+
+@media (max-width: 420px) {
+  .itens_titulo h1 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .plataform {
+    width: 78%;
+  }
+
+  .plataform h2 {
+    font-size: 9px;
+    line-height: 30px;
+  }
+
+  .text_sec1 h1 {
+    font-size: 21px;
+    line-height: 32px;
+  }
+
+  .text2_sec2 h2 {
+    font-size: 11px;
+    line-height: 20px;
+  }
+
+  .title_sec2 h1 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .title_sec2 h2,
+  .email_container h2 {
+    font-size: 11px;
+    line-height: 20px;
+  }
+
+  .email input,
+  .email #equipe {
+    height: 46px;
+    font-size: 11px;
+    padding: 10px 12px;
   }
 
   .confirmar {
-    width: 70;
-    height: 72px;
-    margin: 3% auto;
+    height: 46px;
   }
 
   .confirmar button {
-    height: 60px;
-    font-size: 20px;
-    border-radius: 18px;
+    height: 46px;
+    font-size: 14px;
+    border-radius: 12px;
   }
 }
 
