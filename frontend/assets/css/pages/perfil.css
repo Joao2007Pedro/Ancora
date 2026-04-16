@@ -682,7 +682,7 @@
 
 @media (max-width: 1100px) {
   .main-content {
-    margin-left: 0;
+    margin-left: 256px;
     padding: 24px;
   }
 
@@ -701,6 +701,10 @@
 }
 
 @media (max-width: 900px) {
+    .main-content {
+    margin-left: 256px;
+    padding: 16px;
+  }
   .feitas-grid {
     grid-template-columns: 1fr;
   }
@@ -712,6 +716,7 @@
 
 @media (max-width: 640px) {
   .main-content {
+    margin-left: 0px;
     padding: 16px;
   }
 
@@ -747,7 +752,6 @@
 
 @media (max-width: 768px) {
   .main-content {
-    margin-left: 0;
     padding: 20px 16px 28px;
   }
 
