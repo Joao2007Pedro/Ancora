@@ -573,7 +573,10 @@ main {
   }
 
   .itens_titulo h1 {
+    display: flex;
     font-size: 22px;
+    align-items: center;
+    justify-content: center;
   }
 
   .itens_titulo img {
@@ -746,6 +749,10 @@ main {
 }
 
   #perfil {
+    display: none;
+  }
+
+  #acess {
     display: none;
   }
 
