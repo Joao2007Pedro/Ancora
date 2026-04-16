@@ -345,8 +345,12 @@ body {
 }
 
 @media (max-width: 900px) {
+  sidebar-menu {
+    display: none;
+  }
+
   .main {
-    margin-left: 256px;
+    margin-left: 0;
     padding: 1.2rem;
   }
 

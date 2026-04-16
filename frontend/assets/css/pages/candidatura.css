@@ -90,6 +90,10 @@ textarea {
 }
 
 @media (max-width: 900px) {
+  sidebar-menu {
+    display: none;
+  }
+
   .main-content {
     margin-left: 0;
     padding: 16px;

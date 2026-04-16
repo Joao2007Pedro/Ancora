@@ -300,6 +300,10 @@
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
+  sidebar-menu {
+    display: none;
+  }
+
   .confirmation-page {
     margin-left: 0;
     padding: 1.5rem;

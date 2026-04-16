@@ -701,8 +701,12 @@
 }
 
 @media (max-width: 900px) {
-    .main-content {
-    margin-left: 256px;
+  sidebar-menu {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
     padding: 16px;
   }
   .feitas-grid {
