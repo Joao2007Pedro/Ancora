@@ -228,9 +228,20 @@ export async function buscarMensagens(uid1, uid2) {
 // ── ROADMAP ──────────────────────────────────────────
 
 export async function buscarRoadmap(turma) {
-  const id = turma.toLowerCase().replace(/\s+/g, '').replace('#', 'sharp');
-  const snap = await getDoc(doc(db, "roadmaps", id));
-  return snap.exists() ? snap.data() : null;
+  const id = String(turma || "java").toLowerCase().replace(/\s+/g, '').replace('#', 'sharp');
+  const canonicalId = (id === "java-manha" || id === "java-tarde") ? "java" : id;
+
+  const primarySnap = await getDoc(doc(db, "roadmaps", canonicalId));
+  if (primarySnap.exists()) {
+    return primarySnap.data();
+  }
+
+  if (canonicalId !== id) {
+    const legacySnap = await getDoc(doc(db, "roadmaps", id));
+    return legacySnap.exists() ? legacySnap.data() : null;
+  }
+
+  return null;
 }
 
 export async function salvarProgressoModulo(uid, turma, ordemModulo, status) {

@@ -19,15 +19,30 @@ function normalizarTurmaId(turma) {
     .replace("#", "sharp");
 }
 
+function canonicalizarTurmaRoadmap(turmaId) {
+  if (turmaId === "java-manha" || turmaId === "java-tarde") {
+    return "java";
+  }
+
+  return turmaId;
+}
+
 observarSessao(async (usuario) => {
   if (!usuario) return;
 
   const dadosUsuario = await buscarUsuarioPorUid(usuario.uid);
   const turma        = dadosUsuario?.equipe || "java";
-  const turmaId      = normalizarTurmaId(turma);
+  const turmaOriginalId = normalizarTurmaId(turma);
+  const turmaId      = canonicalizarTurmaRoadmap(turmaOriginalId);
   const roadmap      = await buscarRoadmap(turmaId);
   const progresso    = await buscarProgressoAluno(usuario.uid);
   const container = document.querySelector("#roadmap-container");
+
+  const getStatusModulo = (ordem) => {
+    const chaveCanonica = `${turmaId}_modulo_${ordem}`;
+    const chaveLegada = `${turmaOriginalId}_modulo_${ordem}`;
+    return progresso[chaveCanonica] || progresso[chaveLegada] || "a_aprender";
+  };
 
   if (!container) return;
 
@@ -40,8 +55,7 @@ observarSessao(async (usuario) => {
   // Calcula progresso geral
   const total     = roadmap.modulos.length;
   const concluidos = roadmap.modulos.filter(m => {
-    const chave = `${turmaId}_modulo_${m.ordem}`;
-    return progresso[chave] === "concluido";
+    return getStatusModulo(m.ordem) === "concluido";
   }).length;
 
   // Atualiza barra de progresso
@@ -55,8 +69,7 @@ observarSessao(async (usuario) => {
 
   // Renderiza módulos
   container.innerHTML = roadmap.modulos.map(modulo => {
-    const chave  = `${turmaId}_modulo_${modulo.ordem}`;
-    const status = progresso[chave] || "a_aprender";
+    const status = getStatusModulo(modulo.ordem);
     const s      = STATUS[status];
 
     return `
@@ -115,8 +128,9 @@ observarSessao(async (usuario) => {
     // Recalcula barra
     const novoProgresso = await buscarProgressoAluno(usuario.uid);
     const novoConcluidos = roadmap.modulos.filter(m => {
-      const c = `${turmaId}_modulo_${m.ordem}`;
-      return novoProgresso[c] === "concluido";
+      const chaveCanonica = `${turmaId}_modulo_${m.ordem}`;
+      const chaveLegada = `${turmaOriginalId}_modulo_${m.ordem}`;
+      return (novoProgresso[chaveCanonica] || novoProgresso[chaveLegada]) === "concluido";
     }).length;
     const novoPct = Math.round((novoConcluidos / total) * 100);
     document.querySelector("#progresso-texto") &&
