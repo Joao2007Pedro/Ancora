@@ -3,6 +3,16 @@ import { protegerPagina } from "../utils/auth-guard.js";
 
 protegerPagina();
 
+document.addEventListener("click", (event) => {
+  const botao = event.target.closest(".resource-link");
+  if (!botao) return;
+
+  const url = botao.dataset.url;
+  if (!url) return;
+
+  window.open(url, "_blank", "noopener,noreferrer");
+});
+
 function getUserTypeFromStorage() {
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   return userData.userType === "monitor" || userData.perfil === "monitor" ? "monitor" : "student";
