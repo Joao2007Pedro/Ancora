@@ -112,7 +112,7 @@ body {
 .day-cell {
   min-height: 84px;
   border-radius: 0.75rem;
-  border: 1px solid #e6edf8;
+  border: 2px solid #e6edf8;
   background: #fafcff;
   display: flex;
   flex-direction: column;
@@ -121,12 +121,14 @@ body {
   gap: 0.2rem;
   padding: 0.55rem;
   cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .day-cell:hover {
-  transform: translateY(-1px);
-  border-color: #1300e1;
+  transform: translateY(-2px);
+  border-color: #3333ff;
+  box-shadow: 0 4px 12px rgba(19, 0, 225, 0.15);
 }
 
 .day-cell--empty {
@@ -135,12 +137,24 @@ body {
 }
 
 .day-cell--today {
-  box-shadow: 0 0 0 2px rgba(19, 0, 225, 0.14) inset;
+  box-shadow: 0 0 0 2px rgba(19, 0, 225, 0.25) inset;
+  background: #f0f4ff;
 }
 
 .day-cell--selected {
   border-color: #1300e1;
-  background: #eef0ff;
+  background: #e8edff;
+  box-shadow: 0 0 0 3px rgba(19, 0, 225, 0.15) inset, 0 4px 16px rgba(19, 0, 225, 0.2);
+}
+
+/* Dias com monitorias (mais de 0) */
+.day-cell:has(.day-count) {
+  border-color: #3333ff;
+  background: linear-gradient(135deg, #f8faff 0%, #eef2ff 100%);
+}
+
+.day-cell:has(.day-count):hover {
+  box-shadow: 0 6px 20px rgba(51, 51, 255, 0.25);
 }
 
 .day-number {
@@ -153,11 +167,13 @@ body {
   display: inline-flex;
   margin-top: 0.35rem;
   border-radius: 999px;
-  background: rgba(204, 255, 0, 0.35);
-  color: #516200;
-  padding: 0.2rem 0.45rem;
-  font-size: 0.66rem;
-  font-weight: 700;
+  background: linear-gradient(135deg, #3333ff 0%, #1300e1 100%);
+  color: #ffffff;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(51, 51, 255, 0.3);
+  letter-spacing: 0.02em;
 }
 
 .events-card {

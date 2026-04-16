@@ -133,6 +133,7 @@ function renderEventsForDate(isoDate) {
   if (!eventsList) return;
 
   if (!isoDate) {
+    console.log('[RENDER EVENTS] No date selected');
     eventsList.innerHTML = `<p class="empty">Selecione um dia para ver as monitorias.</p>`;
     return;
   }
@@ -141,12 +142,15 @@ function renderEventsForDate(isoDate) {
     .filter((m) => toIsoDate(m.data) === isoDate)
     .sort((a, b) => String(a.horario_inicio || "").localeCompare(String(b.horario_inicio || "")));
 
+  console.log(`[RENDER EVENTS] For ${isoDate}: ${events.length} events`);
+
   if (events.length === 0) {
     eventsList.innerHTML = `<p class="empty">Nenhuma monitoria para esta data.</p>`;
     return;
   }
 
   eventsList.innerHTML = events.map(buildEventCard).join("");
+  console.log(`[RENDER EVENTS] Rendered ${events.length} event cards`);
 }
 
 function renderCalendar() {
@@ -160,6 +164,7 @@ function renderCalendar() {
   const monthLength = new Date(year, month + 1, 0).getDate();
 
   monthLabel.textContent = `${monthNames[month]} ${year}`;
+  console.log(`[RENDER CALENDAR] ${monthNames[month]} ${year}`);
 
   const days = [];
   for (let i = 0; i < firstDayWeekIndex; i += 1) {
@@ -173,6 +178,10 @@ function renderCalendar() {
     const count = state.visibleMonitorias.filter((m) => toIsoDate(m.data) === iso).length;
     const isToday = iso === todayIso;
     const isSelected = iso === state.selectedDateIso;
+    
+    if (count > 0) {
+      console.log(`[RENDER CALENDAR] Day ${day}: ${count} monitoria(s)`);
+    }
 
     days.push(`
       <button type="button" class="day-cell${isToday ? " day-cell--today" : ""}${isSelected ? " day-cell--selected" : ""}" data-date="${iso}">
@@ -187,6 +196,7 @@ function renderCalendar() {
   calendarGrid.querySelectorAll(".day-cell[data-date]").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.selectedDateIso = btn.dataset.date;
+      console.log(`[CLICK DAY] Selected ${state.selectedDateIso}`);
       renderCalendar();
       updateFooterSelection(state.selectedDateIso);
       renderEventsForDate(state.selectedDateIso);
@@ -196,6 +206,7 @@ function renderCalendar() {
 
 async function loadAgendaForUser() {
   if (!state.currentUser?.uid) {
+    console.log('[AGENDA] No user, showing empty calendar');
     state.monitorias = [];
     state.visibleMonitorias = [];
     state.selectedDateIso = new Date().toISOString().slice(0, 10);
@@ -210,27 +221,36 @@ async function loadAgendaForUser() {
   let monitoriasVisiveis = [];
 
   try {
+    console.log('[AGENDA] Fetching all active monitorias...');
     const resultados = await buscarMonitorias({ status: "ativa" });
+    console.log('[AGENDA] Total monitorias fetched:', resultados.length, resultados);
 
     monitoriasVisiveis = resultados.filter((monitoria) => {
       const dataConvertida = toIsoDate(monitoria.data);
       const futuro = isTodayOrFuture(monitoria);
+      console.log(`[AGENDA] Filter monitoria: data=${dataConvertida}, futuro=${futuro}`);
       return futuro;
     });
+    console.log('[AGENDA] After future filter:', monitoriasVisiveis.length);
   } catch (error) {
-    void error;
+    console.error('[AGENDA] Error fetching monitorias:', error);
   }
 
   if (monitoriasVisiveis.length === 0 && state.userType === "monitor") {
+    console.log('[AGENDA] No visible monitorias, trying monitor fallback...');
     try {
-      monitoriasVisiveis = (await buscarMonitoriasDoMonitor(state.currentUser.uid)).filter(isTodayOrFuture);
+      const monitorMonitorias = await buscarMonitoriasDoMonitor(state.currentUser.uid);
+      console.log('[AGENDA] Monitor monitorias fetched:', monitorMonitorias.length, monitorMonitorias);
+      monitoriasVisiveis = monitorMonitorias.filter(isTodayOrFuture);
+      console.log('[AGENDA] After future filter (monitor):', monitoriasVisiveis.length);
     } catch (error) {
-      void error;
+      console.error('[AGENDA] Error fetching monitor monitorias:', error);
     }
   }
 
   state.monitorias = monitoriasVisiveis;
   state.visibleMonitorias = monitoriasVisiveis;
+  console.log('[AGENDA] Final visibleMonitorias count:', state.visibleMonitorias.length);
 
   const firstUpcoming = state.visibleMonitorias
     .map((m) => toIsoDate(m.data))
@@ -240,6 +260,7 @@ async function loadAgendaForUser() {
   state.selectedDateIso = firstUpcoming || new Date().toISOString().slice(0, 10);
   state.currentMonthDate = new Date(`${state.selectedDateIso}T00:00:00`);
   state.currentMonthDate.setDate(1);
+  console.log('[AGENDA] Selected date:', state.selectedDateIso);
 
   renderCalendar();
   updateFooterSelection(state.selectedDateIso);
